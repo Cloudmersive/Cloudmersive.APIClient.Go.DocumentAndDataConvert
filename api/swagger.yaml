@@ -4353,6 +4353,138 @@ paths:
             $ref: "#/definitions/GetDocxCommentsHierarchicalResponse"
       security:
       - Apikey: []
+  /convert/edit/docx/comments/remove-all:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Remove all comments from a Word DOCX document"
+      description: "Removes all of the comments from a Word Document."
+      operationId: "EditDocument_DocxRemoveAllComments"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/docx/track-changes/enable:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Enable track changes, revisions in a Word DOCX document"
+      description: "Enables tracking of changes and revisions in a Word DOCX document.\
+        \  Users editing the document will see changes tracked automatically, with\
+        \ edits highlighted, and the ability to accept or reject changes made to the\
+        \ document."
+      operationId: "EditDocument_DocxEnableTrackChanges"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/docx/track-changes/disable:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Disable track changes, revisions in a Word DOCX document"
+      description: "Diables tracking of changes and revisions in a Word DOCX document,\
+        \ and accepts any pending changes.  Users editing the document will no longer\
+        \ see changes tracked automatically."
+      operationId: "EditDocument_DocxDisableTrackChanges"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/docx/track-changes/accept-all:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Accept all tracked changes, revisions in a Word DOCX document"
+      description: "Accepts all tracked changes and revisions in a Word DOCX document.\
+        \  This will accept all pending changes in the document when tracked changes\
+        \ is turned on.  Track changes will remain on (if it is on) after this oepration\
+        \ is completed."
+      operationId: "EditDocument_DocxAcceptAllTrackChanges"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/edit/docx/insert-comment/on/paragraph:
     post:
       tags:

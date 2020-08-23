@@ -5,11 +5,14 @@ All URIs are relative to *https://api.cloudmersive.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**EditDocumentBeginEditing**](EditDocumentApi.md#EditDocumentBeginEditing) | **Post** /convert/edit/begin-editing | Begin editing a document
+[**EditDocumentDocxAcceptAllTrackChanges**](EditDocumentApi.md#EditDocumentDocxAcceptAllTrackChanges) | **Post** /convert/edit/docx/track-changes/accept-all | Accept all tracked changes, revisions in a Word DOCX document
 [**EditDocumentDocxBody**](EditDocumentApi.md#EditDocumentDocxBody) | **Post** /convert/edit/docx/get-body | Get body from a Word DOCX document
 [**EditDocumentDocxCreateBlankDocument**](EditDocumentApi.md#EditDocumentDocxCreateBlankDocument) | **Post** /convert/edit/docx/create/blank | Create a blank Word DOCX document
 [**EditDocumentDocxDeletePages**](EditDocumentApi.md#EditDocumentDocxDeletePages) | **Post** /convert/edit/docx/delete-pages | Delete, remove pages from a Word DOCX document
 [**EditDocumentDocxDeleteTableRow**](EditDocumentApi.md#EditDocumentDocxDeleteTableRow) | **Post** /convert/edit/docx/delete-table-row | Deletes a table row in an existing table in a Word DOCX document
 [**EditDocumentDocxDeleteTableRowRange**](EditDocumentApi.md#EditDocumentDocxDeleteTableRowRange) | **Post** /convert/edit/docx/delete-table-row/range | Deletes a range of multiple table rows in an existing table in a Word DOCX document
+[**EditDocumentDocxDisableTrackChanges**](EditDocumentApi.md#EditDocumentDocxDisableTrackChanges) | **Post** /convert/edit/docx/track-changes/disable | Disable track changes, revisions in a Word DOCX document
+[**EditDocumentDocxEnableTrackChanges**](EditDocumentApi.md#EditDocumentDocxEnableTrackChanges) | **Post** /convert/edit/docx/track-changes/enable | Enable track changes, revisions in a Word DOCX document
 [**EditDocumentDocxFindParagraph**](EditDocumentApi.md#EditDocumentDocxFindParagraph) | **Post** /convert/edit/docx/find/paragraph | Find matching paragraphs in a Word DOCX document
 [**EditDocumentDocxGetComments**](EditDocumentApi.md#EditDocumentDocxGetComments) | **Post** /convert/edit/docx/get-comments/flat-list | Get comments from a Word DOCX document as a flat list
 [**EditDocumentDocxGetCommentsHierarchical**](EditDocumentApi.md#EditDocumentDocxGetCommentsHierarchical) | **Post** /convert/edit/docx/get-comments/hierarchical | Get comments from a Word DOCX document hierarchically
@@ -26,6 +29,7 @@ Method | HTTP request | Description
 [**EditDocumentDocxInsertTable**](EditDocumentApi.md#EditDocumentDocxInsertTable) | **Post** /convert/edit/docx/insert-table | Insert a new table into a Word DOCX document
 [**EditDocumentDocxInsertTableRow**](EditDocumentApi.md#EditDocumentDocxInsertTableRow) | **Post** /convert/edit/docx/insert-table-row | Insert a new row into an existing table in a Word DOCX document
 [**EditDocumentDocxPages**](EditDocumentApi.md#EditDocumentDocxPages) | **Post** /convert/edit/docx/get-pages | Get pages and content from a Word DOCX document
+[**EditDocumentDocxRemoveAllComments**](EditDocumentApi.md#EditDocumentDocxRemoveAllComments) | **Post** /convert/edit/docx/comments/remove-all | Remove all comments from a Word DOCX document
 [**EditDocumentDocxRemoveHeadersAndFooters**](EditDocumentApi.md#EditDocumentDocxRemoveHeadersAndFooters) | **Post** /convert/edit/docx/remove-headers-and-footers | Remove headers and footers from Word DOCX document
 [**EditDocumentDocxRemoveObject**](EditDocumentApi.md#EditDocumentDocxRemoveObject) | **Post** /convert/edit/docx/remove-object | Delete any object in a Word DOCX document
 [**EditDocumentDocxReplace**](EditDocumentApi.md#EditDocumentDocxReplace) | **Post** /convert/edit/docx/replace-all | Replace string in Word DOCX document
@@ -66,6 +70,34 @@ Method | HTTP request | Description
 Begin editing a document
 
 Uploads a document to Cloudmersive to begin a series of one or more editing operations.  To edit a document, first call Begin Editing on the document.  Then perform operations on the document using the secure URL returned from BeginEditing, such as Word DOCX Delete Pages and Insert Table.  Finally, perform finish editing on the URL to return the resulting edited document.  The editing URL is temporary and only stored in-memory cache, and will automatically expire from the cache after 30 minutes, and cannot be directly accessed.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxAcceptAllTrackChanges**
+> string EditDocumentDocxAcceptAllTrackChanges(ctx, inputFile)
+Accept all tracked changes, revisions in a Word DOCX document
+
+Accepts all tracked changes and revisions in a Word DOCX document.  This will accept all pending changes in the document when tracked changes is turned on.  Track changes will remain on (if it is on) after this oepration is completed.
 
 ### Required Parameters
 
@@ -225,6 +257,62 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxDisableTrackChanges**
+> string EditDocumentDocxDisableTrackChanges(ctx, inputFile)
+Disable track changes, revisions in a Word DOCX document
+
+Diables tracking of changes and revisions in a Word DOCX document, and accepts any pending changes.  Users editing the document will no longer see changes tracked automatically.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxEnableTrackChanges**
+> string EditDocumentDocxEnableTrackChanges(ctx, inputFile)
+Enable track changes, revisions in a Word DOCX document
+
+Enables tracking of changes and revisions in a Word DOCX document.  Users editing the document will see changes tracked automatically, with edits highlighted, and the ability to accept or reject changes made to the document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -673,6 +761,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxRemoveAllComments**
+> string EditDocumentDocxRemoveAllComments(ctx, inputFile)
+Remove all comments from a Word DOCX document
+
+Removes all of the comments from a Word Document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

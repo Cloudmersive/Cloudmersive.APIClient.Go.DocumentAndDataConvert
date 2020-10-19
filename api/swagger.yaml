@@ -8408,6 +8408,45 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/image:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate an Image File"
+      description: "Validate an image file; if the document is not valid, identifies\
+        \ the errors in the document.  Formats supported include AAI, ART, ARW, AVS,\
+        \ BPG, BMP, BMP2, BMP3, BRF, CALS, CGM, CIN, CMYK, CMYKA, CR2, CRW, CUR, CUT,\
+        \ DCM, DCR, DCX, DDS, DIB, DJVU, DNG, DOT, DPX, EMF, EPDF, EPI, EPS, EPS2,\
+        \ EPS3, EPSF, EPSI, EPT, EXR, FAX, FIG, FITS, FPX, GIF, GPLT, GRAY, HDR, HEIC,\
+        \ HPGL, HRZ, ICO, ISOBRL, ISBRL6, JBIG, JNG, JP2, JPT, J2C, J2K, JPEG/JPG,\
+        \ JXR, MAT, MONO, MNG, M2V, MRW, MTV, NEF, ORF, OTB, P7, PALM, PAM, PBM, PCD,\
+        \ PCDS, PCL, PCX, PDF, PEF, PES, PFA, PFB, PFM, PGM, PICON, PICT, PIX, PNG,\
+        \ PNG8, PNG00, PNG24, PNG32, PNG48, PNG64, PNM, PPM, PSB, PSD, PTIF, PWB,\
+        \ RAD, RAF, RGB, RGBA, RGF, RLA, RLE, SCT, SFW, SGI, SID, SUN, SVG, TGA, TIFF,\
+        \ TIM, UIL, VIFF, VICAR, VBMP, WDP, WEBP, WPG, X, XBM, XCF, XPM, XWD, X3F,\
+        \ YCbCr, YCbCrA, YUV."
+      operationId: "ValidateDocument_ImageValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
   /convert/validate/xlsx:
     post:
       tags:
@@ -8665,6 +8704,35 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/html:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate an HTML file"
+      description: "Validate an HTML document file; if the document is not valid,\
+        \ identifies the errors in the document"
+      operationId: "ValidateDocument_HtmlValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
   /convert/validate/json:
     post:
       tags:
@@ -8822,6 +8890,106 @@ paths:
       produces:
       - "application/octet-stream"
       parameters:
+      - name: "inputFile1"
+        in: "formData"
+        description: "First input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile1"
+      - name: "inputFile2"
+        in: "formData"
+        description: "Second input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile2"
+      - name: "inputFile3"
+        in: "formData"
+        description: "Third input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile3"
+      - name: "inputFile4"
+        in: "formData"
+        description: "Fourth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile4"
+      - name: "inputFile5"
+        in: "formData"
+        description: "Fifth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile5"
+      - name: "inputFile6"
+        in: "formData"
+        description: "Sixth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile6"
+      - name: "inputFile7"
+        in: "formData"
+        description: "Seventh input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile7"
+      - name: "inputFile8"
+        in: "formData"
+        description: "Eighth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile8"
+      - name: "inputFile9"
+        in: "formData"
+        description: "Ninth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile9"
+      - name: "inputFile10"
+        in: "formData"
+        description: "Tenth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile10"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/archive/zip/create/encrypted:
+    post:
+      tags:
+      - "ZipArchive"
+      summary: "Compress files to create a new, encrypted and password-protected zip\
+        \ archive"
+      description: "Create a new zip archive by compressing input files, and also\
+        \ applies encryption and password protection to the zip."
+      operationId: "ZipArchive_ZipCreateEncrypted"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "password"
+        in: "header"
+        description: "Password to place on the Zip file; the longer the password,\
+          \ the more secure"
+        required: true
+        type: "string"
+        x-exportParamName: "Password"
+      - name: "encryptionAlgorithm"
+        in: "header"
+        description: "Encryption algorithm to use; possible values are AES-256 (recommended),\
+          \ AES-128, and PK-Zip (not recommended; legacy, weak encryption algorithm).\
+          \ Default is AES-256."
+        required: false
+        type: "string"
+        x-exportParamName: "EncryptionAlgorithm"
+        x-optionalDataType: "String"
       - name: "inputFile1"
         in: "formData"
         description: "First input file to perform the operation on."

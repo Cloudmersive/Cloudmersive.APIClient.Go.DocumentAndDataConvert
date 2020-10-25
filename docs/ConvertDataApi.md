@@ -5,9 +5,11 @@ All URIs are relative to *https://api.cloudmersive.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ConvertDataCsvToJson**](ConvertDataApi.md#ConvertDataCsvToJson) | **Post** /convert/csv/to/json | Convert CSV to JSON conversion
+[**ConvertDataCsvToXml**](ConvertDataApi.md#ConvertDataCsvToXml) | **Post** /convert/csv/to/xml | Convert CSV to XML conversion
 [**ConvertDataJsonToXml**](ConvertDataApi.md#ConvertDataJsonToXml) | **Post** /convert/json/to/xml | Convert JSON to XML conversion
 [**ConvertDataXlsToJson**](ConvertDataApi.md#ConvertDataXlsToJson) | **Post** /convert/xls/to/json | Convert Excel (97-2003) XLS to JSON conversion
 [**ConvertDataXlsxToJson**](ConvertDataApi.md#ConvertDataXlsxToJson) | **Post** /convert/xlsx/to/json | Convert Excel XLSX to JSON conversion
+[**ConvertDataXlsxToXml**](ConvertDataApi.md#ConvertDataXlsxToXml) | **Post** /convert/xlsx/to/xml | Convert Excel XLSX to XML conversion
 [**ConvertDataXmlEditAddAttributeWithXPath**](ConvertDataApi.md#ConvertDataXmlEditAddAttributeWithXPath) | **Post** /convert/xml/edit/xpath/add-attribute | Adds an attribute to all XML nodes matching XPath expression
 [**ConvertDataXmlEditAddChildWithXPath**](ConvertDataApi.md#ConvertDataXmlEditAddChildWithXPath) | **Post** /convert/xml/edit/xpath/add-child | Adds an XML node as a child to XML nodes matching XPath expression
 [**ConvertDataXmlEditRemoveAllChildNodesWithXPath**](ConvertDataApi.md#ConvertDataXmlEditRemoveAllChildNodesWithXPath) | **Post** /convert/xml/edit/xpath/remove-all-children | Removes, deletes all children of nodes matching XPath expression, but does not remove the nodes
@@ -55,6 +57,43 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDataCsvToXml**
+> string ConvertDataCsvToXml(ctx, inputFile, optional)
+Convert CSV to XML conversion
+
+Convert a CSV file to a XML file
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ConvertDataCsvToXmlOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ConvertDataCsvToXmlOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **columnNamesFromFirstRow** | **optional.Bool**| Optional; If true, the first row will be used as the labels for the columns; if false, columns will be named Column0, Column1, etc.  Default is true.  Set to false if you are not using column headings, or have an irregular column structure. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -115,7 +154,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ConvertDataXlsxToJson**
-> interface{} ConvertDataXlsxToJson(ctx, inputFile)
+> string ConvertDataXlsxToJson(ctx, inputFile)
 Convert Excel XLSX to JSON conversion
 
 Convert an Excel XLSX file to a JSON object array
@@ -129,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**interface{}**](interface{}.md)
+**string**
 
 ### Authorization
 
@@ -138,7 +177,35 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: application/json
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDataXlsxToXml**
+> string ConvertDataXlsxToXml(ctx, inputFile)
+Convert Excel XLSX to XML conversion
+
+Convert an Excel XLSX file to a XML file
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**ConvertDocumentDocToDocx**](ConvertDocumentApi.md#ConvertDocumentDocToDocx) | **Post** /convert/doc/to/docx | Convert Word DOC (97-03) Document to DOCX
 [**ConvertDocumentDocToPdf**](ConvertDocumentApi.md#ConvertDocumentDocToPdf) | **Post** /convert/doc/to/pdf | Convert Word DOC (97-03) Document to PDF
 [**ConvertDocumentDocToTxt**](ConvertDocumentApi.md#ConvertDocumentDocToTxt) | **Post** /convert/doc/to/txt | Convert Word DOC (97-03) Document to Text (txt)
+[**ConvertDocumentDocxToDoc**](ConvertDocumentApi.md#ConvertDocumentDocxToDoc) | **Post** /convert/docx/to/doc | Convert Word DOCX Document to Legacy Word DOC (97-03)
 [**ConvertDocumentDocxToHtml**](ConvertDocumentApi.md#ConvertDocumentDocxToHtml) | **Post** /convert/docx/to/html | Convert Word DOCX Document to HTML Document
 [**ConvertDocumentDocxToJpg**](ConvertDocumentApi.md#ConvertDocumentDocxToJpg) | **Post** /convert/docx/to/jpg | Convert Word DOCX Document to JPG/JPEG image array
 [**ConvertDocumentDocxToPdf**](ConvertDocumentApi.md#ConvertDocumentDocxToPdf) | **Post** /convert/docx/to/pdf | Convert Word DOCX Document to PDF
@@ -65,6 +66,7 @@ Method | HTTP request | Description
 [**ConvertDocumentPptToPptx**](ConvertDocumentApi.md#ConvertDocumentPptToPptx) | **Post** /convert/ppt/to/pptx | Convert PowerPoint PPT (97-03) Presentation to PPTX
 [**ConvertDocumentPptxToPdf**](ConvertDocumentApi.md#ConvertDocumentPptxToPdf) | **Post** /convert/pptx/to/pdf | Convert PowerPoint PPTX Presentation to PDF
 [**ConvertDocumentPptxToPng**](ConvertDocumentApi.md#ConvertDocumentPptxToPng) | **Post** /convert/pptx/to/png | Convert PowerPoint PPTX to PNG image array
+[**ConvertDocumentPptxToPpt**](ConvertDocumentApi.md#ConvertDocumentPptxToPpt) | **Post** /convert/pptx/to/ppt | Convert PowerPoint PPTX presentation to Legacy PowerPoint PPT (97-03)
 [**ConvertDocumentPptxToTxt**](ConvertDocumentApi.md#ConvertDocumentPptxToTxt) | **Post** /convert/pptx/to/txt | Convert PowerPoint PPTX Presentation to Text (txt)
 [**ConvertDocumentRtfToDocx**](ConvertDocumentApi.md#ConvertDocumentRtfToDocx) | **Post** /convert/rtf/to/docx | Convert Rich Text Format RTF to DOCX Document
 [**ConvertDocumentRtfToHtml**](ConvertDocumentApi.md#ConvertDocumentRtfToHtml) | **Post** /convert/rtf/to/html | Convert Rich Text Format RTF to HTML Document
@@ -80,6 +82,7 @@ Method | HTTP request | Description
 [**ConvertDocumentXlsxToPdf**](ConvertDocumentApi.md#ConvertDocumentXlsxToPdf) | **Post** /convert/xlsx/to/pdf | Convert Excel XLSX Spreadsheet to PDF
 [**ConvertDocumentXlsxToPng**](ConvertDocumentApi.md#ConvertDocumentXlsxToPng) | **Post** /convert/xlsx/to/png | Convert Excel XLSX spreadsheet to PNG image array
 [**ConvertDocumentXlsxToTxt**](ConvertDocumentApi.md#ConvertDocumentXlsxToTxt) | **Post** /convert/xlsx/to/txt | Convert Excel XLSX Spreadsheet to Text (txt)
+[**ConvertDocumentXlsxToXls**](ConvertDocumentApi.md#ConvertDocumentXlsxToXls) | **Post** /convert/xlsx/to/xls | Convert Excel XLSX Spreadsheet to Legacy Excel XLS (97-03)
 
 
 # **ConvertDocumentAutodetectGetInfo**
@@ -531,6 +534,34 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentDocxToDoc**
+> string ConvertDocumentDocxToDoc(ctx, inputFile)
+Convert Word DOCX Document to Legacy Word DOC (97-03)
+
+Convert/downgrade modern Office Word DOCX Documents (DOCX) to the legacy Word DOC (97-2003 Format) format
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2024,6 +2055,30 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ConvertDocumentPptxToPpt**
+> interface{} ConvertDocumentPptxToPpt(ctx, )
+Convert PowerPoint PPTX presentation to Legacy PowerPoint PPT (97-03)
+
+Convert/downgrade modern Office PowerPoint PPTX Presentation to the legacy PowerPoint PPT (97-2003 Format) format
+
+### Required Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**interface{}**](interface{}.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ConvertDocumentPptxToTxt**
 > TextConversionResult ConvertDocumentPptxToTxt(ctx, inputFile)
 Convert PowerPoint PPTX Presentation to Text (txt)
@@ -2468,6 +2523,34 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentXlsxToXls**
+> string ConvertDocumentXlsxToXls(ctx, inputFile)
+Convert Excel XLSX Spreadsheet to Legacy Excel XLS (97-03)
+
+Convert/downgrade modern Office Excel XLSX Spreadsheet to the legacy Excel XLS (97-2003 Format) format
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

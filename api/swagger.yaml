@@ -79,6 +79,44 @@ paths:
             type: "object"
       security:
       - Apikey: []
+  /convert/csv/to/xml:
+    post:
+      tags:
+      - "ConvertData"
+      summary: "Convert CSV to XML conversion"
+      description: "Convert a CSV file to a XML file"
+      operationId: "ConvertData_CsvToXml"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "columnNamesFromFirstRow"
+        in: "header"
+        description: "Optional; If true, the first row will be used as the labels\
+          \ for the columns; if false, columns will be named Column0, Column1, etc.\
+          \  Default is true.  Set to false if you are not using column headings,\
+          \ or have an irregular column structure."
+        required: false
+        type: "boolean"
+        x-exportParamName: "ColumnNamesFromFirstRow"
+        x-optionalDataType: "Bool"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/xlsx/to/json:
     post:
       tags:
@@ -89,7 +127,7 @@ paths:
       consumes:
       - "multipart/form-data"
       produces:
-      - "application/json"
+      - "application/octet-stream"
       parameters:
       - name: "inputFile"
         in: "formData"
@@ -101,7 +139,38 @@ paths:
         "200":
           description: "OK"
           schema:
-            type: "object"
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/xlsx/to/xml:
+    post:
+      tags:
+      - "ConvertData"
+      summary: "Convert Excel XLSX to XML conversion"
+      description: "Convert an Excel XLSX file to a XML file"
+      operationId: "ConvertData_XlsxToXml"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/xls/to/json:
@@ -871,6 +940,83 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/docx/to/doc:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert Word DOCX Document to Legacy Word DOC (97-03)"
+      description: "Convert/downgrade modern Office Word DOCX Documents (DOCX) to\
+        \ the legacy Word DOC (97-2003 Format) format"
+      operationId: "ConvertDocument_DocxToDoc"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/xlsx/to/xls:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert Excel XLSX Spreadsheet to Legacy Excel XLS (97-03)"
+      description: "Convert/downgrade modern Office Excel XLSX Spreadsheet to the\
+        \ legacy Excel XLS (97-2003 Format) format"
+      operationId: "ConvertDocument_XlsxToXls"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/pptx/to/ppt:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert PowerPoint PPTX presentation to Legacy PowerPoint PPT (97-03)"
+      description: "Convert/downgrade modern Office PowerPoint PPTX Presentation to\
+        \ the legacy PowerPoint PPT (97-2003 Format) format"
+      operationId: "ConvertDocument_PptxToPpt"
+      consumes: []
+      produces:
+      - "application/octet-stream"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/doc/to/txt:
@@ -6854,6 +7000,101 @@ paths:
         required: true
         type: "string"
         x-exportParamName: "PaperSize"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/optimize/pdf-a:
+    post:
+      tags:
+      - "EditPdf"
+      summary: "Convert a PDF file to PDF/A"
+      description: "Converts the input PDF file to a PDF/A-1b or PDF/A-2b standardized\
+        \ PDF."
+      operationId: "EditPdf_ConvertToPdfA"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "conformanceLevel"
+        in: "header"
+        description: "Optional: Select the conformance level for PDF/A - specify '1b'\
+          \ for PDF/A-1b or specify '2b' for PDF/A-2b; default is PDF/A-1b"
+        required: false
+        type: "string"
+        x-exportParamName: "ConformanceLevel"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/optimize/reduce-file-size:
+    post:
+      tags:
+      - "EditPdf"
+      summary: "Reduce the file size and optimize a PDF"
+      description: "Reduces the file size and optimizes the content of a PDF to minimize\
+        \ its file size."
+      operationId: "EditPdf_ReduceFileSize"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/optimize/linearize:
+    post:
+      tags:
+      - "EditPdf"
+      summary: "Linearize and optimize a PDF for streaming download"
+      description: "Linearizes the content of a PDF to optimize it for streaming download,\
+        \ particularly over web streaming."
+      operationId: "EditPdf_Linearize"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
       responses:
         "200":
           description: "OK"

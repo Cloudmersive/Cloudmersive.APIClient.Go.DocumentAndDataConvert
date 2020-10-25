@@ -5,6 +5,7 @@ All URIs are relative to *https://api.cloudmersive.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**EditPdfAddAnnotations**](EditPdfApi.md#EditPdfAddAnnotations) | **Post** /convert/edit/pdf/annotations/add-item | Add one or more PDF annotations, comments in the PDF document
+[**EditPdfConvertToPdfA**](EditPdfApi.md#EditPdfConvertToPdfA) | **Post** /convert/edit/pdf/optimize/pdf-a | Convert a PDF file to PDF/A
 [**EditPdfDecrypt**](EditPdfApi.md#EditPdfDecrypt) | **Post** /convert/edit/pdf/decrypt | Decrypt and password-protect a PDF
 [**EditPdfDeletePages**](EditPdfApi.md#EditPdfDeletePages) | **Post** /convert/edit/pdf/pages/delete | Remove, delete pages from a PDF document
 [**EditPdfEncrypt**](EditPdfApi.md#EditPdfEncrypt) | **Post** /convert/edit/pdf/encrypt | Encrypt and password-protect a PDF
@@ -13,7 +14,9 @@ Method | HTTP request | Description
 [**EditPdfGetMetadata**](EditPdfApi.md#EditPdfGetMetadata) | **Post** /convert/edit/pdf/get-metadata | Get PDF document metadata
 [**EditPdfGetPdfTextByPages**](EditPdfApi.md#EditPdfGetPdfTextByPages) | **Post** /convert/edit/pdf/pages/get-text | Get text in a PDF document by page
 [**EditPdfInsertPages**](EditPdfApi.md#EditPdfInsertPages) | **Post** /convert/edit/pdf/pages/insert | Insert, copy pages from one PDF document into another
+[**EditPdfLinearize**](EditPdfApi.md#EditPdfLinearize) | **Post** /convert/edit/pdf/optimize/linearize | Linearize and optimize a PDF for streaming download
 [**EditPdfRasterize**](EditPdfApi.md#EditPdfRasterize) | **Post** /convert/edit/pdf/rasterize | Rasterize a PDF to an image-based PDF
+[**EditPdfReduceFileSize**](EditPdfApi.md#EditPdfReduceFileSize) | **Post** /convert/edit/pdf/optimize/reduce-file-size | Reduce the file size and optimize a PDF
 [**EditPdfRemoveAllAnnotations**](EditPdfApi.md#EditPdfRemoveAllAnnotations) | **Post** /convert/edit/pdf/annotations/remove-all | Remove all PDF annotations, including comments in the document
 [**EditPdfRemoveAnnotationItem**](EditPdfApi.md#EditPdfRemoveAnnotationItem) | **Post** /convert/edit/pdf/annotations/remove-item | Remove a specific PDF annotation, comment in the document
 [**EditPdfResize**](EditPdfApi.md#EditPdfResize) | **Post** /convert/edit/pdf/resize | Change PDF Document&#39;s Paper Size
@@ -49,6 +52,43 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditPdfConvertToPdfA**
+> string EditPdfConvertToPdfA(ctx, inputFile, optional)
+Convert a PDF file to PDF/A
+
+Converts the input PDF file to a PDF/A-1b or PDF/A-2b standardized PDF.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***EditPdfConvertToPdfAOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditPdfConvertToPdfAOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **conformanceLevel** | **optional.String**| Optional: Select the conformance level for PDF/A - specify &#39;1b&#39; for PDF/A-1b or specify &#39;2b&#39; for PDF/A-2b; default is PDF/A-1b | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -304,11 +344,67 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **EditPdfLinearize**
+> string EditPdfLinearize(ctx, inputFile)
+Linearize and optimize a PDF for streaming download
+
+Linearizes the content of a PDF to optimize it for streaming download, particularly over web streaming.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **EditPdfRasterize**
 > string EditPdfRasterize(ctx, inputFile)
 Rasterize a PDF to an image-based PDF
 
 Rasterize a PDF into an image-based PDF.  The output is a PDF where each page is comprised of a high-resolution image, with all text, figures and other components removed.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditPdfReduceFileSize**
+> string EditPdfReduceFileSize(ctx, inputFile)
+Reduce the file size and optimize a PDF
+
+Reduces the file size and optimizes the content of a PDF to minimize its file size.
 
 ### Required Parameters
 

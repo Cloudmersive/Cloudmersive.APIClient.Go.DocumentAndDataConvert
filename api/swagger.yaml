@@ -8974,6 +8974,35 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/txt:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate an TXT file"
+      description: "Validate an TXT document file; if the document is not valid, identifies\
+        \ the errors in the document"
+      operationId: "ValidateDocument_TxtValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
   /convert/validate/json:
     post:
       tags:
@@ -9112,6 +9141,20 @@ paths:
         required: true
         type: "file"
         x-exportParamName: "InputFile"
+      - name: "width"
+        in: "header"
+        description: "Optional; width of the output viewer in pixels"
+        required: false
+        type: "integer"
+        x-exportParamName: "Width"
+        x-optionalDataType: "Int32"
+      - name: "height"
+        in: "header"
+        description: "Optional; height of the output viewer in pixels"
+        required: false
+        type: "integer"
+        x-exportParamName: "Height"
+        x-optionalDataType: "Int32"
       responses:
         "200":
           description: "OK"

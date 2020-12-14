@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"strings"
 	"os"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -30,10 +31,19 @@ ViewerToolsApiService Create a web-based viewer
 Creates an HTML embed code for a simple web-based viewer of a document; supports Office document types and PDF.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param inputFile Input file to perform the operation on.
+ * @param optional nil or *ViewerToolsCreateSimpleOpts - Optional Parameters:
+     * @param "Width" (optional.Int32) -  Optional; width of the output viewer in pixels
+     * @param "Height" (optional.Int32) -  Optional; height of the output viewer in pixels
 
 @return ViewerResponse
 */
-func (a *ViewerToolsApiService) ViewerToolsCreateSimple(ctx context.Context, inputFile *os.File) (ViewerResponse, *http.Response, error) {
+
+type ViewerToolsCreateSimpleOpts struct { 
+	Width optional.Int32
+	Height optional.Int32
+}
+
+func (a *ViewerToolsApiService) ViewerToolsCreateSimple(ctx context.Context, inputFile *os.File, localVarOptionals *ViewerToolsCreateSimpleOpts) (ViewerResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -65,6 +75,12 @@ func (a *ViewerToolsApiService) ViewerToolsCreateSimple(ctx context.Context, inp
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.Width.IsSet() {
+		localVarHeaderParams["width"] = parameterToString(localVarOptionals.Width.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.Height.IsSet() {
+		localVarHeaderParams["height"] = parameterToString(localVarOptionals.Height.Value(), "")
 	}
 	var localVarFile *os.File
 	if localVarFile != nil {

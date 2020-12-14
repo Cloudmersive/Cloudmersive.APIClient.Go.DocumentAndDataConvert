@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **ViewerToolsCreateSimple**
-> ViewerResponse ViewerToolsCreateSimple(ctx, inputFile)
+> ViewerResponse ViewerToolsCreateSimple(ctx, inputFile, optional)
 Create a web-based viewer
 
 Creates an HTML embed code for a simple web-based viewer of a document; supports Office document types and PDF.
@@ -19,6 +19,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ViewerToolsCreateSimpleOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ViewerToolsCreateSimpleOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **width** | **optional.Int32**| Optional; width of the output viewer in pixels | 
+ **height** | **optional.Int32**| Optional; height of the output viewer in pixels | 
 
 ### Return type
 

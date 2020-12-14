@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**ValidateDocumentPptxValidation**](ValidateDocumentApi.md#ValidateDocumentPptxValidation) | **Post** /convert/validate/pptx | Validate a PowerPoint presentation (PPTX)
 [**ValidateDocumentRarValidation**](ValidateDocumentApi.md#ValidateDocumentRarValidation) | **Post** /convert/validate/rar | Validate a RAR Archive file (RAR)
 [**ValidateDocumentTarValidation**](ValidateDocumentApi.md#ValidateDocumentTarValidation) | **Post** /convert/validate/tar | Validate a TAR Tarball Archive file (TAR)
+[**ValidateDocumentTxtValidation**](ValidateDocumentApi.md#ValidateDocumentTxtValidation) | **Post** /convert/validate/txt | Validate an TXT file
 [**ValidateDocumentXlsxValidation**](ValidateDocumentApi.md#ValidateDocumentXlsxValidation) | **Post** /convert/validate/xlsx | Validate a Excel document (XLSX)
 [**ValidateDocumentXmlValidation**](ValidateDocumentApi.md#ValidateDocumentXmlValidation) | **Post** /convert/validate/xml | Validate an XML file
 [**ValidateDocumentZipValidation**](ValidateDocumentApi.md#ValidateDocumentZipValidation) | **Post** /convert/validate/zip | Validate a Zip Archive file (zip)
@@ -392,6 +393,34 @@ Name | Type | Description  | Notes
 Validate a TAR Tarball Archive file (TAR)
 
 Validate a TAR tarball archive file (TAR)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentTxtValidation**
+> DocumentValidationResult ValidateDocumentTxtValidation(ctx, inputFile)
+Validate an TXT file
+
+Validate an TXT document file; if the document is not valid, identifies the errors in the document
 
 ### Required Parameters
 

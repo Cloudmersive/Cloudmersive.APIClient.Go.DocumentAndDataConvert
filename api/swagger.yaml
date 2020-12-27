@@ -4123,6 +4123,71 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/edit/docx/get-metadata:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get all metadata properties in Word DOCX document"
+      description: "Returns all the metadata properties in an Office Word Document\
+        \ (docx)"
+      operationId: "EditDocument_DocxGetMetadataProperties"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetDocxMetadataPropertiesResponse"
+      security:
+      - Apikey: []
+  /convert/edit/docx/set-metadata/custom-property:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Set custom property metadata properties in Word DOCX document"
+      description: "Sets the custom property metadata for the metadata properties\
+        \ in an Office Word Document (docx)"
+      operationId: "EditDocument_DocxSetCustomMetadataProperties"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - in: "body"
+        name: "input"
+        required: true
+        schema:
+          $ref: "#/definitions/DocxSetCustomMetadataPropertiesRequest"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/edit/docx/get-tables:
     post:
       tags:
@@ -10914,6 +10979,140 @@ definitions:
       MatchString: "MatchString"
       MatchCase: true
       ReplaceString: "ReplaceString"
+  GetDocxMetadataPropertiesResponse:
+    type: "object"
+    properties:
+      Company:
+        type: "string"
+        description: "Name of the Company that authored the document, if available"
+      Manager:
+        type: "string"
+        description: "Name of the Manager that authored the document, if available"
+      ApplicationVersion:
+        type: "string"
+        description: "Application version that authored the document, if available"
+      WordCount:
+        type: "integer"
+        format: "int64"
+        description: "Word count of the document"
+      LineCount:
+        type: "integer"
+        format: "int64"
+        description: "Line count of the document"
+      ParagraphCount:
+        type: "integer"
+        format: "int64"
+        description: "Paragraph count of the document"
+      PageCount:
+        type: "integer"
+        format: "int64"
+        description: "Page count of the document"
+      CustomProperties:
+        type: "array"
+        description: "Custom properties applied to the document"
+        items:
+          $ref: "#/definitions/DocxMetadataCustomProperty"
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+    description: "Result of running a DocxGetMetadataProperties command"
+    example:
+      Company: "Company"
+      ApplicationVersion: "ApplicationVersion"
+      PageCount: 5
+      WordCount: 0
+      ParagraphCount: 1
+      Manager: "Manager"
+      LineCount: 6
+      Successful: true
+      CustomProperties:
+      - PropertyName: "PropertyName"
+        DoubleValue: 2.3021358869347655
+        DateValue: "2000-01-23T04:56:07.000+00:00"
+        IntegerValue: 5
+        PropertyDataType: "PropertyDataType"
+        StringValue: "StringValue"
+      - PropertyName: "PropertyName"
+        DoubleValue: 2.3021358869347655
+        DateValue: "2000-01-23T04:56:07.000+00:00"
+        IntegerValue: 5
+        PropertyDataType: "PropertyDataType"
+        StringValue: "StringValue"
+  DocxMetadataCustomProperty:
+    type: "object"
+    properties:
+      PropertyName:
+        type: "string"
+        description: "Name of the property"
+      PropertyDataType:
+        type: "string"
+        description: "Data type of the property; possible values are \"string\", \"\
+          integer\", \"double\" or \"date\""
+      StringValue:
+        type: "string"
+        description: "If the property is of a string data type, then provides the\
+          \ string value if available"
+      IntegerValue:
+        type: "integer"
+        format: "int64"
+        description: "If the property is of a integer data type, then provides the\
+          \ integer value if available"
+      DoubleValue:
+        type: "number"
+        format: "double"
+        description: "If the property is of a double floating point data type, then\
+          \ provides the double value if available"
+      DateValue:
+        type: "string"
+        format: "date-time"
+        description: "If the property is of a date time data type, then provides the\
+          \ date time value if available"
+    description: "Name and value pair for a custom-defined DOCX metadata property"
+    example:
+      PropertyName: "PropertyName"
+      DoubleValue: 2.3021358869347655
+      DateValue: "2000-01-23T04:56:07.000+00:00"
+      IntegerValue: 5
+      PropertyDataType: "PropertyDataType"
+      StringValue: "StringValue"
+  DocxSetCustomMetadataPropertiesRequest:
+    type: "object"
+    properties:
+      InputFileBytes:
+        type: "string"
+        format: "byte"
+        description: "Optional: Bytes of the input file to operate on"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      InputFileUrl:
+        type: "string"
+        description: "Optional: URL of a file to operate on as input.  This can be\
+          \ a public URL, or you can also use the begin-editing API to upload a document\
+          \ and pass in the secure URL result from that operation as the URL here\
+          \ (this URL is not public)."
+      PropertiesToSet:
+        type: "array"
+        description: "Required: properties to set in the Word Document; provide one\
+          \ or more property definitions to set - be sure to specify the data type\
+          \ and value, together with the property name"
+        items:
+          $ref: "#/definitions/DocxMetadataCustomProperty"
+    description: "Request to set Word custom metadata properties"
+    example:
+      InputFileBytes: "InputFileBytes"
+      InputFileUrl: "InputFileUrl"
+      PropertiesToSet:
+      - PropertyName: "PropertyName"
+        DoubleValue: 2.3021358869347655
+        DateValue: "2000-01-23T04:56:07.000+00:00"
+        IntegerValue: 5
+        PropertyDataType: "PropertyDataType"
+        StringValue: "StringValue"
+      - PropertyName: "PropertyName"
+        DoubleValue: 2.3021358869347655
+        DateValue: "2000-01-23T04:56:07.000+00:00"
+        IntegerValue: 5
+        PropertyDataType: "PropertyDataType"
+        StringValue: "StringValue"
   GetDocxTablesRequest:
     type: "object"
     properties:

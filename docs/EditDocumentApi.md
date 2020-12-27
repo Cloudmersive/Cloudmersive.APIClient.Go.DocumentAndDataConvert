@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**EditDocumentDocxGetCommentsHierarchical**](EditDocumentApi.md#EditDocumentDocxGetCommentsHierarchical) | **Post** /convert/edit/docx/get-comments/hierarchical | Get comments from a Word DOCX document hierarchically
 [**EditDocumentDocxGetHeadersAndFooters**](EditDocumentApi.md#EditDocumentDocxGetHeadersAndFooters) | **Post** /convert/edit/docx/get-headers-and-footers | Get content of a footer from a Word DOCX document
 [**EditDocumentDocxGetImages**](EditDocumentApi.md#EditDocumentDocxGetImages) | **Post** /convert/edit/docx/get-images | Get images from a Word DOCX document
+[**EditDocumentDocxGetMetadataProperties**](EditDocumentApi.md#EditDocumentDocxGetMetadataProperties) | **Post** /convert/edit/docx/get-metadata | Get all metadata properties in Word DOCX document
 [**EditDocumentDocxGetSections**](EditDocumentApi.md#EditDocumentDocxGetSections) | **Post** /convert/edit/docx/get-sections | Get sections from a Word DOCX document
 [**EditDocumentDocxGetStyles**](EditDocumentApi.md#EditDocumentDocxGetStyles) | **Post** /convert/edit/docx/get-styles | Get styles from a Word DOCX document
 [**EditDocumentDocxGetTableByIndex**](EditDocumentApi.md#EditDocumentDocxGetTableByIndex) | **Post** /convert/edit/docx/get-table/by-index | Get a specific table by index in a Word DOCX document
@@ -35,6 +36,7 @@ Method | HTTP request | Description
 [**EditDocumentDocxReplace**](EditDocumentApi.md#EditDocumentDocxReplace) | **Post** /convert/edit/docx/replace-all | Replace string in Word DOCX document
 [**EditDocumentDocxReplaceMulti**](EditDocumentApi.md#EditDocumentDocxReplaceMulti) | **Post** /convert/edit/docx/replace-all/multi | Replace multiple strings in Word DOCX document
 [**EditDocumentDocxReplaceParagraph**](EditDocumentApi.md#EditDocumentDocxReplaceParagraph) | **Post** /convert/edit/docx/replace/paragraph | Replace matching paragraphs in a Word DOCX document
+[**EditDocumentDocxSetCustomMetadataProperties**](EditDocumentApi.md#EditDocumentDocxSetCustomMetadataProperties) | **Post** /convert/edit/docx/set-metadata/custom-property | Set custom property metadata properties in Word DOCX document
 [**EditDocumentDocxSetFooter**](EditDocumentApi.md#EditDocumentDocxSetFooter) | **Post** /convert/edit/docx/set-footer | Set the footer in a Word DOCX document
 [**EditDocumentDocxSetFooterAddPageNumber**](EditDocumentApi.md#EditDocumentDocxSetFooterAddPageNumber) | **Post** /convert/edit/docx/set-footer/add-page-number | Add page number to footer in a Word DOCX document
 [**EditDocumentDocxSetHeader**](EditDocumentApi.md#EditDocumentDocxSetHeader) | **Post** /convert/edit/docx/set-header | Set the header in a Word DOCX document
@@ -453,6 +455,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxGetMetadataProperties**
+> GetDocxMetadataPropertiesResponse EditDocumentDocxGetMetadataProperties(ctx, inputFile)
+Get all metadata properties in Word DOCX document
+
+Returns all the metadata properties in an Office Word Document (docx)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**GetDocxMetadataPropertiesResponse**](GetDocxMetadataPropertiesResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -921,6 +951,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**ReplaceDocxParagraphResponse**](ReplaceDocxParagraphResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxSetCustomMetadataProperties**
+> string EditDocumentDocxSetCustomMetadataProperties(ctx, input)
+Set custom property metadata properties in Word DOCX document
+
+Sets the custom property metadata for the metadata properties in an Office Word Document (docx)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **input** | [**DocxSetCustomMetadataPropertiesRequest**](DocxSetCustomMetadataPropertiesRequest.md)|  | 
+
+### Return type
+
+**string**
 
 ### Authorization
 

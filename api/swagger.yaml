@@ -8753,6 +8753,64 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/png:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate a PNG File"
+      description: "Validate a PNG image file; if the document is not valid, identifies\
+        \ the errors in the document."
+      operationId: "ValidateDocument_PngValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
+  /convert/validate/jpg:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate a JPG File"
+      description: "Validate a JPEG image file; if the document is not valid, identifies\
+        \ the errors in the document.."
+      operationId: "ValidateDocument_JpgValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
   /convert/validate/xlsx:
     post:
       tags:

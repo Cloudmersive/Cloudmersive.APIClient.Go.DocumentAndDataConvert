@@ -12,9 +12,11 @@ Method | HTTP request | Description
 [**ValidateDocumentGZipValidation**](ValidateDocumentApi.md#ValidateDocumentGZipValidation) | **Post** /convert/validate/gzip | Validate a GZip Archive file (gzip or gz)
 [**ValidateDocumentHtmlValidation**](ValidateDocumentApi.md#ValidateDocumentHtmlValidation) | **Post** /convert/validate/html | Validate an HTML file
 [**ValidateDocumentImageValidation**](ValidateDocumentApi.md#ValidateDocumentImageValidation) | **Post** /convert/validate/image | Validate an Image File
+[**ValidateDocumentJpgValidation**](ValidateDocumentApi.md#ValidateDocumentJpgValidation) | **Post** /convert/validate/jpg | Validate a JPG File
 [**ValidateDocumentJsonValidation**](ValidateDocumentApi.md#ValidateDocumentJsonValidation) | **Post** /convert/validate/json | Validate a JSON file
 [**ValidateDocumentMsgValidation**](ValidateDocumentApi.md#ValidateDocumentMsgValidation) | **Post** /convert/validate/msg | Validate if an MSG file is executable
 [**ValidateDocumentPdfValidation**](ValidateDocumentApi.md#ValidateDocumentPdfValidation) | **Post** /convert/validate/pdf | Validate a PDF document file
+[**ValidateDocumentPngValidation**](ValidateDocumentApi.md#ValidateDocumentPngValidation) | **Post** /convert/validate/png | Validate a PNG File
 [**ValidateDocumentPptxValidation**](ValidateDocumentApi.md#ValidateDocumentPptxValidation) | **Post** /convert/validate/pptx | Validate a PowerPoint presentation (PPTX)
 [**ValidateDocumentRarValidation**](ValidateDocumentApi.md#ValidateDocumentRarValidation) | **Post** /convert/validate/rar | Validate a RAR Archive file (RAR)
 [**ValidateDocumentTarValidation**](ValidateDocumentApi.md#ValidateDocumentTarValidation) | **Post** /convert/validate/tar | Validate a TAR Tarball Archive file (TAR)
@@ -248,6 +250,34 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ValidateDocumentJpgValidation**
+> DocumentValidationResult ValidateDocumentJpgValidation(ctx, inputFile)
+Validate a JPG File
+
+Validate a JPEG image file; if the document is not valid, identifies the errors in the document..
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ValidateDocumentJsonValidation**
 > DocumentValidationResult ValidateDocumentJsonValidation(ctx, inputFile)
 Validate a JSON file
@@ -309,6 +339,34 @@ Name | Type | Description  | Notes
 Validate a PDF document file
 
 Validate a PDF document; if the document is not valid, identifies the errors in the document.  Also checks if the PDF is password protected.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentPngValidation**
+> DocumentValidationResult ValidateDocumentPngValidation(ctx, inputFile)
+Validate a PNG File
+
+Validate a PNG image file; if the document is not valid, identifies the errors in the document.
 
 ### Required Parameters
 

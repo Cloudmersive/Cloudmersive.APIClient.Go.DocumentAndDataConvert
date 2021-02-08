@@ -716,3 +716,134 @@ func (a *EditHtmlApiService) EditHtmlHtmlCreateBlankDocument(ctx context.Context
 
 	return localVarReturnValue, localVarHttpResponse, nil
 }
+
+/* 
+EditHtmlApiService Extract resolved link URLs from HTML File
+Extracts the resolved link URLs, fully-qualified if possible, from an input HTML file.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param optional nil or *EditHtmlHtmlGetLinksOpts - Optional Parameters:
+     * @param "InputFile" (optional.Interface of *os.File) -  Optional: Input file to perform the operation on.
+     * @param "InputFileUrl" (optional.String) -  Optional: URL of a file to operate on as input.
+     * @param "BaseUrl" (optional.String) -  Optional: Base URL of the page, such as https://mydomain.com
+
+@return HtmlGetLinksResponse
+*/
+
+type EditHtmlHtmlGetLinksOpts struct { 
+	InputFile optional.Interface
+	InputFileUrl optional.String
+	BaseUrl optional.String
+}
+
+func (a *EditHtmlApiService) EditHtmlHtmlGetLinks(ctx context.Context, localVarOptionals *EditHtmlHtmlGetLinksOpts) (HtmlGetLinksResponse, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue HtmlGetLinksResponse
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/convert/edit/html/extract/links"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.InputFileUrl.IsSet() {
+		localVarHeaderParams["inputFileUrl"] = parameterToString(localVarOptionals.InputFileUrl.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.BaseUrl.IsSet() {
+		localVarHeaderParams["baseUrl"] = parameterToString(localVarOptionals.BaseUrl.Value(), "")
+	}
+	var localVarFile *os.File
+	if localVarOptionals != nil && localVarOptionals.InputFile.IsSet() {
+		localVarFileOk := false
+		localVarFile, localVarFileOk = localVarOptionals.InputFile.Value().(*os.File)
+		if !localVarFileOk {
+				return localVarReturnValue, nil, reportError("inputFile should be *os.File")
+		}
+	}
+	if localVarFile != nil {
+		fbs, _ := ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Apikey"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		if localVarHttpResponse.StatusCode == 200 {
+			var v HtmlGetLinksResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}

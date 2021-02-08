@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**ValidateDocumentEmlValidation**](ValidateDocumentApi.md#ValidateDocumentEmlValidation) | **Post** /convert/validate/eml | Validate if an EML file is executable
 [**ValidateDocumentExecutableValidation**](ValidateDocumentApi.md#ValidateDocumentExecutableValidation) | **Post** /convert/validate/executable | Validate if a file is executable
 [**ValidateDocumentGZipValidation**](ValidateDocumentApi.md#ValidateDocumentGZipValidation) | **Post** /convert/validate/gzip | Validate a GZip Archive file (gzip or gz)
+[**ValidateDocumentHtmlSsrfValidation**](ValidateDocumentApi.md#ValidateDocumentHtmlSsrfValidation) | **Post** /convert/validate/html/ssrf-threat-check | Validate an HTML file and checks for SSRF threats
 [**ValidateDocumentHtmlValidation**](ValidateDocumentApi.md#ValidateDocumentHtmlValidation) | **Post** /convert/validate/html | Validate an HTML file
 [**ValidateDocumentImageValidation**](ValidateDocumentApi.md#ValidateDocumentImageValidation) | **Post** /convert/validate/image | Validate an Image File
 [**ValidateDocumentJpgValidation**](ValidateDocumentApi.md#ValidateDocumentJpgValidation) | **Post** /convert/validate/jpg | Validate a JPG File
@@ -182,6 +183,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentHtmlSsrfValidation**
+> HtmlSsrfThreatCheckResult ValidateDocumentHtmlSsrfValidation(ctx, inputFile)
+Validate an HTML file and checks for SSRF threats
+
+Validate an HTML document file and checks for SSRF (Server-side Request Forgery) threats in the file; if the document is not valid, identifies the errors in the document
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**HtmlSsrfThreatCheckResult**](HtmlSsrfThreatCheckResult.md)
 
 ### Authorization
 

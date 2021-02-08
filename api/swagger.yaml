@@ -6103,6 +6103,48 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/edit/html/extract/links:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Extract resolved link URLs from HTML File"
+      description: "Extracts the resolved link URLs, fully-qualified if possible,\
+        \ from an input HTML file."
+      operationId: "EditHtml_HtmlGetLinks"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      - name: "baseUrl"
+        in: "header"
+        description: "Optional: Base URL of the page, such as https://mydomain.com"
+        required: false
+        type: "string"
+        x-exportParamName: "BaseUrl"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/HtmlGetLinksResponse"
+      security:
+      - Apikey: []
   /convert/edit/html/append/image/from-url:
     post:
       tags:
@@ -8077,6 +8119,124 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/merge/html:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Two HTML (HTM) Files Together"
+      description: "Combine two HTML (.HTM) files into a single text document, preserving\
+        \ the order of the input documents in the combined document by stacking them\
+        \ vertically.  The title will be taken from the first document."
+      operationId: "MergeDocument_Html"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile1"
+        in: "formData"
+        description: "First input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile1"
+      - name: "inputFile2"
+        in: "formData"
+        description: "Second input file to perform the operation on (more than 2 can\
+          \ be supplied)."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile2"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+      security:
+      - Apikey: []
+  /convert/merge/html/multi:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple HTML (HTM) Files Together"
+      description: "Combine multiple HTML (.HTM) files into a single text document,\
+        \ preserving the order of the input documents in the combined document by\
+        \ stacking them vertically.  The title will be taken from the first document."
+      operationId: "MergeDocument_HtmlMulti"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile1"
+        in: "formData"
+        description: "First input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile1"
+      - name: "inputFile2"
+        in: "formData"
+        description: "Second input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile2"
+      - name: "inputFile3"
+        in: "formData"
+        description: "Third input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile3"
+      - name: "inputFile4"
+        in: "formData"
+        description: "Fourth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile4"
+      - name: "inputFile5"
+        in: "formData"
+        description: "Fifth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile5"
+      - name: "inputFile6"
+        in: "formData"
+        description: "Sixth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile6"
+      - name: "inputFile7"
+        in: "formData"
+        description: "Seventh input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile7"
+      - name: "inputFile8"
+        in: "formData"
+        description: "Eighth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile8"
+      - name: "inputFile9"
+        in: "formData"
+        description: "Ninth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile9"
+      - name: "inputFile10"
+        in: "formData"
+        description: "Tenth input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile10"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/merge/txt:
     post:
       tags:
@@ -9095,6 +9255,36 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
+  /convert/validate/html/ssrf-threat-check:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate an HTML file and checks for SSRF threats"
+      description: "Validate an HTML document file and checks for SSRF (Server-side\
+        \ Request Forgery) threats in the file; if the document is not valid, identifies\
+        \ the errors in the document"
+      operationId: "ValidateDocument_HtmlSsrfValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/HtmlSsrfThreatCheckResult"
       security:
       - Apikey: []
   /convert/validate/txt:
@@ -18977,6 +19167,39 @@ definitions:
       InputFileUrl: "InputFileUrl"
       StartDeleteSlideNumber: 0
       EndDeleteSlideNumber: 6
+  HtmlGetLinksResponse:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      Links:
+        type: "array"
+        description: "All hyperlinks in the HTML document"
+        items:
+          $ref: "#/definitions/HtmlHyperlink"
+    description: "Result of extracting links from an HTML file"
+    example:
+      Links:
+      - Anchortext: "Anchortext"
+        Url: "Url"
+      - Anchortext: "Anchortext"
+        Url: "Url"
+      Successful: true
+  HtmlHyperlink:
+    type: "object"
+    properties:
+      Anchortext:
+        type: "string"
+        description: "Anchor text of the hyperlink, e.g. Click Here"
+      Url:
+        type: "string"
+        description: "URL of the hyperlink; fully-qualified if possible, otherwise\
+          \ relative"
+    description: "Individual hyperlink in an HTML File"
+    example:
+      Anchortext: "Anchortext"
+      Url: "Url"
   PdfTextByPageResult:
     type: "object"
     properties:
@@ -20004,6 +20227,43 @@ definitions:
         Uri: "Uri"
       PasswordProtected: true
       ErrorCount: 0
+  HtmlSsrfThreatCheckResult:
+    type: "object"
+    properties:
+      IsValid:
+        type: "boolean"
+        description: "True if the document is valid and has no errors, false otherwise"
+      IsThreat:
+        type: "boolean"
+        description: "True if the document contains an SSRF threat, false otherwise"
+      ThreatLinks:
+        type: "array"
+        description: "Links found in the input HTML that contains threats"
+        items:
+          $ref: "#/definitions/HtmlThreatLink"
+    description: "HTML SSRF validation result"
+    example:
+      ThreatLinks:
+      - LinkUrl: "LinkUrl"
+        ThreatLevel: "ThreatLevel"
+      - LinkUrl: "LinkUrl"
+        ThreatLevel: "ThreatLevel"
+      IsThreat: true
+      IsValid: true
+  HtmlThreatLink:
+    type: "object"
+    properties:
+      LinkUrl:
+        type: "string"
+        description: "URL of the link"
+      ThreatLevel:
+        type: "string"
+        description: "Threat assessment level; possible values are None, Low, Medium\
+          \ and High"
+    description: "Threat assessment for a hyperlink URL"
+    example:
+      LinkUrl: "LinkUrl"
+      ThreatLevel: "ThreatLevel"
   ViewerResponse:
     type: "object"
     properties:

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**EditHtmlHtmlAppendImageInline**](EditHtmlApi.md#EditHtmlHtmlAppendImageInline) | **Post** /convert/edit/html/append/image/inline | Append a Base64 Inline Image to an HTML Document
 [**EditHtmlHtmlAppendParagraph**](EditHtmlApi.md#EditHtmlHtmlAppendParagraph) | **Post** /convert/edit/html/append/paragraph | Append a Paragraph to an HTML Document
 [**EditHtmlHtmlCreateBlankDocument**](EditHtmlApi.md#EditHtmlHtmlCreateBlankDocument) | **Post** /convert/edit/html/create/blank | Create a Blank HTML Document
+[**EditHtmlHtmlGetLinks**](EditHtmlApi.md#EditHtmlHtmlGetLinks) | **Post** /convert/edit/html/extract/links | Extract resolved link URLs from HTML File
 
 
 # **EditHtmlHtmlAppendHeading**
@@ -196,6 +197,43 @@ Name | Type | Description  | Notes
 ### Return type
 
 **string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditHtmlHtmlGetLinks**
+> HtmlGetLinksResponse EditHtmlHtmlGetLinks(ctx, optional)
+Extract resolved link URLs from HTML File
+
+Extracts the resolved link URLs, fully-qualified if possible, from an input HTML file.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***EditHtmlHtmlGetLinksOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlGetLinksOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+ **baseUrl** | **optional.String**| Optional: Base URL of the page, such as https://mydomain.com | 
+
+### Return type
+
+[**HtmlGetLinksResponse**](HtmlGetLinksResponse.md)
 
 ### Authorization
 

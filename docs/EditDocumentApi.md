@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**EditDocumentDocxGetCommentsHierarchical**](EditDocumentApi.md#EditDocumentDocxGetCommentsHierarchical) | **Post** /convert/edit/docx/get-comments/hierarchical | Get comments from a Word DOCX document hierarchically
 [**EditDocumentDocxGetHeadersAndFooters**](EditDocumentApi.md#EditDocumentDocxGetHeadersAndFooters) | **Post** /convert/edit/docx/get-headers-and-footers | Get content of a footer from a Word DOCX document
 [**EditDocumentDocxGetImages**](EditDocumentApi.md#EditDocumentDocxGetImages) | **Post** /convert/edit/docx/get-images | Get images from a Word DOCX document
+[**EditDocumentDocxGetMacroInformation**](EditDocumentApi.md#EditDocumentDocxGetMacroInformation) | **Post** /convert/edit/docx/get-macros | Get macro information from a Word DOCX/DOCM document
 [**EditDocumentDocxGetMetadataProperties**](EditDocumentApi.md#EditDocumentDocxGetMetadataProperties) | **Post** /convert/edit/docx/get-metadata | Get all metadata properties in Word DOCX document
 [**EditDocumentDocxGetSections**](EditDocumentApi.md#EditDocumentDocxGetSections) | **Post** /convert/edit/docx/get-sections | Get sections from a Word DOCX document
 [**EditDocumentDocxGetStyles**](EditDocumentApi.md#EditDocumentDocxGetStyles) | **Post** /convert/edit/docx/get-styles | Get styles from a Word DOCX document
@@ -44,6 +45,7 @@ Method | HTTP request | Description
 [**EditDocumentDocxUpdateTableRow**](EditDocumentApi.md#EditDocumentDocxUpdateTableRow) | **Post** /convert/edit/docx/update-table-row | Update, set contents of a table row in an existing table in a Word DOCX document
 [**EditDocumentFinishEditing**](EditDocumentApi.md#EditDocumentFinishEditing) | **Post** /convert/edit/finish-editing | Finish editing document, and download result from document editing
 [**EditDocumentPptxDeleteSlides**](EditDocumentApi.md#EditDocumentPptxDeleteSlides) | **Post** /convert/edit/pptx/delete-slides | Delete, remove slides from a PowerPoint PPTX presentation document
+[**EditDocumentPptxGetMacroInformation**](EditDocumentApi.md#EditDocumentPptxGetMacroInformation) | **Post** /convert/edit/pptx/get-macros | Get macro information from a PowerPoint PPTX/PPTM presentation document
 [**EditDocumentPptxReplace**](EditDocumentApi.md#EditDocumentPptxReplace) | **Post** /convert/edit/pptx/replace-all | Replace string in PowerPoint PPTX presentation
 [**EditDocumentXlsxAppendRow**](EditDocumentApi.md#EditDocumentXlsxAppendRow) | **Post** /convert/edit/xlsx/append-row | Append row to a Excel XLSX spreadsheet, worksheet
 [**EditDocumentXlsxClearCellByIndex**](EditDocumentApi.md#EditDocumentXlsxClearCellByIndex) | **Post** /convert/edit/xlsx/clear-cell/by-index | Clear cell contents in an Excel XLSX spreadsheet, worksheet by index
@@ -57,6 +59,7 @@ Method | HTTP request | Description
 [**EditDocumentXlsxGetCellByIndex**](EditDocumentApi.md#EditDocumentXlsxGetCellByIndex) | **Post** /convert/edit/xlsx/get-cell/by-index | Get cell from an Excel XLSX spreadsheet, worksheet by index
 [**EditDocumentXlsxGetColumns**](EditDocumentApi.md#EditDocumentXlsxGetColumns) | **Post** /convert/edit/xlsx/get-columns | Get columns from a Excel XLSX spreadsheet, worksheet
 [**EditDocumentXlsxGetImages**](EditDocumentApi.md#EditDocumentXlsxGetImages) | **Post** /convert/edit/xlsx/get-images | Get images from a Excel XLSX spreadsheet, worksheet
+[**EditDocumentXlsxGetMacroInformation**](EditDocumentApi.md#EditDocumentXlsxGetMacroInformation) | **Post** /convert/edit/xlsx/get-macros | Get macro information from a Excel XLSX/XLSM spreadsheet, worksheet
 [**EditDocumentXlsxGetRowsAndCells**](EditDocumentApi.md#EditDocumentXlsxGetRowsAndCells) | **Post** /convert/edit/xlsx/get-rows-and-cells | Get rows and cells from a Excel XLSX spreadsheet, worksheet
 [**EditDocumentXlsxGetSpecificRow**](EditDocumentApi.md#EditDocumentXlsxGetSpecificRow) | **Post** /convert/edit/xlsx/get-specific-row | Get a specific row from a Excel XLSX spreadsheet, worksheet by path
 [**EditDocumentXlsxGetStyles**](EditDocumentApi.md#EditDocumentXlsxGetStyles) | **Post** /convert/edit/xlsx/get-styles | Get styles from a Excel XLSX spreadsheet, worksheet
@@ -455,6 +458,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxGetMacroInformation**
+> GetMacrosResponse EditDocumentDocxGetMacroInformation(ctx, inputFile)
+Get macro information from a Word DOCX/DOCM document
+
+Returns information about the Macros (e.g. VBA) defined in the Word Document
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**GetMacrosResponse**](GetMacrosResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1187,6 +1218,34 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **EditDocumentPptxGetMacroInformation**
+> GetMacrosResponse EditDocumentPptxGetMacroInformation(ctx, inputFile)
+Get macro information from a PowerPoint PPTX/PPTM presentation document
+
+Returns information about the Macros (e.g. VBA) defined in the PowerPoint Document
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**GetMacrosResponse**](GetMacrosResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **EditDocumentPptxReplace**
 > string EditDocumentPptxReplace(ctx, reqConfig)
 Replace string in PowerPoint PPTX presentation
@@ -1547,6 +1606,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentXlsxGetMacroInformation**
+> GetMacrosResponse EditDocumentXlsxGetMacroInformation(ctx, inputFile)
+Get macro information from a Excel XLSX/XLSM spreadsheet, worksheet
+
+Returns information about the Macros (e.g. VBA) defined in the Excel Spreadsheet
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**GetMacrosResponse**](GetMacrosResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -4123,6 +4123,35 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/edit/pptx/get-macros:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get macro information from a PowerPoint PPTX/PPTM presentation document"
+      description: "Returns information about the Macros (e.g. VBA) defined in the\
+        \ PowerPoint Document"
+      operationId: "EditDocument_PptxGetMacroInformation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetMacrosResponse"
+      security:
+      - Apikey: []
   /convert/edit/docx/get-metadata:
     post:
       tags:
@@ -4287,6 +4316,35 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/GetDocxImagesResponse"
+      security:
+      - Apikey: []
+  /convert/edit/docx/get-macros:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get macro information from a Word DOCX/DOCM document"
+      description: "Returns information about the Macros (e.g. VBA) defined in the\
+        \ Word Document"
+      operationId: "EditDocument_DocxGetMacroInformation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetMacrosResponse"
       security:
       - Apikey: []
   /convert/edit/docx/get-styles:
@@ -5792,6 +5850,35 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/GetXlsxImagesResponse"
+      security:
+      - Apikey: []
+  /convert/edit/xlsx/get-macros:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get macro information from a Excel XLSX/XLSM spreadsheet, worksheet"
+      description: "Returns information about the Macros (e.g. VBA) defined in the\
+        \ Excel Spreadsheet"
+      operationId: "EditDocument_XlsxGetMacroInformation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetMacrosResponse"
       security:
       - Apikey: []
   /convert/edit/xlsx/get-styles:
@@ -11227,6 +11314,19 @@ definitions:
       MatchString: "MatchString"
       MatchCase: true
       ReplaceString: "ReplaceString"
+  GetMacrosResponse:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      ContainsVbaMacros:
+        type: "boolean"
+        description: "True if the document contains VBA macros, false otherwise"
+    description: "Result of running a Get Macro Information command"
+    example:
+      ContainsVbaMacros: true
+      Successful: true
   GetDocxMetadataPropertiesResponse:
     type: "object"
     properties:

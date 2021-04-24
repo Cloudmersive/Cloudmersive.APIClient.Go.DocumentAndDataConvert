@@ -9315,6 +9315,37 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/xml/xxe-threats:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate an XML file for XML External Entity (XXE) threats"
+      description: "Validate an XML document file for XML External Entity (XXE) threats;\
+        \ if the document is not valid, identifies the errors in the document.  XXE\
+        \ threats are a type of threat that exploits vulnerabilities in the XML standard\
+        \ relating to external or local entity URIs in XML documents."
+      operationId: "ValidateDocument_XmlXxeThreatValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/XxeThreatDetectionResult"
+      security:
+      - Apikey: []
   /convert/validate/html:
     post:
       tags:
@@ -9742,6 +9773,26 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/archive/zip/create/quarantine:
+    post:
+      tags:
+      - "ZipArchive"
+      summary: "Create an encrypted zip file to quarantine a dangerous file"
+      description: "Create a new zip archive by compressing input files, and also\
+        \ applies encryption and password protection to the zip, for the purposes\
+        \ of quarantining the underlyikng file."
+      operationId: "ZipArchive_ZipCreateQuarantine"
+      consumes: []
+      produces:
+      - "application/octet-stream"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/archive/zip/create/advanced:
@@ -20327,6 +20378,19 @@ definitions:
         Uri: "Uri"
       PasswordProtected: true
       ErrorCount: 0
+  XxeThreatDetectionResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      ContainsXxeThreat:
+        type: "boolean"
+        description: "True if the XML input contains XXE threats, false otherwise"
+    description: "Result of performing an XXE threat detection operation"
+    example:
+      Successful: true
+      ContainsXxeThreat: true
   HtmlSsrfThreatCheckResult:
     type: "object"
     properties:

@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**ValidateDocumentTxtValidation**](ValidateDocumentApi.md#ValidateDocumentTxtValidation) | **Post** /convert/validate/txt | Validate an TXT file
 [**ValidateDocumentXlsxValidation**](ValidateDocumentApi.md#ValidateDocumentXlsxValidation) | **Post** /convert/validate/xlsx | Validate a Excel document (XLSX)
 [**ValidateDocumentXmlValidation**](ValidateDocumentApi.md#ValidateDocumentXmlValidation) | **Post** /convert/validate/xml | Validate an XML file
+[**ValidateDocumentXmlXxeThreatValidation**](ValidateDocumentApi.md#ValidateDocumentXmlXxeThreatValidation) | **Post** /convert/validate/xml/xxe-threats | Validate an XML file for XML External Entity (XXE) threats
 [**ValidateDocumentZipValidation**](ValidateDocumentApi.md#ValidateDocumentZipValidation) | **Post** /convert/validate/zip | Validate a Zip Archive file (zip)
 
 
@@ -575,6 +576,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentXmlXxeThreatValidation**
+> XxeThreatDetectionResult ValidateDocumentXmlXxeThreatValidation(ctx, inputFile)
+Validate an XML file for XML External Entity (XXE) threats
+
+Validate an XML document file for XML External Entity (XXE) threats; if the document is not valid, identifies the errors in the document.  XXE threats are a type of threat that exploits vulnerabilities in the XML standard relating to external or local entity URIs in XML documents.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**XxeThreatDetectionResult**](XxeThreatDetectionResult.md)
 
 ### Authorization
 

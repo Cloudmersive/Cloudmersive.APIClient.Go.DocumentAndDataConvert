@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**ZipArchiveZipCreate**](ZipArchiveApi.md#ZipArchiveZipCreate) | **Post** /convert/archive/zip/create | Compress files to create a new zip archive
 [**ZipArchiveZipCreateAdvanced**](ZipArchiveApi.md#ZipArchiveZipCreateAdvanced) | **Post** /convert/archive/zip/create/advanced | Compress files and folders to create a new zip archive with advanced options
 [**ZipArchiveZipCreateEncrypted**](ZipArchiveApi.md#ZipArchiveZipCreateEncrypted) | **Post** /convert/archive/zip/create/encrypted | Compress files to create a new, encrypted and password-protected zip archive
+[**ZipArchiveZipCreateQuarantine**](ZipArchiveApi.md#ZipArchiveZipCreateQuarantine) | **Post** /convert/archive/zip/create/quarantine | Create an encrypted zip file to quarantine a dangerous file
 [**ZipArchiveZipDecrypt**](ZipArchiveApi.md#ZipArchiveZipDecrypt) | **Post** /convert/archive/zip/decrypt | Decrypt and remove password protection on a zip file
 [**ZipArchiveZipEncryptAdvanced**](ZipArchiveApi.md#ZipArchiveZipEncryptAdvanced) | **Post** /convert/archive/zip/encrypt/advanced | Encrypt and password protect a zip file
 [**ZipArchiveZipExtract**](ZipArchiveApi.md#ZipArchiveZipExtract) | **Post** /convert/archive/zip/extract | Extract, decompress files and folders from a zip archive
@@ -129,6 +130,30 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ZipArchiveZipCreateQuarantine**
+> interface{} ZipArchiveZipCreateQuarantine(ctx, )
+Create an encrypted zip file to quarantine a dangerous file
+
+Create a new zip archive by compressing input files, and also applies encryption and password protection to the zip, for the purposes of quarantining the underlyikng file.
+
+### Required Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**interface{}**](interface{}.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

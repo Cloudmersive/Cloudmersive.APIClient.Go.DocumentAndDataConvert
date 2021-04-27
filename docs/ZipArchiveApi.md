@@ -135,13 +135,28 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ZipArchiveZipCreateQuarantine**
-> interface{} ZipArchiveZipCreateQuarantine(ctx, )
+> interface{} ZipArchiveZipCreateQuarantine(ctx, password, inputFile1, optional)
 Create an encrypted zip file to quarantine a dangerous file
 
 Create a new zip archive by compressing input files, and also applies encryption and password protection to the zip, for the purposes of quarantining the underlyikng file.
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **password** | **string**| Password to place on the Zip file; the longer the password, the more secure | 
+  **inputFile1** | ***os.File**| First input file to perform the operation on. | 
+ **optional** | ***ZipArchiveZipCreateQuarantineOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ZipArchiveZipCreateQuarantineOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **encryptionAlgorithm** | **optional.String**| Encryption algorithm to use; possible values are AES-256 (recommended), AES-128, and PK-Zip (not recommended; legacy, weak encryption algorithm). Default is AES-256. | 
 
 ### Return type
 

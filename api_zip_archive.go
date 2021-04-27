@@ -654,10 +654,19 @@ func (a *ZipArchiveApiService) ZipArchiveZipCreateEncrypted(ctx context.Context,
 ZipArchiveApiService Create an encrypted zip file to quarantine a dangerous file
 Create a new zip archive by compressing input files, and also applies encryption and password protection to the zip, for the purposes of quarantining the underlyikng file.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param password Password to place on the Zip file; the longer the password, the more secure
+ * @param inputFile1 First input file to perform the operation on.
+ * @param optional nil or *ZipArchiveZipCreateQuarantineOpts - Optional Parameters:
+     * @param "EncryptionAlgorithm" (optional.String) -  Encryption algorithm to use; possible values are AES-256 (recommended), AES-128, and PK-Zip (not recommended; legacy, weak encryption algorithm). Default is AES-256.
 
 @return interface{}
 */
-func (a *ZipArchiveApiService) ZipArchiveZipCreateQuarantine(ctx context.Context) (interface{}, *http.Response, error) {
+
+type ZipArchiveZipCreateQuarantineOpts struct { 
+	EncryptionAlgorithm optional.String
+}
+
+func (a *ZipArchiveApiService) ZipArchiveZipCreateQuarantine(ctx context.Context, password string, inputFile1 *os.File, localVarOptionals *ZipArchiveZipCreateQuarantineOpts) (interface{}, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -689,6 +698,17 @@ func (a *ZipArchiveApiService) ZipArchiveZipCreateQuarantine(ctx context.Context
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	localVarHeaderParams["password"] = parameterToString(password, "")
+	if localVarOptionals != nil && localVarOptionals.EncryptionAlgorithm.IsSet() {
+		localVarHeaderParams["encryptionAlgorithm"] = parameterToString(localVarOptionals.EncryptionAlgorithm.Value(), "")
+	}
+	var localVarFile *os.File
+	if localVarFile != nil {
+		fbs, _ := ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
 	}
 	if ctx != nil {
 		// API Key Authentication

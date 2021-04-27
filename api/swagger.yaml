@@ -9787,7 +9787,29 @@ paths:
       consumes: []
       produces:
       - "application/octet-stream"
-      parameters: []
+      parameters:
+      - name: "password"
+        in: "header"
+        description: "Password to place on the Zip file; the longer the password,\
+          \ the more secure"
+        required: true
+        type: "string"
+        x-exportParamName: "Password"
+      - name: "encryptionAlgorithm"
+        in: "header"
+        description: "Encryption algorithm to use; possible values are AES-256 (recommended),\
+          \ AES-128, and PK-Zip (not recommended; legacy, weak encryption algorithm).\
+          \ Default is AES-256."
+        required: false
+        type: "string"
+        x-exportParamName: "EncryptionAlgorithm"
+        x-optionalDataType: "String"
+      - name: "inputFile1"
+        in: "formData"
+        description: "First input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile1"
       responses:
         "200":
           description: "OK"

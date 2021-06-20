@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **MergeDocumentHtml**
-> interface{} MergeDocumentHtml(ctx, inputFile1, inputFile2)
+> string MergeDocumentHtml(ctx, inputFile1, inputFile2)
 Merge Two HTML (HTM) Files Together
 
 Combine two HTML (.HTM) files into a single text document, preserving the order of the input documents in the combined document by stacking them vertically.  The title will be taken from the first document.
@@ -111,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**interface{}**](interface{}.md)
+**string**
 
 ### Authorization
 

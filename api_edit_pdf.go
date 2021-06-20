@@ -1382,10 +1382,17 @@ EditPdfApiService Reduce the file size and optimize a PDF
 Reduces the file size and optimizes the content of a PDF to minimize its file size.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param inputFile Input file to perform the operation on.
+ * @param optional nil or *EditPdfReduceFileSizeOpts - Optional Parameters:
+     * @param "Quality" (optional.Float32) -  Quality level for the images in the PDF, ranging from 0.0 (low quality) to 1.0 (high quality); default is 0.3
 
 @return string
 */
-func (a *EditPdfApiService) EditPdfReduceFileSize(ctx context.Context, inputFile *os.File) (string, *http.Response, error) {
+
+type EditPdfReduceFileSizeOpts struct { 
+	Quality optional.Float32
+}
+
+func (a *EditPdfApiService) EditPdfReduceFileSize(ctx context.Context, inputFile *os.File, localVarOptionals *EditPdfReduceFileSizeOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -1417,6 +1424,9 @@ func (a *EditPdfApiService) EditPdfReduceFileSize(ctx context.Context, inputFile
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.Quality.IsSet() {
+		localVarHeaderParams["quality"] = parameterToString(localVarOptionals.Quality.Value(), "")
 	}
 	var localVarFile *os.File
 	if localVarFile != nil {

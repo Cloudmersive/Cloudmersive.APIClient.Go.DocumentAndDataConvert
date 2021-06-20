@@ -397,15 +397,15 @@ Combine two HTML (.HTM) files into a single text document, preserving the order 
  * @param inputFile1 First input file to perform the operation on.
  * @param inputFile2 Second input file to perform the operation on (more than 2 can be supplied).
 
-@return interface{}
+@return string
 */
-func (a *MergeDocumentApiService) MergeDocumentHtml(ctx context.Context, inputFile1 *os.File, inputFile2 *os.File) (interface{}, *http.Response, error) {
+func (a *MergeDocumentApiService) MergeDocumentHtml(ctx context.Context, inputFile1 *os.File, inputFile2 *os.File) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue interface{}
+		localVarReturnValue string
 	)
 
 	// create path and map variables
@@ -490,7 +490,7 @@ func (a *MergeDocumentApiService) MergeDocumentHtml(ctx context.Context, inputFi
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v interface{}
+			var v string
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

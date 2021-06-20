@@ -6140,6 +6140,284 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/edit/html/head/append/tag:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Append an HTML tag to the HEAD section of an HTML Document"
+      description: "Appends an HTML tag to the HEAD section of an HTML document."
+      operationId: "EditHtml_HtmlAppendHeaderTag"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      - name: "htmlTag"
+        in: "header"
+        description: "The HTML tag to append."
+        required: true
+        type: "string"
+        x-exportParamName: "HtmlTag"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/html/head/get/language:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Gets the language for the HTML document"
+      description: "Retrieves the language code (e.g. \"en\" or \"de\") of an HTML\
+        \ document."
+      operationId: "EditHtml_HtmlGetLanguage"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/HtmlGetLanguageResult"
+      security:
+      - Apikey: []
+  /convert/edit/html/head/set/language:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Sets the language for the HTML document"
+      description: "Sets the language code of an HTML document."
+      operationId: "EditHtml_HtmlSetLanguage"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      - name: "languageCode"
+        in: "header"
+        description: "The HTML langauge code to set."
+        required: true
+        type: "string"
+        x-exportParamName: "LanguageCode"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/html/head/set/rel-canonical-url:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Sets the rel canonical URL for the HTML document"
+      description: "Sets the rel canonical URL of an HTML document.  This is useful\
+        \ for telling search engines and other indexers which pages are duplicates\
+        \ of eachother; any pages with the rel=canonical tag will be treated as duplicates\
+        \ of the canonical URL."
+      operationId: "EditHtml_HtmlSetRelCanonical"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      - name: "canonicalUrl"
+        in: "header"
+        description: "The HTML canonical URL to set."
+        required: true
+        type: "string"
+        x-exportParamName: "CanonicalUrl"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/html/head/get/rel-canonical-url:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Gets the rel canonical URL for the HTML document"
+      description: "Gets the rel canonical URL of an HTML document."
+      operationId: "EditHtml_HtmlGetRelCanonical"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/HtmlGetRelCanonicalUrlResult"
+      security:
+      - Apikey: []
+  /convert/edit/html/head/get/sitemap-url:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Gets the sitemap URL for the HTML document"
+      description: "Gets the sitemap link URL of an HTML document."
+      operationId: "EditHtml_HtmlGetSitemap"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/HtmlGetSitemapUrlResult"
+      security:
+      - Apikey: []
+  /convert/edit/html/head/set/sitemap-url:
+    post:
+      tags:
+      - "EditHtml"
+      summary: "Sets the sitemap URL for the HTML document"
+      description: "Sets the sitemap URL of an HTML document."
+      operationId: "EditHtml_HtmlSetSitemapUrl"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      - name: "sitemapUrl"
+        in: "header"
+        description: "The HTML sitemap URL to set."
+        required: true
+        type: "string"
+        x-exportParamName: "SitemapUrl"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/edit/html/append/paragraph:
     post:
       tags:
@@ -7254,6 +7532,14 @@ paths:
       produces:
       - "application/octet-stream"
       parameters:
+      - name: "quality"
+        in: "header"
+        description: "Quality level for the images in the PDF, ranging from 0.0 (low\
+          \ quality) to 1.0 (high quality); default is 0.3"
+        required: false
+        type: "number"
+        x-exportParamName: "Quality"
+        x-optionalDataType: "Float32"
       - name: "inputFile"
         in: "formData"
         description: "Input file to perform the operation on."
@@ -8237,7 +8523,10 @@ paths:
         "200":
           description: "OK"
           schema:
-            type: "object"
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/merge/html/multi:
@@ -19340,6 +19629,45 @@ definitions:
       InputFileUrl: "InputFileUrl"
       StartDeleteSlideNumber: 0
       EndDeleteSlideNumber: 6
+  HtmlGetLanguageResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      LanguageCode:
+        type: "string"
+        description: "HTML language code of the HTML document, e.g. \"en\" or \"de\""
+    description: "Result of getting the language of the input HTML document"
+    example:
+      LanguageCode: "LanguageCode"
+      Successful: true
+  HtmlGetRelCanonicalUrlResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      CanonicalUrl:
+        type: "string"
+        description: "HTML canonical URL if present"
+    description: "Result of getting the canonical URL of the input HTML document"
+    example:
+      CanonicalUrl: "CanonicalUrl"
+      Successful: true
+  HtmlGetSitemapUrlResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      CanonicalUrl:
+        type: "string"
+        description: "HTML sitemap URL if present"
+    description: "Result of getting the sitemap URL of the input HTML document"
+    example:
+      CanonicalUrl: "CanonicalUrl"
+      Successful: true
   HtmlGetLinksResponse:
     type: "object"
     properties:

@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **EditPdfReduceFileSize**
-> string EditPdfReduceFileSize(ctx, inputFile)
+> string EditPdfReduceFileSize(ctx, inputFile, optional)
 Reduce the file size and optimize a PDF
 
 Reduces the file size and optimizes the content of a PDF to minimize its file size.
@@ -412,6 +412,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***EditPdfReduceFileSizeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditPdfReduceFileSizeOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **quality** | **optional.Float32**| Quality level for the images in the PDF, ranging from 0.0 (low quality) to 1.0 (high quality); default is 0.3 | 
 
 ### Return type
 

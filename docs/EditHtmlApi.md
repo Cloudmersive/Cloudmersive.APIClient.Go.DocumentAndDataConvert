@@ -4,13 +4,58 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**EditHtmlHtmlAppendHeaderTag**](EditHtmlApi.md#EditHtmlHtmlAppendHeaderTag) | **Post** /convert/edit/html/head/append/tag | Append an HTML tag to the HEAD section of an HTML Document
 [**EditHtmlHtmlAppendHeading**](EditHtmlApi.md#EditHtmlHtmlAppendHeading) | **Post** /convert/edit/html/append/heading | Append a Heading to an HTML Document
 [**EditHtmlHtmlAppendImageFromUrl**](EditHtmlApi.md#EditHtmlHtmlAppendImageFromUrl) | **Post** /convert/edit/html/append/image/from-url | Append an Image to an HTML Document from a URL
 [**EditHtmlHtmlAppendImageInline**](EditHtmlApi.md#EditHtmlHtmlAppendImageInline) | **Post** /convert/edit/html/append/image/inline | Append a Base64 Inline Image to an HTML Document
 [**EditHtmlHtmlAppendParagraph**](EditHtmlApi.md#EditHtmlHtmlAppendParagraph) | **Post** /convert/edit/html/append/paragraph | Append a Paragraph to an HTML Document
 [**EditHtmlHtmlCreateBlankDocument**](EditHtmlApi.md#EditHtmlHtmlCreateBlankDocument) | **Post** /convert/edit/html/create/blank | Create a Blank HTML Document
+[**EditHtmlHtmlGetLanguage**](EditHtmlApi.md#EditHtmlHtmlGetLanguage) | **Post** /convert/edit/html/head/get/language | Gets the language for the HTML document
 [**EditHtmlHtmlGetLinks**](EditHtmlApi.md#EditHtmlHtmlGetLinks) | **Post** /convert/edit/html/extract/links | Extract resolved link URLs from HTML File
+[**EditHtmlHtmlGetRelCanonical**](EditHtmlApi.md#EditHtmlHtmlGetRelCanonical) | **Post** /convert/edit/html/head/get/rel-canonical-url | Gets the rel canonical URL for the HTML document
+[**EditHtmlHtmlGetSitemap**](EditHtmlApi.md#EditHtmlHtmlGetSitemap) | **Post** /convert/edit/html/head/get/sitemap-url | Gets the sitemap URL for the HTML document
+[**EditHtmlHtmlSetLanguage**](EditHtmlApi.md#EditHtmlHtmlSetLanguage) | **Post** /convert/edit/html/head/set/language | Sets the language for the HTML document
+[**EditHtmlHtmlSetRelCanonical**](EditHtmlApi.md#EditHtmlHtmlSetRelCanonical) | **Post** /convert/edit/html/head/set/rel-canonical-url | Sets the rel canonical URL for the HTML document
+[**EditHtmlHtmlSetSitemapUrl**](EditHtmlApi.md#EditHtmlHtmlSetSitemapUrl) | **Post** /convert/edit/html/head/set/sitemap-url | Sets the sitemap URL for the HTML document
 
+
+# **EditHtmlHtmlAppendHeaderTag**
+> string EditHtmlHtmlAppendHeaderTag(ctx, htmlTag, optional)
+Append an HTML tag to the HEAD section of an HTML Document
+
+Appends an HTML tag to the HEAD section of an HTML document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **htmlTag** | **string**| The HTML tag to append. | 
+ **optional** | ***EditHtmlHtmlAppendHeaderTagOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlAppendHeaderTagOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **EditHtmlHtmlAppendHeading**
 > string EditHtmlHtmlAppendHeading(ctx, headingText, optional)
@@ -209,6 +254,42 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **EditHtmlHtmlGetLanguage**
+> HtmlGetLanguageResult EditHtmlHtmlGetLanguage(ctx, optional)
+Gets the language for the HTML document
+
+Retrieves the language code (e.g. \"en\" or \"de\") of an HTML document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***EditHtmlHtmlGetLanguageOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlGetLanguageOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+[**HtmlGetLanguageResult**](HtmlGetLanguageResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **EditHtmlHtmlGetLinks**
 > HtmlGetLinksResponse EditHtmlHtmlGetLinks(ctx, optional)
 Extract resolved link URLs from HTML File
@@ -234,6 +315,192 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HtmlGetLinksResponse**](HtmlGetLinksResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditHtmlHtmlGetRelCanonical**
+> HtmlGetRelCanonicalUrlResult EditHtmlHtmlGetRelCanonical(ctx, optional)
+Gets the rel canonical URL for the HTML document
+
+Gets the rel canonical URL of an HTML document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***EditHtmlHtmlGetRelCanonicalOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlGetRelCanonicalOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+[**HtmlGetRelCanonicalUrlResult**](HtmlGetRelCanonicalUrlResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditHtmlHtmlGetSitemap**
+> HtmlGetSitemapUrlResult EditHtmlHtmlGetSitemap(ctx, optional)
+Gets the sitemap URL for the HTML document
+
+Gets the sitemap link URL of an HTML document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+ **optional** | ***EditHtmlHtmlGetSitemapOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlGetSitemapOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+[**HtmlGetSitemapUrlResult**](HtmlGetSitemapUrlResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditHtmlHtmlSetLanguage**
+> string EditHtmlHtmlSetLanguage(ctx, languageCode, optional)
+Sets the language for the HTML document
+
+Sets the language code of an HTML document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **languageCode** | **string**| The HTML langauge code to set. | 
+ **optional** | ***EditHtmlHtmlSetLanguageOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlSetLanguageOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditHtmlHtmlSetRelCanonical**
+> string EditHtmlHtmlSetRelCanonical(ctx, canonicalUrl, optional)
+Sets the rel canonical URL for the HTML document
+
+Sets the rel canonical URL of an HTML document.  This is useful for telling search engines and other indexers which pages are duplicates of eachother; any pages with the rel=canonical tag will be treated as duplicates of the canonical URL.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **canonicalUrl** | **string**| The HTML canonical URL to set. | 
+ **optional** | ***EditHtmlHtmlSetRelCanonicalOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlSetRelCanonicalOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditHtmlHtmlSetSitemapUrl**
+> string EditHtmlHtmlSetSitemapUrl(ctx, sitemapUrl, optional)
+Sets the sitemap URL for the HTML document
+
+Sets the sitemap URL of an HTML document.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **sitemapUrl** | **string**| The HTML sitemap URL to set. | 
+ **optional** | ***EditHtmlHtmlSetSitemapUrlOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditHtmlHtmlSetSitemapUrlOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **inputFile** | **optional.Interface of *os.File**| Optional: Input file to perform the operation on. | 
+ **inputFileUrl** | **optional.String**| Optional: URL of a file to operate on as input. | 
+
+### Return type
+
+**string**
 
 ### Authorization
 

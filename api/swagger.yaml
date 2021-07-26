@@ -9133,6 +9133,39 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/transform/docx/table/fill/data:
+    post:
+      tags:
+      - "TransformDocument"
+      summary: "Fill in data in a table in a Word DOCX document"
+      description: "Replace placeholder rows ina  table in an Office Word Document\
+        \ (docx) using one or more templates"
+      operationId: "TransformDocument_DocxTableFillIn"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "request"
+        required: true
+        schema:
+          $ref: "#/definitions/DocxTableTableFillRequest"
+        x-exportParamName: "Request"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/transform/pptx/replace-all:
     post:
       tags:
@@ -20634,6 +20667,74 @@ definitions:
     example:
       ElementNumber: 0
       ElementContents: "ElementContents"
+  DocxTableTableFillRequest:
+    type: "object"
+    properties:
+      InputFileUrl:
+        type: "string"
+        description: "Optional; Input URL of the document; use BeginEditing to create\
+          \ this"
+      InputFileData:
+        type: "string"
+        format: "byte"
+        description: "Optional; Input Word Document file content for the operation"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      TableStartTag:
+        type: "string"
+        description: "Start tag that delineates the beginning of the table"
+      TableEndTag:
+        type: "string"
+        description: "End tag that delineates the end of the table"
+      DataToFillIn:
+        type: "array"
+        description: "Data set to populate the table with"
+        items:
+          $ref: "#/definitions/DocxTableTableFillTableRow"
+    description: "Request to update data in a table in a Word DOCX Document"
+    example:
+      InputFileUrl: "InputFileUrl"
+      TableStartTag: "TableStartTag"
+      TableEndTag: "TableEndTag"
+      DataToFillIn:
+      - Cells:
+        - ReplacementValue: "ReplacementValue"
+          TargetTag: "TargetTag"
+        - ReplacementValue: "ReplacementValue"
+          TargetTag: "TargetTag"
+      - Cells:
+        - ReplacementValue: "ReplacementValue"
+          TargetTag: "TargetTag"
+        - ReplacementValue: "ReplacementValue"
+          TargetTag: "TargetTag"
+      InputFileData: "InputFileData"
+  DocxTableTableFillTableRow:
+    type: "object"
+    properties:
+      Cells:
+        type: "array"
+        description: "Cells in the row to fill in"
+        items:
+          $ref: "#/definitions/DocxTableTableFillTableCell"
+    description: "Row data to fill in to the DOCX Table"
+    example:
+      Cells:
+      - ReplacementValue: "ReplacementValue"
+        TargetTag: "TargetTag"
+      - ReplacementValue: "ReplacementValue"
+        TargetTag: "TargetTag"
+  DocxTableTableFillTableCell:
+    type: "object"
+    properties:
+      TargetTag:
+        type: "string"
+        description: "Target tag to replace"
+      ReplacementValue:
+        type: "string"
+        description: "Replacement value for the target tag"
+    description: "Cell data to fill in to the DOCX Table"
+    example:
+      ReplacementValue: "ReplacementValue"
+      TargetTag: "TargetTag"
   AutodetectDocumentValidationResult:
     type: "object"
     properties:

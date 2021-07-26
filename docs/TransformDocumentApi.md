@@ -5,6 +5,7 @@ All URIs are relative to *https://api.cloudmersive.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**TransformDocumentDocxReplace**](TransformDocumentApi.md#TransformDocumentDocxReplace) | **Post** /convert/transform/docx/replace-all | Replace string in Word DOCX document
+[**TransformDocumentDocxTableFillIn**](TransformDocumentApi.md#TransformDocumentDocxTableFillIn) | **Post** /convert/transform/docx/table/fill/data | Fill in data in a table in a Word DOCX document
 [**TransformDocumentPptxReplace**](TransformDocumentApi.md#TransformDocumentPptxReplace) | **Post** /convert/transform/pptx/replace-all | Replace string in PowerPoint PPTX presentation
 
 
@@ -45,6 +46,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **TransformDocumentDocxTableFillIn**
+> string TransformDocumentDocxTableFillIn(ctx, request)
+Fill in data in a table in a Word DOCX document
+
+Replace placeholder rows ina  table in an Office Word Document (docx) using one or more templates
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **request** | [**DocxTableTableFillRequest**](DocxTableTableFillRequest.md)|  | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
  - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

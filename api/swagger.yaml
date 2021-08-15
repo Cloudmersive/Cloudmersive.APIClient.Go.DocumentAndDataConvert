@@ -4059,7 +4059,7 @@ paths:
     post:
       tags:
       - "EditDocument"
-      summary: "Replace multiple strings in Word DOCX document"
+      summary: "Replace multiple strings in Word DOCX document, return result"
       description: "Replace all instances of multiple strings in an Office Word Document\
         \ (docx)"
       operationId: "EditDocument_DocxReplaceMulti"
@@ -4087,6 +4087,43 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/docx/replace-all/multi/edit-session:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Replace multiple strings in Word DOCX document, return edit session"
+      description: "Replace all instances of multiple strings in an Office Word Document\
+        \ (docx).  Returns an edit session URL so that you can chain together multiple\
+        \ edit operations without having to send the entire document contents back\
+        \ and forth multiple times.  Call the Finish Editing API to retrieve the final\
+        \ document once editing is complete."
+      operationId: "EditDocument_DocxReplaceMultiEditSession"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - in: "body"
+        name: "reqConfig"
+        description: "Document string replacement configuration input"
+        required: true
+        schema:
+          $ref: "#/definitions/MultiReplaceStringRequest"
+        x-exportParamName: "ReqConfig"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentEditingEditSession"
       security:
       - Apikey: []
   /convert/edit/pptx/replace-all:
@@ -9080,7 +9117,7 @@ paths:
     post:
       tags:
       - "TransformDocument"
-      summary: "Replace string in Word DOCX document"
+      summary: "Replace string in Word DOCX document, return result"
       description: "Replace all instances of a string in an Office Word Document (docx)"
       operationId: "TransformDocument_DocxReplace"
       consumes: []
@@ -9133,11 +9170,72 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/transform/docx/replace-all/edit-session:
+    post:
+      tags:
+      - "TransformDocument"
+      summary: "Replace string in Word DOCX document, return edit session"
+      description: "Replace all instances of a string in an Office Word Document (docx).\
+        \  Returns an edit session URL so that you can chain together multiple edit\
+        \ operations without having to send the entire document contents back and\
+        \ forth multiple times.  Call the Finish Editing API to retrieve the final\
+        \ document once editing is complete."
+      operationId: "TransformDocument_DocxReplaceEditSession"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Optional: Input file to perform the operation on."
+        required: false
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "inputFileUrl"
+        in: "header"
+        description: "Optional: URL of a file to operate on as input.  This can be\
+          \ a public URL, or you can also use the begin-editing API (part of EditDocumentApi)\
+          \ to upload a document and pass in the secure URL result from that operation\
+          \ as the URL here (this URL is not public)."
+        required: false
+        type: "string"
+        x-exportParamName: "InputFileUrl"
+        x-optionalDataType: "String"
+      - name: "matchString"
+        in: "header"
+        description: "String to search for and match against, to be replaced"
+        required: true
+        type: "string"
+        x-exportParamName: "MatchString"
+      - name: "replaceString"
+        in: "header"
+        description: "String to replace the matched values with"
+        required: true
+        type: "string"
+        x-exportParamName: "ReplaceString"
+      - name: "matchCase"
+        in: "header"
+        description: "Optional: True if the case should be matched, false for case\
+          \ insensitive match. Default is false."
+        required: false
+        type: "boolean"
+        x-exportParamName: "MatchCase"
+        x-optionalDataType: "Bool"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentTransformEditSession"
+      security:
+      - Apikey: []
   /convert/transform/docx/table/fill/data:
     post:
       tags:
       - "TransformDocument"
-      summary: "Fill in data in a table in a Word DOCX document"
+      summary: "Fill in data in a table in a Word DOCX document, return result"
       description: "Replace placeholder rows ina  table in an Office Word Document\
         \ (docx) using one or more templates"
       operationId: "TransformDocument_DocxTableFillIn"
@@ -9166,11 +9264,47 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/transform/docx/table/fill/data/edit-session:
+    post:
+      tags:
+      - "TransformDocument"
+      summary: "Fill in data in a table in a Word DOCX document, return edit session"
+      description: "Replace placeholder rows ina  table in an Office Word Document\
+        \ (docx) using one or more templates.  Returns an edit session URL so that\
+        \ you can chain together multiple edit operations without having to send the\
+        \ entire document contents back and forth multiple times.  Call the Finish\
+        \ Editing API to retrieve the final document once editing is complete."
+      operationId: "TransformDocument_DocxTableFillInEditSession"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - in: "body"
+        name: "request"
+        required: true
+        schema:
+          $ref: "#/definitions/DocxTableTableFillRequest"
+        x-exportParamName: "Request"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentTransformEditSession"
+      security:
+      - Apikey: []
   /convert/transform/pptx/replace-all:
     post:
       tags:
       - "TransformDocument"
-      summary: "Replace string in PowerPoint PPTX presentation"
+      summary: "Replace string in PowerPoint PPTX presentation, return result"
       description: "Replace all instances of a string in an Office PowerPoint Document\
         \ (pptx)"
       operationId: "TransformDocument_PptxReplace"
@@ -11709,6 +11843,22 @@ definitions:
       MatchString: "MatchString"
       MatchCase: true
       ReplaceString: "ReplaceString"
+  DocumentEditingEditSession:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      EditSessionURL:
+        type: "string"
+        description: "Document editing session URL; in-memory temporary cache link\
+          \ with TTL (Time-to-Live expiration) of 30 minutes.  To retrieve the document,\
+          \ use the Finish Editing API."
+    description: "Active document editing session result.  To retrieve the document,\
+      \ use the Finish Editing API."
+    example:
+      EditSessionURL: "EditSessionURL"
+      Successful: true
   GetMacrosResponse:
     type: "object"
     properties:
@@ -20667,6 +20817,22 @@ definitions:
     example:
       ElementNumber: 0
       ElementContents: "ElementContents"
+  DocumentTransformEditSession:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      EditSessionURL:
+        type: "string"
+        description: "Document editing session URL; in-memory temporary cache link\
+          \ with TTL (Time-to-Live expiration) of 30 minutes.  To retrieve the document,\
+          \ use the Finish Editing API."
+    description: "Active document editing session result.  To retrieve the document,\
+      \ use the Finish Editing API."
+    example:
+      EditSessionURL: "EditSessionURL"
+      Successful: true
   DocxTableTableFillRequest:
     type: "object"
     properties:

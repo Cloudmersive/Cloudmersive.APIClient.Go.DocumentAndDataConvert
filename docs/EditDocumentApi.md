@@ -35,7 +35,8 @@ Method | HTTP request | Description
 [**EditDocumentDocxRemoveHeadersAndFooters**](EditDocumentApi.md#EditDocumentDocxRemoveHeadersAndFooters) | **Post** /convert/edit/docx/remove-headers-and-footers | Remove headers and footers from Word DOCX document
 [**EditDocumentDocxRemoveObject**](EditDocumentApi.md#EditDocumentDocxRemoveObject) | **Post** /convert/edit/docx/remove-object | Delete any object in a Word DOCX document
 [**EditDocumentDocxReplace**](EditDocumentApi.md#EditDocumentDocxReplace) | **Post** /convert/edit/docx/replace-all | Replace string in Word DOCX document
-[**EditDocumentDocxReplaceMulti**](EditDocumentApi.md#EditDocumentDocxReplaceMulti) | **Post** /convert/edit/docx/replace-all/multi | Replace multiple strings in Word DOCX document
+[**EditDocumentDocxReplaceMulti**](EditDocumentApi.md#EditDocumentDocxReplaceMulti) | **Post** /convert/edit/docx/replace-all/multi | Replace multiple strings in Word DOCX document, return result
+[**EditDocumentDocxReplaceMultiEditSession**](EditDocumentApi.md#EditDocumentDocxReplaceMultiEditSession) | **Post** /convert/edit/docx/replace-all/multi/edit-session | Replace multiple strings in Word DOCX document, return edit session
 [**EditDocumentDocxReplaceParagraph**](EditDocumentApi.md#EditDocumentDocxReplaceParagraph) | **Post** /convert/edit/docx/replace/paragraph | Replace matching paragraphs in a Word DOCX document
 [**EditDocumentDocxSetCustomMetadataProperties**](EditDocumentApi.md#EditDocumentDocxSetCustomMetadataProperties) | **Post** /convert/edit/docx/set-metadata/custom-property | Set custom property metadata properties in Word DOCX document
 [**EditDocumentDocxSetFooter**](EditDocumentApi.md#EditDocumentDocxSetFooter) | **Post** /convert/edit/docx/set-footer | Set the footer in a Word DOCX document
@@ -940,7 +941,7 @@ Name | Type | Description  | Notes
 
 # **EditDocumentDocxReplaceMulti**
 > string EditDocumentDocxReplaceMulti(ctx, reqConfig)
-Replace multiple strings in Word DOCX document
+Replace multiple strings in Word DOCX document, return result
 
 Replace all instances of multiple strings in an Office Word Document (docx)
 
@@ -963,6 +964,34 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
  - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxReplaceMultiEditSession**
+> DocumentEditingEditSession EditDocumentDocxReplaceMultiEditSession(ctx, reqConfig)
+Replace multiple strings in Word DOCX document, return edit session
+
+Replace all instances of multiple strings in an Office Word Document (docx).  Returns an edit session URL so that you can chain together multiple edit operations without having to send the entire document contents back and forth multiple times.  Call the Finish Editing API to retrieve the final document once editing is complete.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **reqConfig** | [**MultiReplaceStringRequest**](MultiReplaceStringRequest.md)| Document string replacement configuration input | 
+
+### Return type
+
+[**DocumentEditingEditSession**](DocumentEditingEditSession.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

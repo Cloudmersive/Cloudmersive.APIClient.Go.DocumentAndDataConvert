@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**TransformDocumentDocxReplaceEditSession**](TransformDocumentApi.md#TransformDocumentDocxReplaceEditSession) | **Post** /convert/transform/docx/replace-all/edit-session | Replace string in Word DOCX document, return edit session
 [**TransformDocumentDocxTableFillIn**](TransformDocumentApi.md#TransformDocumentDocxTableFillIn) | **Post** /convert/transform/docx/table/fill/data | Fill in data in a table in a Word DOCX document, return result
 [**TransformDocumentDocxTableFillInEditSession**](TransformDocumentApi.md#TransformDocumentDocxTableFillInEditSession) | **Post** /convert/transform/docx/table/fill/data/edit-session | Fill in data in a table in a Word DOCX document, return edit session
+[**TransformDocumentDocxTableFillInMulti**](TransformDocumentApi.md#TransformDocumentDocxTableFillInMulti) | **Post** /convert/transform/docx/table/fill/data/multi | Fill in data in multiple tables in a Word DOCX document, return result
 [**TransformDocumentPptxReplace**](TransformDocumentApi.md#TransformDocumentPptxReplace) | **Post** /convert/transform/pptx/replace-all | Replace string in PowerPoint PPTX presentation, return result
 
 
@@ -146,6 +147,34 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
  - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **TransformDocumentDocxTableFillInMulti**
+> interface{} TransformDocumentDocxTableFillInMulti(ctx, request)
+Fill in data in multiple tables in a Word DOCX document, return result
+
+Replace placeholder rows in multiple tables in an Office Word Document (docx) using one or more templates
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **request** | [**DocxTableTableFillMultiRequest**](DocxTableTableFillMultiRequest.md)|  | 
+
+### Return type
+
+[**interface{}**](interface{}.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

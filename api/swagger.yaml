@@ -4218,6 +4218,101 @@ paths:
             $ref: "#/definitions/GetDocxMetadataPropertiesResponse"
       security:
       - Apikey: []
+  /convert/edit/docx/get-content-controls:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get all content controls (form fields) and values in a Word DOCX document"
+      description: "Returns all the content controls, used for creating form fields,\
+        \ in a Office Word Document (docx)"
+      operationId: "EditDocument_DocxGetContentControls"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetDocxContentControlsResponse"
+      security:
+      - Apikey: []
+  /convert/edit/docx/get-form-fields:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get all form fields in a Word DOCX document"
+      description: "Returns all the content controls, used for creating form fields,\
+        \ as well as handlebar style text-based form fields such as \"{{FieldName}}\"\
+        , in a Office Word Document (docx)"
+      operationId: "EditDocument_DocxGetFormFields"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/GetDocxGetFormFieldsResponse"
+      security:
+      - Apikey: []
+  /convert/edit/docx/set-form-fields:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Set and fill values for form fields in a Word DOCX document"
+      description: "Modifies a Office Word Document (docx) by filling in form fields\
+        \ using the provided values."
+      operationId: "EditDocument_DocxSetFormFields"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - in: "body"
+        name: "reqConfig"
+        required: true
+        schema:
+          $ref: "#/definitions/DocxSetFormFieldsRequest"
+        x-exportParamName: "ReqConfig"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/edit/docx/set-metadata/custom-property:
     post:
       tags:
@@ -11998,6 +12093,114 @@ definitions:
       IntegerValue: 5
       PropertyDataType: "PropertyDataType"
       StringValue: "StringValue"
+  GetDocxContentControlsResponse:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      ContentControls:
+        type: "array"
+        description: "Content controls in the DOCX"
+        items:
+          $ref: "#/definitions/DocxContentControl"
+    description: "Result of running a DocxGetContentControls command"
+    example:
+      ContentControls:
+      - Value: "Value"
+      - Value: "Value"
+      Successful: true
+  DocxContentControl:
+    type: "object"
+    properties:
+      Value:
+        type: "string"
+        description: "Text content value in the content control; text entered into\
+          \ the control"
+    description: "Content Control instance"
+    example:
+      Value: "Value"
+  GetDocxGetFormFieldsResponse:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      ContentControls:
+        type: "array"
+        description: "Content controls in the DOCX"
+        items:
+          $ref: "#/definitions/DocxContentControl"
+      HandlebarFormFields:
+        type: "array"
+        description: "Form fields that comply with the Handlebar style, that is they\
+          \ are surrounded by two curly braces on either side such as \"{{FieldName}}\"\
+          , in the DOCX"
+        items:
+          $ref: "#/definitions/HandlebarFormField"
+    description: "Result of running a DocxGetFormFields command"
+    example:
+      ContentControls:
+      - Value: "Value"
+      - Value: "Value"
+      HandlebarFormFields:
+      - FormFieldTitle: "FormFieldTitle"
+      - FormFieldTitle: "FormFieldTitle"
+      Successful: true
+  HandlebarFormField:
+    type: "object"
+    properties:
+      FormFieldTitle:
+        type: "string"
+        description: "Title of the handlebar style form field, such as \"FieldName\"\
+          \ in the case of \"{{FieldName}}\""
+    description: "Instance of a form field that is handlebar style, such as \"{{FieldName}}\""
+    example:
+      FormFieldTitle: "FormFieldTitle"
+  DocxSetFormFieldsRequest:
+    type: "object"
+    properties:
+      InputFileBytes:
+        type: "string"
+        format: "byte"
+        description: "Optional: Bytes of the input file to operate on"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      InputFileUrl:
+        type: "string"
+        description: "Optional: URL of a file to operate on as input.  This can be\
+          \ a public URL, or you can also use the begin-editing API to upload a document\
+          \ and pass in the secure URL result from that operation as the URL here\
+          \ (this URL is not public)."
+      HandlebarFieldsToFill:
+        type: "array"
+        description: "Handlebar style form fields to fill in; form field that is handlebar\
+          \ style, such as \"{{FieldName}}\""
+        items:
+          $ref: "#/definitions/FillHandlebarFormField"
+    description: "Request for DocxSetFormFields operation"
+    example:
+      InputFileBytes: "InputFileBytes"
+      HandlebarFieldsToFill:
+      - ValueToFill: "ValueToFill"
+        FieldName: "FieldName"
+      - ValueToFill: "ValueToFill"
+        FieldName: "FieldName"
+      InputFileUrl: "InputFileUrl"
+  FillHandlebarFormField:
+    type: "object"
+    properties:
+      FieldName:
+        type: "string"
+        description: "Name of the field without the curly braces, e.g. \"FieldName\"\
+          \ for a field that is included in the text of the DOCX as \"{{FieldName}}\""
+      ValueToFill:
+        type: "string"
+        description: "Text value to fill in for the field in the resulting document"
+    description: "Handlebar style form fields to fill in; form field that is handlebar\
+      \ style, such as \"{{FieldName}}\""
+    example:
+      ValueToFill: "ValueToFill"
+      FieldName: "FieldName"
   DocxSetCustomMetadataPropertiesRequest:
     type: "object"
     properties:

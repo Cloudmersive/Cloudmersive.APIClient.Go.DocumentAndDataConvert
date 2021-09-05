@@ -16,6 +16,8 @@ Method | HTTP request | Description
 [**EditDocumentDocxFindParagraph**](EditDocumentApi.md#EditDocumentDocxFindParagraph) | **Post** /convert/edit/docx/find/paragraph | Find matching paragraphs in a Word DOCX document
 [**EditDocumentDocxGetComments**](EditDocumentApi.md#EditDocumentDocxGetComments) | **Post** /convert/edit/docx/get-comments/flat-list | Get comments from a Word DOCX document as a flat list
 [**EditDocumentDocxGetCommentsHierarchical**](EditDocumentApi.md#EditDocumentDocxGetCommentsHierarchical) | **Post** /convert/edit/docx/get-comments/hierarchical | Get comments from a Word DOCX document hierarchically
+[**EditDocumentDocxGetContentControls**](EditDocumentApi.md#EditDocumentDocxGetContentControls) | **Post** /convert/edit/docx/get-content-controls | Get all content controls (form fields) and values in a Word DOCX document
+[**EditDocumentDocxGetFormFields**](EditDocumentApi.md#EditDocumentDocxGetFormFields) | **Post** /convert/edit/docx/get-form-fields | Get all form fields in a Word DOCX document
 [**EditDocumentDocxGetHeadersAndFooters**](EditDocumentApi.md#EditDocumentDocxGetHeadersAndFooters) | **Post** /convert/edit/docx/get-headers-and-footers | Get content of a footer from a Word DOCX document
 [**EditDocumentDocxGetImages**](EditDocumentApi.md#EditDocumentDocxGetImages) | **Post** /convert/edit/docx/get-images | Get images from a Word DOCX document
 [**EditDocumentDocxGetMacroInformation**](EditDocumentApi.md#EditDocumentDocxGetMacroInformation) | **Post** /convert/edit/docx/get-macros | Get macro information from a Word DOCX/DOCM document
@@ -41,6 +43,7 @@ Method | HTTP request | Description
 [**EditDocumentDocxSetCustomMetadataProperties**](EditDocumentApi.md#EditDocumentDocxSetCustomMetadataProperties) | **Post** /convert/edit/docx/set-metadata/custom-property | Set custom property metadata properties in Word DOCX document
 [**EditDocumentDocxSetFooter**](EditDocumentApi.md#EditDocumentDocxSetFooter) | **Post** /convert/edit/docx/set-footer | Set the footer in a Word DOCX document
 [**EditDocumentDocxSetFooterAddPageNumber**](EditDocumentApi.md#EditDocumentDocxSetFooterAddPageNumber) | **Post** /convert/edit/docx/set-footer/add-page-number | Add page number to footer in a Word DOCX document
+[**EditDocumentDocxSetFormFields**](EditDocumentApi.md#EditDocumentDocxSetFormFields) | **Post** /convert/edit/docx/set-form-fields | Set and fill values for form fields in a Word DOCX document
 [**EditDocumentDocxSetHeader**](EditDocumentApi.md#EditDocumentDocxSetHeader) | **Post** /convert/edit/docx/set-header | Set the header in a Word DOCX document
 [**EditDocumentDocxUpdateTableCell**](EditDocumentApi.md#EditDocumentDocxUpdateTableCell) | **Post** /convert/edit/docx/update-table-cell | Update, set contents of a table cell in an existing table in a Word DOCX document
 [**EditDocumentDocxUpdateTableRow**](EditDocumentApi.md#EditDocumentDocxUpdateTableRow) | **Post** /convert/edit/docx/update-table-row | Update, set contents of a table row in an existing table in a Word DOCX document
@@ -403,6 +406,62 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxGetContentControls**
+> GetDocxContentControlsResponse EditDocumentDocxGetContentControls(ctx, inputFile)
+Get all content controls (form fields) and values in a Word DOCX document
+
+Returns all the content controls, used for creating form fields, in a Office Word Document (docx)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**GetDocxContentControlsResponse**](GetDocxContentControlsResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxGetFormFields**
+> GetDocxGetFormFieldsResponse EditDocumentDocxGetFormFields(ctx, inputFile)
+Get all form fields in a Word DOCX document
+
+Returns all the content controls, used for creating form fields, as well as handlebar style text-based form fields such as \"{{FieldName}}\", in a Office Word Document (docx)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**GetDocxGetFormFieldsResponse**](GetDocxGetFormFieldsResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1095,6 +1154,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocxSetFooterResponse**](DocxSetFooterResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentDocxSetFormFields**
+> string EditDocumentDocxSetFormFields(ctx, reqConfig)
+Set and fill values for form fields in a Word DOCX document
+
+Modifies a Office Word Document (docx) by filling in form fields using the provided values.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **reqConfig** | [**DocxSetFormFieldsRequest**](DocxSetFormFieldsRequest.md)|  | 
+
+### Return type
+
+**string**
 
 ### Authorization
 

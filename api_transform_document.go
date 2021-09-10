@@ -508,15 +508,15 @@ Replace placeholder rows in multiple tables in an Office Word Document (docx) us
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param request
 
-@return interface{}
+@return string
 */
-func (a *TransformDocumentApiService) TransformDocumentDocxTableFillInMulti(ctx context.Context, request DocxTableTableFillMultiRequest) (interface{}, *http.Response, error) {
+func (a *TransformDocumentApiService) TransformDocumentDocxTableFillInMulti(ctx context.Context, request DocxTableTableFillMultiRequest) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
 		localVarFileName   string
 		localVarFileBytes  []byte
-		localVarReturnValue interface{}
+		localVarReturnValue string
 	)
 
 	// create path and map variables
@@ -536,7 +536,7 @@ func (a *TransformDocumentApiService) TransformDocumentDocxTableFillInMulti(ctx 
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -589,7 +589,7 @@ func (a *TransformDocumentApiService) TransformDocumentDocxTableFillInMulti(ctx 
 		}
 		
 		if localVarHttpResponse.StatusCode == 200 {
-			var v interface{}
+			var v string
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

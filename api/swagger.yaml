@@ -9410,7 +9410,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "request"
@@ -9422,7 +9425,10 @@ paths:
         "200":
           description: "OK"
           schema:
-            type: "object"
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/transform/pptx/replace-all:

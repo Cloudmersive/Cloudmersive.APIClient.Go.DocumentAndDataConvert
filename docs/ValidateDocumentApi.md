@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ValidateDocumentAutodetectValidation**](ValidateDocumentApi.md#ValidateDocumentAutodetectValidation) | **Post** /convert/validate/autodetect | Autodetect content type and validate
 [**ValidateDocumentCsvValidation**](ValidateDocumentApi.md#ValidateDocumentCsvValidation) | **Post** /convert/validate/csv | Validate a CSV file document (CSV)
+[**ValidateDocumentDocValidation**](ValidateDocumentApi.md#ValidateDocumentDocValidation) | **Post** /convert/validate/doc | Validate a Word 97-2003 Legacy document (DOC)
 [**ValidateDocumentDocxValidation**](ValidateDocumentApi.md#ValidateDocumentDocxValidation) | **Post** /convert/validate/docx | Validate a Word document (DOCX)
 [**ValidateDocumentEmlValidation**](ValidateDocumentApi.md#ValidateDocumentEmlValidation) | **Post** /convert/validate/eml | Validate if an EML file is executable
 [**ValidateDocumentExecutableValidation**](ValidateDocumentApi.md#ValidateDocumentExecutableValidation) | **Post** /convert/validate/executable | Validate if a file is executable
@@ -18,10 +19,13 @@ Method | HTTP request | Description
 [**ValidateDocumentMsgValidation**](ValidateDocumentApi.md#ValidateDocumentMsgValidation) | **Post** /convert/validate/msg | Validate if an MSG file is executable
 [**ValidateDocumentPdfValidation**](ValidateDocumentApi.md#ValidateDocumentPdfValidation) | **Post** /convert/validate/pdf | Validate a PDF document file
 [**ValidateDocumentPngValidation**](ValidateDocumentApi.md#ValidateDocumentPngValidation) | **Post** /convert/validate/png | Validate a PNG File
+[**ValidateDocumentPptValidation**](ValidateDocumentApi.md#ValidateDocumentPptValidation) | **Post** /convert/validate/ppt | Validate a PowerPoint 97-2003 Legacy presentation (PPT)
 [**ValidateDocumentPptxValidation**](ValidateDocumentApi.md#ValidateDocumentPptxValidation) | **Post** /convert/validate/pptx | Validate a PowerPoint presentation (PPTX)
 [**ValidateDocumentRarValidation**](ValidateDocumentApi.md#ValidateDocumentRarValidation) | **Post** /convert/validate/rar | Validate a RAR Archive file (RAR)
+[**ValidateDocumentRtfValidation**](ValidateDocumentApi.md#ValidateDocumentRtfValidation) | **Post** /convert/validate/rtf | Validate a Rich Text Format document (RTF)
 [**ValidateDocumentTarValidation**](ValidateDocumentApi.md#ValidateDocumentTarValidation) | **Post** /convert/validate/tar | Validate a TAR Tarball Archive file (TAR)
 [**ValidateDocumentTxtValidation**](ValidateDocumentApi.md#ValidateDocumentTxtValidation) | **Post** /convert/validate/txt | Validate an TXT file
+[**ValidateDocumentXlsValidation**](ValidateDocumentApi.md#ValidateDocumentXlsValidation) | **Post** /convert/validate/xls | Validate a Excel 97-2003 Legacy spreadsheet (XLS)
 [**ValidateDocumentXlsxValidation**](ValidateDocumentApi.md#ValidateDocumentXlsxValidation) | **Post** /convert/validate/xlsx | Validate a Excel document (XLSX)
 [**ValidateDocumentXmlValidation**](ValidateDocumentApi.md#ValidateDocumentXmlValidation) | **Post** /convert/validate/xml | Validate an XML file
 [**ValidateDocumentXmlXxeThreatValidation**](ValidateDocumentApi.md#ValidateDocumentXmlXxeThreatValidation) | **Post** /convert/validate/xml/xxe-threats | Validate an XML file for XML External Entity (XXE) threats
@@ -61,6 +65,34 @@ Name | Type | Description  | Notes
 Validate a CSV file document (CSV)
 
 Validate a CSV file document (CSV); if the document is not valid, identifies the errors in the document
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentDocValidation**
+> DocumentValidationResult ValidateDocumentDocValidation(ctx, inputFile)
+Validate a Word 97-2003 Legacy document (DOC)
+
+Validate a Word 97-2003 Legacy document (DOC)
 
 ### Required Parameters
 
@@ -420,6 +452,34 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ValidateDocumentPptValidation**
+> DocumentValidationResult ValidateDocumentPptValidation(ctx, inputFile)
+Validate a PowerPoint 97-2003 Legacy presentation (PPT)
+
+Validate a PowerPoint 97-2003 Legacy presentation (PPT)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ValidateDocumentPptxValidation**
 > DocumentValidationResult ValidateDocumentPptxValidation(ctx, inputFile)
 Validate a PowerPoint presentation (PPTX)
@@ -476,6 +536,34 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ValidateDocumentRtfValidation**
+> DocumentValidationResult ValidateDocumentRtfValidation(ctx, inputFile)
+Validate a Rich Text Format document (RTF)
+
+Validate a Rich Text Format document (RTF)
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ValidateDocumentTarValidation**
 > DocumentValidationResult ValidateDocumentTarValidation(ctx, inputFile)
 Validate a TAR Tarball Archive file (TAR)
@@ -509,6 +597,34 @@ Name | Type | Description  | Notes
 Validate an TXT file
 
 Validate an TXT document file; if the document is not valid, identifies the errors in the document
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentXlsValidation**
+> DocumentValidationResult ValidateDocumentXlsValidation(ctx, inputFile)
+Validate a Excel 97-2003 Legacy spreadsheet (XLS)
+
+Validate a Excel 97-2003 Legacy spreadsheet (XLS)
 
 ### Required Parameters
 

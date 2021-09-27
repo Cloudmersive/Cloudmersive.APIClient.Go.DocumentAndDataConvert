@@ -9548,6 +9548,34 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/doc:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate a Word 97-2003 Legacy document (DOC)"
+      description: "Validate a Word 97-2003 Legacy document (DOC)"
+      operationId: "ValidateDocument_DocValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
   /convert/validate/image:
     post:
       tags:
@@ -9674,6 +9702,34 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/xls:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate a Excel 97-2003 Legacy spreadsheet (XLS)"
+      description: "Validate a Excel 97-2003 Legacy spreadsheet (XLS)"
+      operationId: "ValidateDocument_XlsValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
   /convert/validate/csv:
     post:
       tags:
@@ -9711,6 +9767,62 @@ paths:
       description: "Validate a PowerPoint presentation (PPTX); if the document is\
         \ not valid, identifies the errors in the document"
       operationId: "ValidateDocument_PptxValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
+  /convert/validate/ppt:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate a PowerPoint 97-2003 Legacy presentation (PPT)"
+      description: "Validate a PowerPoint 97-2003 Legacy presentation (PPT)"
+      operationId: "ValidateDocument_PptValidation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
+  /convert/validate/rtf:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Validate a Rich Text Format document (RTF)"
+      description: "Validate a Rich Text Format document (RTF)"
+      operationId: "ValidateDocument_RtfValidation"
       consumes:
       - "multipart/form-data"
       produces:

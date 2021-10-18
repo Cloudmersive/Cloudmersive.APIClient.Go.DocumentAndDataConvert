@@ -59,7 +59,7 @@ func (a *ConvertWebApiService) ConvertWebHtmlToDocx(ctx context.Context, inputRe
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -162,7 +162,7 @@ func (a *ConvertWebApiService) ConvertWebHtmlToPdf(ctx context.Context, input Ht
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -265,7 +265,7 @@ func (a *ConvertWebApiService) ConvertWebHtmlToPng(ctx context.Context, input Ht
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -368,7 +368,7 @@ func (a *ConvertWebApiService) ConvertWebHtmlToTxt(ctx context.Context, input Ht
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -471,7 +471,7 @@ func (a *ConvertWebApiService) ConvertWebMdToHtml(ctx context.Context, inputFile
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -579,7 +579,7 @@ func (a *ConvertWebApiService) ConvertWebUrlToPdf(ctx context.Context, input Url
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -682,7 +682,7 @@ func (a *ConvertWebApiService) ConvertWebUrlToScreenshot(ctx context.Context, in
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
@@ -785,7 +785,7 @@ func (a *ConvertWebApiService) ConvertWebUrlToTxt(ctx context.Context, input Url
 	}
 
 	// to determine the Accept header
-	localVarHttpHeaderAccepts := []string{"application/octet-stream"}
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
 
 	// set Accept header
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)

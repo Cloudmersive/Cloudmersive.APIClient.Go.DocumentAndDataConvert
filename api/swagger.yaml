@@ -664,7 +664,7 @@ paths:
     post:
       tags:
       - "ConvertData"
-      summary: "Convert JSON to XML conversion"
+      summary: "Convert JSON Object to XML conversion"
       description: "Convert a JSON object into XML"
       operationId: "ConvertData_JsonToXml"
       consumes:
@@ -678,7 +678,7 @@ paths:
       parameters:
       - in: "body"
         name: "JsonObject"
-        description: "Input JSON to convert to XML"
+        description: "Input JSON Object to convert to XML"
         required: true
         schema:
           type: "object"
@@ -691,6 +691,30 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/json-string/to/xml:
+    post:
+      tags:
+      - "ConvertData"
+      summary: "Convert JSON String to XML conversion"
+      description: "Convert a JSON object into XML"
+      operationId: "ConvertData_JsonStringToXml"
+      consumes: []
+      produces:
+      - "application/xml"
+      parameters:
+      - name: "JsonString"
+        in: "query"
+        description: "Input JSON String to convert to XML"
+        required: true
+        type: "string"
+        x-exportParamName: "JsonString"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/docx/to/pdf:
@@ -3676,7 +3700,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "input"
@@ -3710,7 +3737,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "input"
@@ -3744,7 +3774,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "input"
@@ -3775,7 +3808,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "input"
@@ -3809,7 +3845,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "input"
@@ -3843,7 +3882,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "input"
@@ -3873,7 +3915,10 @@ paths:
       - "text/xml"
       - "application/x-www-form-urlencoded"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - in: "body"
         name: "inputRequest"
@@ -3902,7 +3947,10 @@ paths:
       consumes:
       - "multipart/form-data"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - name: "inputFile"
         in: "formData"
@@ -11876,6 +11924,9 @@ definitions:
         type: "string"
         description: "Text content result from the URL website input"
     description: "Result of running the URL website to Text operation"
+    example:
+      Successful: true
+      TextContentResult: "TextContentResult"
   HtmlToPdfRequest:
     type: "object"
     properties:
@@ -11955,6 +12006,9 @@ definitions:
         type: "string"
         description: "Text content result from the HTML input"
     description: "Result of running the HTML to Text operation"
+    example:
+      Successful: true
+      TextContentResult: "TextContentResult"
   HtmlToOfficeRequest:
     type: "object"
     properties:
@@ -11974,6 +12028,9 @@ definitions:
         type: "string"
         description: "Resulting HTML from the conversion"
     description: "Result from converting a Markdown file to HTML"
+    example:
+      Html: "Html"
+      Successful: true
   FinishEditingRequest:
     type: "object"
     properties:

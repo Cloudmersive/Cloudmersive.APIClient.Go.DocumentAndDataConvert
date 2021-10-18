@@ -6,7 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ConvertDataCsvToJson**](ConvertDataApi.md#ConvertDataCsvToJson) | **Post** /convert/csv/to/json | Convert CSV to JSON conversion
 [**ConvertDataCsvToXml**](ConvertDataApi.md#ConvertDataCsvToXml) | **Post** /convert/csv/to/xml | Convert CSV to XML conversion
-[**ConvertDataJsonToXml**](ConvertDataApi.md#ConvertDataJsonToXml) | **Post** /convert/json/to/xml | Convert JSON to XML conversion
+[**ConvertDataJsonStringToXml**](ConvertDataApi.md#ConvertDataJsonStringToXml) | **Post** /convert/json-string/to/xml | Convert JSON String to XML conversion
+[**ConvertDataJsonToXml**](ConvertDataApi.md#ConvertDataJsonToXml) | **Post** /convert/json/to/xml | Convert JSON Object to XML conversion
 [**ConvertDataXlsToJson**](ConvertDataApi.md#ConvertDataXlsToJson) | **Post** /convert/xls/to/json | Convert Excel (97-2003) XLS to JSON conversion
 [**ConvertDataXlsxToJson**](ConvertDataApi.md#ConvertDataXlsxToJson) | **Post** /convert/xlsx/to/json | Convert Excel XLSX to JSON conversion
 [**ConvertDataXlsxToXml**](ConvertDataApi.md#ConvertDataXlsxToXml) | **Post** /convert/xlsx/to/xml | Convert Excel XLSX to XML conversion
@@ -97,9 +98,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **ConvertDataJsonToXml**
-> string ConvertDataJsonToXml(ctx, jsonObject)
-Convert JSON to XML conversion
+# **ConvertDataJsonStringToXml**
+> interface{} ConvertDataJsonStringToXml(ctx, jsonString)
+Convert JSON String to XML conversion
 
 Convert a JSON object into XML
 
@@ -108,7 +109,35 @@ Convert a JSON object into XML
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **jsonObject** | [**interface{}**](interface{}.md)| Input JSON to convert to XML | 
+  **jsonString** | **string**| Input JSON String to convert to XML | 
+
+### Return type
+
+[**interface{}**](interface{}.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDataJsonToXml**
+> string ConvertDataJsonToXml(ctx, jsonObject)
+Convert JSON Object to XML conversion
+
+Convert a JSON object into XML
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **jsonObject** | [**interface{}**](interface{}.md)| Input JSON Object to convert to XML | 
 
 ### Return type
 

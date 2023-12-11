@@ -7,8 +7,9 @@ Method | HTTP request | Description
 [**ValidateDocumentAutodetectValidation**](ValidateDocumentApi.md#ValidateDocumentAutodetectValidation) | **Post** /convert/validate/autodetect | Autodetect content type and validate
 [**ValidateDocumentCsvValidation**](ValidateDocumentApi.md#ValidateDocumentCsvValidation) | **Post** /convert/validate/csv | Validate a CSV file document (CSV)
 [**ValidateDocumentDocValidation**](ValidateDocumentApi.md#ValidateDocumentDocValidation) | **Post** /convert/validate/doc | Validate a Word 97-2003 Legacy document (DOC)
+[**ValidateDocumentDocxRepair**](ValidateDocumentApi.md#ValidateDocumentDocxRepair) | **Post** /convert/validate/docx/repair | Repair a Word document (DOCX) that contains errors
 [**ValidateDocumentDocxValidation**](ValidateDocumentApi.md#ValidateDocumentDocxValidation) | **Post** /convert/validate/docx | Validate a Word document (DOCX)
-[**ValidateDocumentEmlValidation**](ValidateDocumentApi.md#ValidateDocumentEmlValidation) | **Post** /convert/validate/eml | Validate if an EML file is executable
+[**ValidateDocumentEmlValidation**](ValidateDocumentApi.md#ValidateDocumentEmlValidation) | **Post** /convert/validate/eml | Validate if input file is a valid EML file
 [**ValidateDocumentExecutableValidation**](ValidateDocumentApi.md#ValidateDocumentExecutableValidation) | **Post** /convert/validate/executable | Validate if a file is executable
 [**ValidateDocumentGZipValidation**](ValidateDocumentApi.md#ValidateDocumentGZipValidation) | **Post** /convert/validate/gzip | Validate a GZip Archive file (gzip or gz)
 [**ValidateDocumentHtmlSsrfValidation**](ValidateDocumentApi.md#ValidateDocumentHtmlSsrfValidation) | **Post** /convert/validate/html/ssrf-threat-check | Validate an HTML file and checks for SSRF threats
@@ -16,16 +17,18 @@ Method | HTTP request | Description
 [**ValidateDocumentImageValidation**](ValidateDocumentApi.md#ValidateDocumentImageValidation) | **Post** /convert/validate/image | Validate an Image File
 [**ValidateDocumentJpgValidation**](ValidateDocumentApi.md#ValidateDocumentJpgValidation) | **Post** /convert/validate/jpg | Validate a JPG File
 [**ValidateDocumentJsonValidation**](ValidateDocumentApi.md#ValidateDocumentJsonValidation) | **Post** /convert/validate/json | Validate a JSON file
-[**ValidateDocumentMsgValidation**](ValidateDocumentApi.md#ValidateDocumentMsgValidation) | **Post** /convert/validate/msg | Validate if an MSG file is executable
+[**ValidateDocumentMsgValidation**](ValidateDocumentApi.md#ValidateDocumentMsgValidation) | **Post** /convert/validate/msg | Validate if input file is a valid MSG file
 [**ValidateDocumentPdfValidation**](ValidateDocumentApi.md#ValidateDocumentPdfValidation) | **Post** /convert/validate/pdf | Validate a PDF document file
 [**ValidateDocumentPngValidation**](ValidateDocumentApi.md#ValidateDocumentPngValidation) | **Post** /convert/validate/png | Validate a PNG File
 [**ValidateDocumentPptValidation**](ValidateDocumentApi.md#ValidateDocumentPptValidation) | **Post** /convert/validate/ppt | Validate a PowerPoint 97-2003 Legacy presentation (PPT)
+[**ValidateDocumentPptxRepair**](ValidateDocumentApi.md#ValidateDocumentPptxRepair) | **Post** /convert/validate/pptx/repair | Repair a PowerPoint presentation (PPTX) that contains errors
 [**ValidateDocumentPptxValidation**](ValidateDocumentApi.md#ValidateDocumentPptxValidation) | **Post** /convert/validate/pptx | Validate a PowerPoint presentation (PPTX)
 [**ValidateDocumentRarValidation**](ValidateDocumentApi.md#ValidateDocumentRarValidation) | **Post** /convert/validate/rar | Validate a RAR Archive file (RAR)
 [**ValidateDocumentRtfValidation**](ValidateDocumentApi.md#ValidateDocumentRtfValidation) | **Post** /convert/validate/rtf | Validate a Rich Text Format document (RTF)
 [**ValidateDocumentTarValidation**](ValidateDocumentApi.md#ValidateDocumentTarValidation) | **Post** /convert/validate/tar | Validate a TAR Tarball Archive file (TAR)
 [**ValidateDocumentTxtValidation**](ValidateDocumentApi.md#ValidateDocumentTxtValidation) | **Post** /convert/validate/txt | Validate an TXT file
 [**ValidateDocumentXlsValidation**](ValidateDocumentApi.md#ValidateDocumentXlsValidation) | **Post** /convert/validate/xls | Validate a Excel 97-2003 Legacy spreadsheet (XLS)
+[**ValidateDocumentXlsxRepair**](ValidateDocumentApi.md#ValidateDocumentXlsxRepair) | **Post** /convert/validate/xlsx/repair | Repair an Excel spreadsheet (XLSX) that contains errors
 [**ValidateDocumentXlsxValidation**](ValidateDocumentApi.md#ValidateDocumentXlsxValidation) | **Post** /convert/validate/xlsx | Validate a Excel document (XLSX)
 [**ValidateDocumentXmlValidation**](ValidateDocumentApi.md#ValidateDocumentXmlValidation) | **Post** /convert/validate/xml | Validate an XML file
 [**ValidateDocumentXmlXxeThreatValidation**](ValidateDocumentApi.md#ValidateDocumentXmlXxeThreatValidation) | **Post** /convert/validate/xml/xxe-threats | Validate an XML file for XML External Entity (XXE) threats
@@ -116,6 +119,43 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ValidateDocumentDocxRepair**
+> string ValidateDocumentDocxRepair(ctx, inputFile, optional)
+Repair a Word document (DOCX) that contains errors
+
+Repair a Word document (DOCX) that contains errors or corruption, if possible.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ValidateDocumentDocxRepairOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ValidateDocumentDocxRepairOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **repairMode** | **optional.String**| Optional; Set to advanced to apply the most advanced repair mode, basic for basic repair mode.  Default is advanced. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ValidateDocumentDocxValidation**
 > DocumentValidationResult ValidateDocumentDocxValidation(ctx, inputFile)
 Validate a Word document (DOCX)
@@ -146,7 +186,7 @@ Name | Type | Description  | Notes
 
 # **ValidateDocumentEmlValidation**
 > DocumentValidationResult ValidateDocumentEmlValidation(ctx, inputFile)
-Validate if an EML file is executable
+Validate if input file is a valid EML file
 
 Validate if an input file is an EML email file; if the document is not valid
 
@@ -370,7 +410,7 @@ Name | Type | Description  | Notes
 
 # **ValidateDocumentMsgValidation**
 > DocumentValidationResult ValidateDocumentMsgValidation(ctx, inputFile)
-Validate if an MSG file is executable
+Validate if input file is a valid MSG file
 
 Validate if an input file is an MSG email file; if the document is not valid
 
@@ -468,6 +508,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentPptxRepair**
+> string ValidateDocumentPptxRepair(ctx, inputFile)
+Repair a PowerPoint presentation (PPTX) that contains errors
+
+Repair a PowerPoint presentation document (PPTX) that contains errors or corruption, if possible.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
 
 ### Authorization
 
@@ -636,6 +704,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentValidationResult**](DocumentValidationResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ValidateDocumentXlsxRepair**
+> string ValidateDocumentXlsxRepair(ctx, inputFile)
+Repair an Excel spreadsheet (XLSX) that contains errors
+
+Repair an Excel spreadsheet document (XLSX) that contains errors or corruption, if possible.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+**string**
 
 ### Authorization
 

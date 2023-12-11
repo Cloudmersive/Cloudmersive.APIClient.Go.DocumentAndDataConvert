@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**ConvertDocumentAutodetectGetInfo**](ConvertDocumentApi.md#ConvertDocumentAutodetectGetInfo) | **Post** /convert/autodetect/get-info | Get document type information
 [**ConvertDocumentAutodetectToJpg**](ConvertDocumentApi.md#ConvertDocumentAutodetectToJpg) | **Post** /convert/autodetect/to/jpg | Convert Document to JPG/JPEG image array
 [**ConvertDocumentAutodetectToPdf**](ConvertDocumentApi.md#ConvertDocumentAutodetectToPdf) | **Post** /convert/autodetect/to/pdf | Convert Document to PDF
+[**ConvertDocumentAutodetectToPdfBatchJob**](ConvertDocumentApi.md#ConvertDocumentAutodetectToPdfBatchJob) | **Post** /convert/autodetect/to/pdf/batch-job | Convert Document to PDF as Batch Job
 [**ConvertDocumentAutodetectToPngArray**](ConvertDocumentApi.md#ConvertDocumentAutodetectToPngArray) | **Post** /convert/autodetect/to/png | Convert Document to PNG array
 [**ConvertDocumentAutodetectToThumbnail**](ConvertDocumentApi.md#ConvertDocumentAutodetectToThumbnail) | **Post** /convert/autodetect/to/thumbnail | Convert File to Thumbnail Image
 [**ConvertDocumentAutodetectToThumbnailsAdvanced**](ConvertDocumentApi.md#ConvertDocumentAutodetectToThumbnailsAdvanced) | **Post** /convert/autodetect/to/thumbnail/advanced | Convert File to Thumbnail Image Object
@@ -29,6 +30,7 @@ Method | HTTP request | Description
 [**ConvertDocumentEmlToJpg**](ConvertDocumentApi.md#ConvertDocumentEmlToJpg) | **Post** /convert/eml/to/jpg | Convert Email EML file to JPG/JPEG image array
 [**ConvertDocumentEmlToPdf**](ConvertDocumentApi.md#ConvertDocumentEmlToPdf) | **Post** /convert/eml/to/pdf | Convert Email EML file to PDF document
 [**ConvertDocumentEmlToPng**](ConvertDocumentApi.md#ConvertDocumentEmlToPng) | **Post** /convert/eml/to/png | Convert Email EML file to PNG image array
+[**ConvertDocumentGetAsyncJobStatus**](ConvertDocumentApi.md#ConvertDocumentGetAsyncJobStatus) | **Get** /convert/batch-job/status | Get the status and result of a Convert Document Batch Job
 [**ConvertDocumentGetFileTypeIcon**](ConvertDocumentApi.md#ConvertDocumentGetFileTypeIcon) | **Post** /convert/autodetect/get-icon | Get PNG icon file for the file extension
 [**ConvertDocumentGetFileTypeIconAdvanced**](ConvertDocumentApi.md#ConvertDocumentGetFileTypeIconAdvanced) | **Post** /convert/autodetect/get-icon/advanced | Get PNG icon byte array for the file extension
 [**ConvertDocumentHtmlToPdf**](ConvertDocumentApi.md#ConvertDocumentHtmlToPdf) | **Post** /convert/html/to/pdf | Convert HTML document file to PDF Document
@@ -58,10 +60,13 @@ Method | HTTP request | Description
 [**ConvertDocumentPdfToDocxRasterize**](ConvertDocumentApi.md#ConvertDocumentPdfToDocxRasterize) | **Post** /convert/pdf/to/docx/rasterize | Convert PDF to Word DOCX Document based on rasterized version of the PDF
 [**ConvertDocumentPdfToJpg**](ConvertDocumentApi.md#ConvertDocumentPdfToJpg) | **Post** /convert/pdf/to/jpg | Convert PDF to JPG/JPEG image array
 [**ConvertDocumentPdfToPngArray**](ConvertDocumentApi.md#ConvertDocumentPdfToPngArray) | **Post** /convert/pdf/to/png | Convert PDF to PNG Image Array
+[**ConvertDocumentPdfToPngArrayDirect**](ConvertDocumentApi.md#ConvertDocumentPdfToPngArrayDirect) | **Post** /convert/pdf/to/png/direct | Convert PDF to PNG Image Array (Direct)
 [**ConvertDocumentPdfToPngSingle**](ConvertDocumentApi.md#ConvertDocumentPdfToPngSingle) | **Post** /convert/pdf/to/png/merge-single | Convert PDF to Single PNG image
 [**ConvertDocumentPdfToPptx**](ConvertDocumentApi.md#ConvertDocumentPdfToPptx) | **Post** /convert/pdf/to/pptx | Convert PDF to PowerPoint PPTX Presentation
+[**ConvertDocumentPdfToTiff**](ConvertDocumentApi.md#ConvertDocumentPdfToTiff) | **Post** /convert/pdf/to/tiff | Convert PDF to TIFF image
 [**ConvertDocumentPdfToTxt**](ConvertDocumentApi.md#ConvertDocumentPdfToTxt) | **Post** /convert/pdf/to/txt | Convert PDF Document to Text (txt)
 [**ConvertDocumentPngArrayToPdf**](ConvertDocumentApi.md#ConvertDocumentPngArrayToPdf) | **Post** /convert/png/to/pdf | Convert PNG Array to PDF
+[**ConvertDocumentPngArrayToPdfFlattenTransparency**](ConvertDocumentApi.md#ConvertDocumentPngArrayToPdfFlattenTransparency) | **Post** /convert/png/to/pdf/remove-transparency | Convert PNG Array to PDF and remove transparency
 [**ConvertDocumentPptToPdf**](ConvertDocumentApi.md#ConvertDocumentPptToPdf) | **Post** /convert/ppt/to/pdf | Convert PowerPoint PPT (97-03) Presentation to PDF
 [**ConvertDocumentPptToPptx**](ConvertDocumentApi.md#ConvertDocumentPptToPptx) | **Post** /convert/ppt/to/pptx | Convert PowerPoint PPT (97-03) Presentation to PPTX
 [**ConvertDocumentPptxToPdf**](ConvertDocumentApi.md#ConvertDocumentPptxToPdf) | **Post** /convert/pptx/to/pdf | Convert PowerPoint PPTX Presentation to PDF
@@ -73,6 +78,7 @@ Method | HTTP request | Description
 [**ConvertDocumentRtfToJpg**](ConvertDocumentApi.md#ConvertDocumentRtfToJpg) | **Post** /convert/rtf/to/jpg | Convert Rich Text Format RTF to JPG/JPEG image array
 [**ConvertDocumentRtfToPdf**](ConvertDocumentApi.md#ConvertDocumentRtfToPdf) | **Post** /convert/rtf/to/pdf | Convert Rich Text Format RTF to PDF
 [**ConvertDocumentRtfToPng**](ConvertDocumentApi.md#ConvertDocumentRtfToPng) | **Post** /convert/rtf/to/png | Convert Rich Text Format RTF to PNG image array
+[**ConvertDocumentTxtToPdf**](ConvertDocumentApi.md#ConvertDocumentTxtToPdf) | **Post** /convert/txt/to/pdf | Convert TXT text file to PDF Document
 [**ConvertDocumentXlsToCsv**](ConvertDocumentApi.md#ConvertDocumentXlsToCsv) | **Post** /convert/xls/to/csv | Convert Excel XLS (97-03) Spreadsheet to CSV
 [**ConvertDocumentXlsToPdf**](ConvertDocumentApi.md#ConvertDocumentXlsToPdf) | **Post** /convert/xls/to/pdf | Convert Excel XLS (97-03) Spreadsheet to PDF
 [**ConvertDocumentXlsToXlsx**](ConvertDocumentApi.md#ConvertDocumentXlsToXlsx) | **Post** /convert/xls/to/xlsx | Convert Excel XLS (97-03) Spreadsheet to XLSX
@@ -154,7 +160,7 @@ Name | Type | Description  | Notes
 > string ConvertDocumentAutodetectToPdf(ctx, inputFile)
 Convert Document to PDF
 
-Automatically detect file type and convert it to PDF.  Supports all of the major Office document file formats including Word (DOCX, DOC), Excel (XLSX, XLS), PowerPoint (PPTX, PPT), over 100 image formats, HTML files, and even multi-page TIFF files.
+Automatically detect file type and convert it to PDF.  Supports all of the major Office document file formats including Word (DOCX, DOC), Excel (XLSX, XLS), PowerPoint (PPTX, PPT), over 100 image formats, HTML files, text files, and even multi-page TIFF files.
 
 ### Required Parameters
 
@@ -166,6 +172,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 **string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentAutodetectToPdfBatchJob**
+> ConvertDocumentBatchJobCreateResult ConvertDocumentAutodetectToPdfBatchJob(ctx, inputFile)
+Convert Document to PDF as Batch Job
+
+Automatically detect file type and convert it to PDF.  Supports all of the major Office document file formats including Word (DOCX, DOC), Excel (XLSX, XLS), PowerPoint (PPTX, PPT), over 100 image formats, HTML files, text files, and even multi-page TIFF files.  This API is designed for large jobs that could take a long time to create and so runs as a batch job that returns a Job ID that you can use with the GetAsyncJobStatus API to check on the status of the Job and ultimately get the output result.  This API is only available for Cloudmersive Managed Instance and Private Cloud deployments.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**ConvertDocumentBatchJobCreateResult**](ConvertDocumentBatchJobCreateResult.md)
 
 ### Authorization
 
@@ -887,6 +921,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentGetAsyncJobStatus**
+> ConvertDocumentJobStatusResult ConvertDocumentGetAsyncJobStatus(ctx, asyncJobID)
+Get the status and result of a Convert Document Batch Job
+
+Returns the result of the Async Job - possible states can be STARTED or COMPLETED.  This API is only available for Cloudmersive Managed Instance and Private Cloud deployments.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **asyncJobID** | **string**|  | 
+
+### Return type
+
+[**ConvertDocumentJobStatusResult**](ConvertDocumentJobStatusResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1777,10 +1839,10 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ConvertDocumentPdfToPngArray**
-> PdfToPngResult ConvertDocumentPdfToPngArray(ctx, inputFile)
+> PdfToPngResult ConvertDocumentPdfToPngArray(ctx, inputFile, optional)
 Convert PDF to PNG Image Array
 
-Convert PDF document to PNG array, one image per page.
+Convert PDF document to PNG array, one image per page.  Returns PNG images as temporary expiring URLs.
 
 ### Required Parameters
 
@@ -1788,10 +1850,56 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ConvertDocumentPdfToPngArrayOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ConvertDocumentPdfToPngArrayOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **dpi** | **optional.Int32**| Optional; configures the pixel density in Dots per Inch (DPI) (default is 300).  This parameter can only be used with Cloudmersive Managed Instance and Private Cloud. | 
 
 ### Return type
 
 [**PdfToPngResult**](PdfToPngResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentPdfToPngArrayDirect**
+> PdfToPngDirectResult ConvertDocumentPdfToPngArrayDirect(ctx, inputFile, optional)
+Convert PDF to PNG Image Array (Direct)
+
+Convert PDF document to PNG array, one image per page.  Returns PNG images directly in the response objects.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ConvertDocumentPdfToPngArrayDirectOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ConvertDocumentPdfToPngArrayDirectOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **dpi** | **optional.Int32**| Optional; configures the pixel density in Dots per Inch (DPI) (default is 300).  This parameter can only be used with Cloudmersive Managed Instance and Private Cloud. | 
+
+### Return type
+
+[**PdfToPngDirectResult**](PdfToPngDirectResult.md)
 
 ### Authorization
 
@@ -1857,6 +1965,44 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: multipart/form-data
  - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentPdfToTiff**
+> string ConvertDocumentPdfToTiff(ctx, inputFile, optional)
+Convert PDF to TIFF image
+
+Converts a PDF Document to a TIFF image.  If the PDF contains multiple pages, these pages will be represented as separate pages within the output TIFF image.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ConvertDocumentPdfToTiffOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ConvertDocumentPdfToTiffOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **dpi** | **optional.Int32**| Optional; configures the pixel density in Dots per Inch (DPI) (default is 300).  This parameter can only be used with Cloudmersive Managed Instance and Private Cloud. | 
+ **lzwCompression** | **optional.Bool**| Optional; Enables LZW compression to reduce the size of the output image. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1939,6 +2085,30 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ConvertDocumentPngArrayToPdfFlattenTransparency**
+> interface{} ConvertDocumentPngArrayToPdfFlattenTransparency(ctx, )
+Convert PNG Array to PDF and remove transparency
+
+Convert an array of PNG images, remove transparency in source images, one image per page, into a newly-created PDF.  Supports images of different sizes as input.
+
+### Required Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**interface{}**](interface{}.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2056,17 +2226,21 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ConvertDocumentPptxToPpt**
-> interface{} ConvertDocumentPptxToPpt(ctx, )
+> string ConvertDocumentPptxToPpt(ctx, inputFile)
 Convert PowerPoint PPTX presentation to Legacy PowerPoint PPT (97-03)
 
 Convert/downgrade modern Office PowerPoint PPTX Presentation to the legacy PowerPoint PPT (97-2003 Format) format
 
 ### Required Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
 
 ### Return type
 
-[**interface{}**](interface{}.md)
+**string**
 
 ### Authorization
 
@@ -2074,7 +2248,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2256,6 +2430,43 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ConvertDocumentTxtToPdf**
+> string ConvertDocumentTxtToPdf(ctx, inputFile, optional)
+Convert TXT text file to PDF Document
+
+Convert simple text files to PDF.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***ConvertDocumentTxtToPdfOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a ConvertDocumentTxtToPdfOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **scaleFactor** | **optional.Int32**| Optional: Set to 100 to scale at 100%, set to 50% to scale down to 50% scale, set to 200% to scale up to 200% scale, etc.  Default is 100%. Maximum is 1000%. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ConvertDocumentXlsToCsv**
 > string ConvertDocumentXlsToCsv(ctx, inputFile)
 Convert Excel XLS (97-03) Spreadsheet to CSV
@@ -2373,7 +2584,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
- - **Accept**: application/octet-stream
+ - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -34,6 +34,14 @@ paths:
         required: true
         type: "file"
         x-exportParamName: "InputFile2"
+      - name: "autorepair"
+        in: "header"
+        description: "Optional; automatically repair input documents that have errors\
+          \ (default is true)"
+        required: false
+        type: "boolean"
+        x-exportParamName: "Autorepair"
+        x-optionalDataType: "Bool"
       responses:
         "200":
           description: "OK"
@@ -1032,15 +1040,25 @@ paths:
       description: "Convert/downgrade modern Office PowerPoint PPTX Presentation to\
         \ the legacy PowerPoint PPT (97-2003 Format) format"
       operationId: "ConvertDocument_PptxToPpt"
-      consumes: []
+      consumes:
+      - "multipart/form-data"
       produces:
       - "application/octet-stream"
-      parameters: []
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
       responses:
         "200":
           description: "OK"
           schema:
-            type: "object"
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/doc/to/txt:
@@ -1585,7 +1603,10 @@ paths:
       consumes:
       - "multipart/form-data"
       produces:
-      - "application/octet-stream"
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
       parameters:
       - name: "inputFile"
         in: "formData"
@@ -1674,6 +1695,43 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/XlsxToPngResult"
+      security:
+      - Apikey: []
+  /convert/txt/to/pdf:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert TXT text file to PDF Document"
+      description: "Convert simple text files to PDF."
+      operationId: "ConvertDocument_TxtToPdf"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "scaleFactor"
+        in: "header"
+        description: "Optional: Set to 100 to scale at 100%, set to 50% to scale down\
+          \ to 50% scale, set to 200% to scale up to 200% scale, etc.  Default is\
+          \ 100%. Maximum is 1000%."
+        required: false
+        type: "integer"
+        x-exportParamName: "ScaleFactor"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/html/to/pdf:
@@ -1898,7 +1956,7 @@ paths:
       description: "Automatically detect file type and convert it to PDF.  Supports\
         \ all of the major Office document file formats including Word (DOCX, DOC),\
         \ Excel (XLSX, XLS), PowerPoint (PPTX, PPT), over 100 image formats, HTML\
-        \ files, and even multi-page TIFF files."
+        \ files, text files, and even multi-page TIFF files."
       operationId: "ConvertDocument_AutodetectToPdf"
       consumes:
       - "multipart/form-data"
@@ -1919,6 +1977,67 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/autodetect/to/pdf/batch-job:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert Document to PDF as Batch Job"
+      description: "Automatically detect file type and convert it to PDF.  Supports\
+        \ all of the major Office document file formats including Word (DOCX, DOC),\
+        \ Excel (XLSX, XLS), PowerPoint (PPTX, PPT), over 100 image formats, HTML\
+        \ files, text files, and even multi-page TIFF files.  This API is designed\
+        \ for large jobs that could take a long time to create and so runs as a batch\
+        \ job that returns a Job ID that you can use with the GetAsyncJobStatus API\
+        \ to check on the status of the Job and ultimately get the output result.\
+        \  This API is only available for Cloudmersive Managed Instance and Private\
+        \ Cloud deployments."
+      operationId: "ConvertDocument_AutodetectToPdfBatchJob"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ConvertDocumentBatchJobCreateResult"
+      security:
+      - Apikey: []
+  /convert/batch-job/status:
+    get:
+      tags:
+      - "ConvertDocument"
+      summary: "Get the status and result of a Convert Document Batch Job"
+      description: "Returns the result of the Async Job - possible states can be STARTED\
+        \ or COMPLETED.  This API is only available for Cloudmersive Managed Instance\
+        \ and Private Cloud deployments."
+      operationId: "ConvertDocument_GetAsyncJobStatus"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "AsyncJobID"
+        in: "query"
+        required: true
+        type: "string"
+        x-exportParamName: "AsyncJobID"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/ConvertDocumentJobStatusResult"
       security:
       - Apikey: []
   /convert/autodetect/to/txt:
@@ -2170,7 +2289,8 @@ paths:
       tags:
       - "ConvertDocument"
       summary: "Convert PDF to PNG Image Array"
-      description: "Convert PDF document to PNG array, one image per page."
+      description: "Convert PDF document to PNG array, one image per page.  Returns\
+        \ PNG images as temporary expiring URLs."
       operationId: "ConvertDocument_PdfToPngArray"
       consumes:
       - "multipart/form-data"
@@ -2186,11 +2306,58 @@ paths:
         required: true
         type: "file"
         x-exportParamName: "InputFile"
+      - name: "dpi"
+        in: "header"
+        description: "Optional; configures the pixel density in Dots per Inch (DPI)\
+          \ (default is 300).  This parameter can only be used with Cloudmersive Managed\
+          \ Instance and Private Cloud."
+        required: false
+        type: "integer"
+        x-exportParamName: "Dpi"
+        x-optionalDataType: "Int32"
       responses:
         "200":
           description: "OK"
           schema:
             $ref: "#/definitions/PdfToPngResult"
+      security:
+      - Apikey: []
+  /convert/pdf/to/png/direct:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert PDF to PNG Image Array (Direct)"
+      description: "Convert PDF document to PNG array, one image per page.  Returns\
+        \ PNG images directly in the response objects."
+      operationId: "ConvertDocument_PdfToPngArrayDirect"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "dpi"
+        in: "header"
+        description: "Optional; configures the pixel density in Dots per Inch (DPI)\
+          \ (default is 300).  This parameter can only be used with Cloudmersive Managed\
+          \ Instance and Private Cloud."
+        required: false
+        type: "integer"
+        x-exportParamName: "Dpi"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PdfToPngDirectResult"
       security:
       - Apikey: []
   /convert/pdf/to/jpg:
@@ -2229,6 +2396,56 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/PdfToJpgResult"
+      security:
+      - Apikey: []
+  /convert/pdf/to/tiff:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert PDF to TIFF image"
+      description: "Converts a PDF Document to a TIFF image.  If the PDF contains\
+        \ multiple pages, these pages will be represented as separate pages within\
+        \ the output TIFF image."
+      operationId: "ConvertDocument_PdfToTiff"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "dpi"
+        in: "header"
+        description: "Optional; configures the pixel density in Dots per Inch (DPI)\
+          \ (default is 300).  This parameter can only be used with Cloudmersive Managed\
+          \ Instance and Private Cloud."
+        required: false
+        type: "integer"
+        x-exportParamName: "Dpi"
+        x-optionalDataType: "Int32"
+      - name: "lzwCompression"
+        in: "header"
+        description: "Optional; Enables LZW compression to reduce the size of the\
+          \ output image."
+        required: false
+        type: "boolean"
+        x-exportParamName: "LzwCompression"
+        x-optionalDataType: "Bool"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/png/to/pdf:
@@ -2312,6 +2529,26 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/png/to/pdf/remove-transparency:
+    post:
+      tags:
+      - "ConvertDocument"
+      summary: "Convert PNG Array to PDF and remove transparency"
+      description: "Convert an array of PNG images, remove transparency in source\
+        \ images, one image per page, into a newly-created PDF.  Supports images of\
+        \ different sizes as input."
+      operationId: "ConvertDocument_PngArrayToPdfFlattenTransparency"
+      consumes: []
+      produces:
+      - "application/octet-stream"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/pdf/to/png/merge-single:
@@ -3540,6 +3777,15 @@ paths:
         required: true
         type: "file"
         x-exportParamName: "InputFile"
+      - name: "dpi"
+        in: "header"
+        description: "Optional; configures the pixel density in Dots per Inch (DPI)\
+          \ (default is 300).  This parameter can only be used with Cloudmersive Managed\
+          \ Instance and Private Cloud."
+        required: false
+        type: "integer"
+        x-exportParamName: "Dpi"
+        x-optionalDataType: "Int32"
       responses:
         "200":
           description: "OK"
@@ -4924,6 +5170,14 @@ paths:
         required: true
         type: "file"
         x-exportParamName: "InputFile"
+      - name: "autorepair"
+        in: "header"
+        description: "Optional; automatically repair input documents that have errors\
+          \ (default is true)"
+        required: false
+        type: "boolean"
+        x-exportParamName: "Autorepair"
+        x-optionalDataType: "Bool"
       responses:
         "200":
           description: "OK"
@@ -6262,6 +6516,92 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/edit/pptx/set-size-and-orientation:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Set the size and/or orientation of a PowerPoint PPTX presentation\
+        \ document"
+      description: "Edits the input PowerPoint PPTX presentation document to be a\
+        \ different orientation and/or size"
+      operationId: "EditDocument_PptxEditSizeAndOrientation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "orientation"
+        in: "header"
+        description: "Optional: The desired slide orientation; can be landscape or\
+          \ portrait."
+        required: false
+        type: "string"
+        x-exportParamName: "Orientation"
+        x-optionalDataType: "String"
+      - name: "width"
+        in: "header"
+        description: "Optional: The desired slide width in Emu, where 1 inch equals\
+          \ 914400 emu."
+        required: false
+        type: "integer"
+        x-exportParamName: "Width"
+        x-optionalDataType: "Int32"
+      - name: "height"
+        in: "header"
+        description: "Optional: The desired slide height in Emu, where 1 inch equals\
+          \ 914400 emu"
+        required: false
+        type: "integer"
+        x-exportParamName: "Height"
+        x-optionalDataType: "Int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pptx/get-size-and-orientation:
+    post:
+      tags:
+      - "EditDocument"
+      summary: "Get the page layout information, including size and orientation of\
+        \ a PowerPoint PPTX presentation document"
+      description: "Gets size and orientation of an input PowerPoint PPTX presentation"
+      operationId: "EditDocument_PptxGetSizeAndOrientation"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PptxPageLayoutInformation"
+      security:
+      - Apikey: []
   /convert/edit/html/append/heading:
     post:
       tags:
@@ -7151,6 +7491,15 @@ paths:
         required: true
         type: "file"
         x-exportParamName: "InputFile"
+      - name: "dpi"
+        in: "header"
+        description: "Optional; configures the pixel density in Dots per Inch (DPI)\
+          \ (default is 300).  This parameter can only be used with Cloudmersive Managed\
+          \ Instance and Private Cloud."
+        required: false
+        type: "integer"
+        x-exportParamName: "Dpi"
+        x-optionalDataType: "Int32"
       responses:
         "200":
           description: "OK"
@@ -7159,6 +7508,33 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/rasterize/batch-job:
+    post:
+      tags:
+      - "EditPdf"
+      summary: "Rasterize a PDF to an image-based PDF as Batch Job"
+      description: "Rasterize a PDF into an image-based PDF.  The output is a PDF\
+        \ where each page is comprised of a high-resolution image, with all text,\
+        \ figures and other components removed."
+      operationId: "EditPdf_RasterizeBatchJob"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/EditPdfBatchJobCreateResult"
       security:
       - Apikey: []
   /convert/edit/pdf/pages/delete:
@@ -7199,6 +7575,45 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/pages/delete/batch-job:
+    post:
+      tags:
+      - "EditPdf"
+      summary: "Remove, delete pages from a PDF document as Batch Job"
+      description: "Remove one or more pages from a PDF document.  Runs as a batch\
+        \ job async and returns a batch job ID that you can check the status of to\
+        \ get the result.  Requires Cloudmersive Private Cloud or Managed Instance."
+      operationId: "EditPdf_DeletePagesBatchJob"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "pageStart"
+        in: "header"
+        description: "Page number (1 based) to start deleting pages from (inclusive)."
+        required: true
+        type: "integer"
+        x-exportParamName: "PageStart"
+      - name: "pageEnd"
+        in: "header"
+        description: "Page number (1 based) to stop deleting pages from (inclusive)."
+        required: true
+        type: "integer"
+        x-exportParamName: "PageEnd"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/EditPdfBatchJobCreateResult"
       security:
       - Apikey: []
   /convert/edit/pdf/pages/insert:
@@ -7255,6 +7670,89 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/pages/insert/batch-job:
+    post:
+      tags:
+      - "EditPdf"
+      summary: "Insert, copy pages from one PDF document into another as a batch job"
+      description: "Copy one or more pages from one PDF document (source document)\
+        \ and insert them into a second PDF document (destination document).  Runs\
+        \ as a batch job async and returns a batch job ID that you can check the status\
+        \ of to get the result.  Requires Cloudmersive Private Cloud or Managed Instance."
+      operationId: "EditPdf_InsertPagesBatchJob"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "sourceFile"
+        in: "formData"
+        description: "Source PDF file to copy pages from."
+        required: true
+        type: "file"
+        x-exportParamName: "SourceFile"
+      - name: "destinationFile"
+        in: "formData"
+        description: "Destination PDF file to copy pages into."
+        required: true
+        type: "file"
+        x-exportParamName: "DestinationFile"
+      - name: "pageStartSource"
+        in: "header"
+        description: "Page number (1 based) to start copying pages from (inclusive)\
+          \ in the Source file."
+        required: true
+        type: "integer"
+        x-exportParamName: "PageStartSource"
+      - name: "pageEndSource"
+        in: "header"
+        description: "Page number (1 based) to stop copying pages pages from (inclusive)\
+          \ in the Source file."
+        required: true
+        type: "integer"
+        x-exportParamName: "PageEndSource"
+      - name: "pageInsertBeforeDesitnation"
+        in: "header"
+        description: "Page number (1 based) to insert the pages before in the Destination\
+          \ file."
+        required: true
+        type: "integer"
+        x-exportParamName: "PageInsertBeforeDesitnation"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/EditPdfBatchJobCreateResult"
+      security:
+      - Apikey: []
+  /convert/edit/pdf/batch-job/status:
+    get:
+      tags:
+      - "EditPdf"
+      summary: "Get the status and result of a PDF Batch Job"
+      description: "Returns the result of the Async Job - possible states can be STARTED\
+        \ or COMPLETED.  This API is only available for Cloudmersive Managed Instance\
+        \ and Private Cloud deployments."
+      operationId: "EditPdf_GetAsyncJobStatus"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "AsyncJobID"
+        in: "query"
+        required: true
+        type: "string"
+        x-exportParamName: "AsyncJobID"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/EditPdfJobStatusResult"
       security:
       - Apikey: []
   /convert/edit/pdf/pages/get-text:
@@ -8315,6 +8813,37 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/merge/docx/multi/array:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple Word DOCX Together from an array"
+      description: "Combine multiple Office Word Documents (docx), stored in an array,\
+        \ into one single Office Word document"
+      operationId: "MergeDocument_DocxMultiArray"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Array of input files"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+      security:
+      - Apikey: []
   /convert/merge/pptx:
     post:
       tags:
@@ -8432,6 +8961,37 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/merge/pptx/multi/array:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple PowerPoint PPTX Together from an array"
+      description: "Combine multiple Office PowerPoint presentations (pptx), from\
+        \ an array, into one single Office PowerPoint presentation"
+      operationId: "MergeDocument_PptxMultiArray"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Array of input files"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/merge/xlsx:
@@ -8553,6 +9113,37 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/merge/xlsx/multi/array:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple Excel XLSX Together from an Array"
+      description: "Combine multiple Office Excel spreadsheets (xlsx), as an array,\
+        \ into a single Office Excel spreadsheet"
+      operationId: "MergeDocument_XlsxMultiArray"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Array of input files"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+      security:
+      - Apikey: []
   /convert/merge/pdf:
     post:
       tags:
@@ -8670,6 +9261,37 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/merge/pdf/multi/array:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple PDF Files Together from an array"
+      description: "Combine multiple PDF files (pdf), as an array, into a single PDF\
+        \ document, preserving the order of the input documents in the combined document"
+      operationId: "MergeDocument_PdfMultiArray"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Array of input files"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/merge/html:
@@ -8791,6 +9413,39 @@ paths:
             title: "OutputContent"
             format: "byte"
             description: "Output file content from the operation"
+      security:
+      - Apikey: []
+  /convert/merge/html/multi/array:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple HTML (HTM) Files Together from an array"
+      description: "Combine multiple HTML (.HTM) files, from an array, into a single\
+        \ text document, preserving the order of the input documents in the combined\
+        \ document by stacking them vertically.  The title will be taken from the\
+        \ first document."
+      operationId: "MergeDocument_HtmlMultiArray"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Array of input files"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
       security:
       - Apikey: []
   /convert/merge/txt:
@@ -9031,6 +9686,106 @@ paths:
             description: "Output file content from the operation"
       security:
       - Apikey: []
+  /convert/merge/png/vertical/multi/array:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge Multple PNG Files Together from an array"
+      description: "Combine multiple PNG files, from an array, into a single PNG document,\
+        \ preserving the order of the input documents in the combined document by\
+        \ stacking them vertically"
+      operationId: "MergeDocument_PngMultiArray"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Array of input files"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+      security:
+      - Apikey: []
+  /convert/merge/batch-job/create:
+    post:
+      tags:
+      - "MergeDocument"
+      summary: "Merge an array of Documents into a Single Document by Page as a Batch\
+        \ Job"
+      description: "Merge an array of Documents (PDF supported), into a single document.\
+        \  This API is designed for large jobs that could take a long time to create\
+        \ and so runs as a batch job that returns a Job ID that you can use with the\
+        \ GetAsyncJobStatus API to check on the status of the Job and ultimately get\
+        \ the output result.  This API automatically detects the document type and\
+        \ then performs the split by using the document type-specific API needed to\
+        \ perform the split.  This API is only available for Cloudmersive Managed\
+        \ Instance and Private Cloud deployments."
+      operationId: "MergeDocument_BatchJobCreate"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - in: "body"
+        name: "input"
+        required: true
+        schema:
+          $ref: "#/definitions/DocumentArrayInput"
+        x-exportParamName: "Input"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MergeBatchJobCreateResult"
+      security:
+      - Apikey: []
+  /convert/merge/batch-job/status:
+    get:
+      tags:
+      - "MergeDocument"
+      summary: "Get the status and result of a Merge Document Batch Job"
+      description: "Returns the result of the Async Job - possible states can be STARTED\
+        \ or COMPLETED.  This API is only available for Cloudmersive Managed Instance\
+        \ and Private Cloud deployments."
+      operationId: "MergeDocument_GetAsyncJobStatus"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "AsyncJobID"
+        in: "query"
+        required: true
+        type: "string"
+        x-exportParamName: "AsyncJobID"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/MergeJobStatusResult"
+      security:
+      - Apikey: []
   /convert/split/docx:
     post:
       tags:
@@ -9147,6 +9902,39 @@ paths:
             $ref: "#/definitions/SplitPptxPresentationResult"
       security:
       - Apikey: []
+  /convert/split/pptx/advanced:
+    post:
+      tags:
+      - "SplitDocument"
+      summary: "Split a single PowerPoint Presentation PPTX into Separate Presentations"
+      description: "Split a PowerPoint PPTX Presentation, comprised of multiple slides\
+        \ into separate PowerPoint PPTX presentations of customizeable size."
+      operationId: "SplitDocument_PptxAdvanced"
+      consumes:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      - "application/x-www-form-urlencoded"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - in: "body"
+        name: "request"
+        required: true
+        schema:
+          $ref: "#/definitions/PptxSplitAdvancedRequest"
+        x-exportParamName: "Request"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/PptxSplitAdvancedResponse"
+      security:
+      - Apikey: []
   /convert/split/pdf:
     post:
       tags:
@@ -9254,6 +10042,80 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/SplitTextDocumentByStringResult"
+      security:
+      - Apikey: []
+  /convert/split/batch-job/create:
+    post:
+      tags:
+      - "SplitDocument"
+      summary: "Split a single Document into Separate Documents by Page as a Batch\
+        \ Job"
+      description: "Split a Document (PPTX supported), comprised of multiple pages\
+        \ into separate files, with each containing exactly one page.  This API is\
+        \ designed for large jobs that could take a long time to create and so runs\
+        \ as a batch job that returns a Job ID that you can use with the GetAsyncJobStatus\
+        \ API to check on the status of the Job and ultimately get the output result.\
+        \  This API automatically detects the document type and then performs the\
+        \ split by using the document type-specific API needed to perform the split.\
+        \  This API is only available for Cloudmersive Managed Instance and Private\
+        \ Cloud deployments."
+      operationId: "SplitDocument_BatchJobCreate"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "returnDocumentContents"
+        in: "header"
+        description: "Set to true to return the contents of each presentation directly,\
+          \ set to false to only return URLs to each resulting presentation.  Default\
+          \ is true."
+        required: false
+        type: "boolean"
+        x-exportParamName: "ReturnDocumentContents"
+        x-optionalDataType: "Bool"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/SplitBatchJobCreateResult"
+      security:
+      - Apikey: []
+  /convert/split/batch-job/status:
+    get:
+      tags:
+      - "SplitDocument"
+      summary: "Get the status and result of a Split Document Batch Job"
+      description: "Returns the result of the Async Job - possible states can be STARTED\
+        \ or COMPLETED.  This API is only available for Cloudmersive Managed Instance\
+        \ and Private Cloud deployments."
+      operationId: "SplitDocument_GetAsyncJobStatus"
+      consumes: []
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "AsyncJobID"
+        in: "query"
+        required: true
+        type: "string"
+        x-exportParamName: "AsyncJobID"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/JobStatusResult"
       security:
       - Apikey: []
   /convert/transform/docx/replace-all:
@@ -9596,6 +10458,46 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/docx/repair:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Repair a Word document (DOCX) that contains errors"
+      description: "Repair a Word document (DOCX) that contains errors or corruption,\
+        \ if possible."
+      operationId: "ValidateDocument_DocxRepair"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      - name: "repairMode"
+        in: "header"
+        description: "Optional; Set to advanced to apply the most advanced repair\
+          \ mode, basic for basic repair mode.  Default is advanced."
+        required: false
+        type: "string"
+        x-exportParamName: "RepairMode"
+        x-optionalDataType: "String"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/validate/doc:
     post:
       tags:
@@ -9750,6 +10652,38 @@ paths:
             $ref: "#/definitions/DocumentValidationResult"
       security:
       - Apikey: []
+  /convert/validate/xlsx/repair:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Repair an Excel spreadsheet (XLSX) that contains errors"
+      description: "Repair an Excel spreadsheet document (XLSX) that contains errors\
+        \ or corruption, if possible."
+      operationId: "ValidateDocument_XlsxRepair"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
+      security:
+      - Apikey: []
   /convert/validate/xls:
     post:
       tags:
@@ -9834,6 +10768,38 @@ paths:
           description: "OK"
           schema:
             $ref: "#/definitions/DocumentValidationResult"
+      security:
+      - Apikey: []
+  /convert/validate/pptx/repair:
+    post:
+      tags:
+      - "ValidateDocument"
+      summary: "Repair a PowerPoint presentation (PPTX) that contains errors"
+      description: "Repair a PowerPoint presentation document (PPTX) that contains\
+        \ errors or corruption, if possible."
+      operationId: "ValidateDocument_PptxRepair"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      - "text/json"
+      - "application/xml"
+      - "text/xml"
+      parameters:
+      - name: "inputFile"
+        in: "formData"
+        description: "Input file to perform the operation on."
+        required: true
+        type: "file"
+        x-exportParamName: "InputFile"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "string"
+            title: "OutputContent"
+            format: "byte"
+            description: "Output file content from the operation"
       security:
       - Apikey: []
   /convert/validate/ppt:
@@ -10243,7 +11209,7 @@ paths:
     post:
       tags:
       - "ValidateDocument"
-      summary: "Validate if an EML file is executable"
+      summary: "Validate if input file is a valid EML file"
       description: "Validate if an input file is an EML email file; if the document\
         \ is not valid"
       operationId: "ValidateDocument_EmlValidation"
@@ -10272,7 +11238,7 @@ paths:
     post:
       tags:
       - "ValidateDocument"
-      summary: "Validate if an MSG file is executable"
+      summary: "Validate if input file is a valid MSG file"
       description: "Validate if an input file is an MSG email file; if the document\
         \ is not valid"
       operationId: "ValidateDocument_MsgValidation"
@@ -11133,6 +12099,49 @@ definitions:
       Extension: "Extension"
       Icon: "Icon"
       Successful: true
+  ConvertDocumentBatchJobCreateResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      AsyncJobID:
+        type: "string"
+        description: "When creating a job, an Async Job ID is returned.  Use the GetAsyncJobStatus\
+          \ API to check on the status of this job using the AsyncJobID and get the\
+          \ result when it finishes"
+    description: "Result of performing a convert documentbatch job operation"
+  ConvertDocumentJobStatusResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "Tru eif the operation to check the status of the job was successful,\
+          \ false otherwise"
+      AsyncJobStatus:
+        type: "string"
+        description: "Returns the job status of the Async Job, if applicable.  Possible\
+          \ states are STARTED and COMPLETED"
+      AsyncJobID:
+        type: "string"
+        description: "When the job exceeds 25 pages, an Async Job ID is returned.\
+          \  Use the CheckPdfOcrJobStatus API to check on the status of this job using\
+          \ the AsyncJobID and get the result when it finishes"
+      OutputFileResult:
+        type: "string"
+        format: "byte"
+        description: "Output file result (if applicable)"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      ErrorMessage:
+        type: "string"
+        description: "Error message (if any)"
+    description: "Result of performing a batch job operation"
+    example:
+      OutputFileResult: "OutputFileResult"
+      AsyncJobID: "AsyncJobID"
+      ErrorMessage: "ErrorMessage"
+      Successful: true
+      AsyncJobStatus: "AsyncJobStatus"
   AutodetectToPngResult:
     type: "object"
     properties:
@@ -11206,6 +12215,41 @@ definitions:
     example:
       Content: "Content"
       Index: 0
+  PdfToPngDirectResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+      PngResultPages:
+        type: "array"
+        description: "Array of converted pages"
+        items:
+          $ref: "#/definitions/ConvertedPngDirectPage"
+    description: "Result of converting a PDF to a PNG array"
+    example:
+      PngResultPages:
+      - PageNumber: 0
+        ImageData: "ImageData"
+      - PageNumber: 0
+        ImageData: "ImageData"
+      Successful: true
+  ConvertedPngDirectPage:
+    type: "object"
+    properties:
+      PageNumber:
+        type: "integer"
+        format: "int32"
+        description: "Page number of the converted page, starting with 1"
+      ImageData:
+        type: "string"
+        format: "byte"
+        description: "PNG binary image file data in bytes"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+    description: "A single converted page"
+    example:
+      PageNumber: 0
+      ImageData: "ImageData"
   PdfToJpgResult:
     type: "object"
     properties:
@@ -20220,6 +21264,32 @@ definitions:
       InputFileUrl: "InputFileUrl"
       StartDeleteSlideNumber: 0
       EndDeleteSlideNumber: 6
+  PptxPageLayoutInformation:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      Orientation:
+        type: "string"
+        description: "Orientation of the presentation, either portrait or landscape"
+      Width:
+        type: "integer"
+        format: "int32"
+        description: "Width of the presentation in Emu, where 1 inch equals 914400\
+          \ emu."
+      Height:
+        type: "integer"
+        format: "int32"
+        description: "Height of the presentation in Emu, where 1 inch equals 914400\
+          \ emu."
+    description: "Result of getting the page layout information of a PowerPoint PPTX\
+      \ presentation"
+    example:
+      Height: 6
+      Orientation: "Orientation"
+      Successful: true
+      Width: 0
   HtmlGetLanguageResult:
     type: "object"
     properties:
@@ -20292,6 +21362,49 @@ definitions:
     example:
       Anchortext: "Anchortext"
       Url: "Url"
+  EditPdfBatchJobCreateResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      AsyncJobID:
+        type: "string"
+        description: "When creating a job, an Async Job ID is returned.  Use the GetAsyncJobStatus\
+          \ API to check on the status of this job using the AsyncJobID and get the\
+          \ result when it finishes"
+    description: "Result of performing an edit PDF batch job operation"
+  EditPdfJobStatusResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "Tru eif the operation to check the status of the job was successful,\
+          \ false otherwise"
+      AsyncJobStatus:
+        type: "string"
+        description: "Returns the job status of the Async Job, if applicable.  Possible\
+          \ states are STARTED and COMPLETED"
+      AsyncJobID:
+        type: "string"
+        description: "When the job exceeds 25 pages, an Async Job ID is returned.\
+          \  Use the CheckPdfOcrJobStatus API to check on the status of this job using\
+          \ the AsyncJobID and get the result when it finishes"
+      OutputFileResult:
+        type: "string"
+        format: "byte"
+        description: "Output file result (if applicable)"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      ErrorMessage:
+        type: "string"
+        description: "Error message (if any)"
+    description: "Result of performing a batch job operation"
+    example:
+      OutputFileResult: "OutputFileResult"
+      AsyncJobID: "AsyncJobID"
+      ErrorMessage: "ErrorMessage"
+      Successful: true
+      AsyncJobStatus: "AsyncJobStatus"
   PdfTextByPageResult:
     type: "object"
     properties:
@@ -20331,6 +21444,9 @@ definitions:
       Successful:
         type: "boolean"
         description: "True if the operation was successful, false otherwise"
+      ErrorDetails:
+        type: "string"
+        description: "Details of any errors if the operation was unsucessful"
       Title:
         type: "string"
         description: "Title of the document"
@@ -20361,13 +21477,18 @@ definitions:
         type: "integer"
         format: "int32"
         description: "The number of pages in the document"
+      Encrypted:
+        type: "boolean"
+        description: "True if the PDF document is encrypted, false otherwise"
     description: "Result of an autodetect/get-info operation"
     example:
       Keywords: "Keywords"
       PageCount: 0
+      Encrypted: true
       Title: "Title"
       Author: "Author"
       DateCreated: "2000-01-23T04:56:07.000+00:00"
+      ErrorDetails: "ErrorDetails"
       Creator: "Creator"
       Successful: true
       Subject: "Subject"
@@ -20389,9 +21510,11 @@ definitions:
       MetadataToSet:
         Keywords: "Keywords"
         PageCount: 0
+        Encrypted: true
         Title: "Title"
         Author: "Author"
         DateCreated: "2000-01-23T04:56:07.000+00:00"
+        ErrorDetails: "ErrorDetails"
         Creator: "Creator"
         Successful: true
         Subject: "Subject"
@@ -20968,6 +22091,82 @@ definitions:
     example:
       Successful: true
       TextContentResult: "TextContentResult"
+  DocumentArrayInput:
+    type: "object"
+    properties:
+      Documents:
+        type: "array"
+        description: "Array of document objects"
+        items:
+          $ref: "#/definitions/DocumentItem"
+    description: "Input array of documents to be processed for a merge operation"
+    example:
+      Documents:
+      - DocumentFileName: "DocumentFileName"
+        DocumentContent: "DocumentContent"
+      - DocumentFileName: "DocumentFileName"
+        DocumentContent: "DocumentContent"
+  DocumentItem:
+    type: "object"
+    properties:
+      DocumentFileName:
+        type: "string"
+        description: "File name of the document"
+      DocumentContent:
+        type: "string"
+        format: "byte"
+        description: "Contents of the document as a binary byte array"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+    description: "Object representing one document"
+    example:
+      DocumentFileName: "DocumentFileName"
+      DocumentContent: "DocumentContent"
+  MergeBatchJobCreateResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      AsyncJobID:
+        type: "string"
+        description: "When creating a job, an Async Job ID is returned.  Use the GetAsyncJobStatus\
+          \ API to check on the status of this job using the AsyncJobID and get the\
+          \ result when it finishes"
+    description: "Result of performing a merge document batch job"
+    example:
+      AsyncJobID: "AsyncJobID"
+      Successful: true
+  MergeJobStatusResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation to check the status of the job was successful,\
+          \ false otherwise"
+      AsyncJobStatus:
+        type: "string"
+        description: "Returns the job status of the Async Job, if applicable.  Possible\
+          \ states are STARTED and COMPLETED"
+      AsyncJobID:
+        type: "string"
+        description: "When the job exceeds 25 pages, an Async Job ID is returned.\
+          \  Use the CheckPdfOcrJobStatus API to check on the status of this job using\
+          \ the AsyncJobID and get the result when it finishes"
+      FileOutputResult:
+        type: "string"
+        format: "byte"
+        description: "Resulting file output (if applicable)"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      ErrorMessage:
+        type: "string"
+        description: "Error message (if any)"
+    description: "Result of performing a batch job operation"
+    example:
+      FileOutputResult: "FileOutputResult"
+      AsyncJobID: "AsyncJobID"
+      ErrorMessage: "ErrorMessage"
+      Successful: true
+      AsyncJobStatus: "AsyncJobStatus"
   SplitDocxDocumentResult:
     type: "object"
     properties:
@@ -21100,12 +22299,65 @@ definitions:
         format: "byte"
         description: "Contents of the presentation in bytes"
         pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
-    description: "A single Excel XLSX file corresponding to one worksheet (tab) in\
-      \ the original spreadsheet"
+    description: "A single PowerPoint PPTX file corresponding to one slide in the\
+      \ original presentation"
     example:
       SlideNumber: 0
       PresentationContents: "PresentationContents"
       URL: "URL"
+  PptxSplitAdvancedRequest:
+    type: "object"
+    properties:
+      InputFile:
+        type: "string"
+        format: "byte"
+        description: "Input file"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+      SlidesPerPresentation:
+        type: "integer"
+        format: "int32"
+        description: "Slides per presentation for result"
+    description: "Request to split a PowerPoint presentation"
+    example:
+      SlidesPerPresentation: 0
+      InputFile: "InputFile"
+  PptxSplitAdvancedResponse:
+    type: "object"
+    properties:
+      ResultPresentations:
+        type: "array"
+        items:
+          $ref: "#/definitions/PresentationAdvancedResult"
+      Successful:
+        type: "boolean"
+        description: "True if the operation was successful, false otherwise"
+    description: "Result of splitting a single PowerPoint Presentation PPTX into Separate\
+      \ Presentations"
+    example:
+      ResultPresentations:
+      - SlideNumber: 0
+        PresentationContents: "PresentationContents"
+      - SlideNumber: 0
+        PresentationContents: "PresentationContents"
+      Successful: true
+  PresentationAdvancedResult:
+    type: "object"
+    properties:
+      SlideNumber:
+        type: "integer"
+        format: "int32"
+        description: "Presentation number of the converted page, starting with 1 for\
+          \ the left-most worksheet"
+      PresentationContents:
+        type: "string"
+        format: "byte"
+        description: "Contents of the presentation in bytes"
+        pattern: "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+    description: "A single PowerPoint PPTX file corresponding to one worksheet (tab)\
+      \ in the original spreadsheet"
+    example:
+      SlideNumber: 0
+      PresentationContents: "PresentationContents"
   SplitPdfResult:
     type: "object"
     properties:
@@ -21225,6 +22477,58 @@ definitions:
     example:
       ElementNumber: 0
       ElementContents: "ElementContents"
+  SplitBatchJobCreateResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if successful, false otherwise"
+      AsyncJobID:
+        type: "string"
+        description: "When creating a job, an Async Job ID is returned.  Use the GetAsyncJobStatus\
+          \ API to check on the status of this job using the AsyncJobID and get the\
+          \ result when it finishes"
+    description: "Result of performing a split document batch job"
+    example:
+      AsyncJobID: "AsyncJobID"
+      Successful: true
+  JobStatusResult:
+    type: "object"
+    properties:
+      Successful:
+        type: "boolean"
+        description: "True if the operation to check the status of the job was successful,\
+          \ false otherwise"
+      AsyncJobStatus:
+        type: "string"
+        description: "Returns the job status of the Async Job, if applicable.  Possible\
+          \ states are STARTED and COMPLETED"
+      AsyncJobID:
+        type: "string"
+        description: "When the job exceeds 25 pages, an Async Job ID is returned.\
+          \  Use the CheckPdfOcrJobStatus API to check on the status of this job using\
+          \ the AsyncJobID and get the result when it finishes"
+      PptxResult:
+        description: "PowerPoint split result (if applicable)"
+        $ref: "#/definitions/SplitPptxPresentationResult"
+      ErrorMessage:
+        type: "string"
+        description: "Error message (if any)"
+    description: "Result of performing a batch job operation"
+    example:
+      AsyncJobID: "AsyncJobID"
+      PptxResult:
+        ResultPresentations:
+        - SlideNumber: 0
+          PresentationContents: "PresentationContents"
+          URL: "URL"
+        - SlideNumber: 0
+          PresentationContents: "PresentationContents"
+          URL: "URL"
+        Successful: true
+      ErrorMessage: "ErrorMessage"
+      Successful: true
+      AsyncJobStatus: "AsyncJobStatus"
   DocumentTransformEditSession:
     type: "object"
     properties:

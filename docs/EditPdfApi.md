@@ -8,14 +8,18 @@ Method | HTTP request | Description
 [**EditPdfConvertToPdfA**](EditPdfApi.md#EditPdfConvertToPdfA) | **Post** /convert/edit/pdf/optimize/pdf-a | Convert a PDF file to PDF/A
 [**EditPdfDecrypt**](EditPdfApi.md#EditPdfDecrypt) | **Post** /convert/edit/pdf/decrypt | Decrypt and password-protect a PDF
 [**EditPdfDeletePages**](EditPdfApi.md#EditPdfDeletePages) | **Post** /convert/edit/pdf/pages/delete | Remove, delete pages from a PDF document
+[**EditPdfDeletePagesBatchJob**](EditPdfApi.md#EditPdfDeletePagesBatchJob) | **Post** /convert/edit/pdf/pages/delete/batch-job | Remove, delete pages from a PDF document as Batch Job
 [**EditPdfEncrypt**](EditPdfApi.md#EditPdfEncrypt) | **Post** /convert/edit/pdf/encrypt | Encrypt and password-protect a PDF
 [**EditPdfGetAnnotations**](EditPdfApi.md#EditPdfGetAnnotations) | **Post** /convert/edit/pdf/annotations/list | Get PDF annotations, including comments in the document
+[**EditPdfGetAsyncJobStatus**](EditPdfApi.md#EditPdfGetAsyncJobStatus) | **Get** /convert/edit/pdf/batch-job/status | Get the status and result of a PDF Batch Job
 [**EditPdfGetFormFields**](EditPdfApi.md#EditPdfGetFormFields) | **Post** /convert/edit/pdf/form/get-fields | Gets PDF Form fields and values
 [**EditPdfGetMetadata**](EditPdfApi.md#EditPdfGetMetadata) | **Post** /convert/edit/pdf/get-metadata | Get PDF document metadata
 [**EditPdfGetPdfTextByPages**](EditPdfApi.md#EditPdfGetPdfTextByPages) | **Post** /convert/edit/pdf/pages/get-text | Get text in a PDF document by page
 [**EditPdfInsertPages**](EditPdfApi.md#EditPdfInsertPages) | **Post** /convert/edit/pdf/pages/insert | Insert, copy pages from one PDF document into another
+[**EditPdfInsertPagesBatchJob**](EditPdfApi.md#EditPdfInsertPagesBatchJob) | **Post** /convert/edit/pdf/pages/insert/batch-job | Insert, copy pages from one PDF document into another as a batch job
 [**EditPdfLinearize**](EditPdfApi.md#EditPdfLinearize) | **Post** /convert/edit/pdf/optimize/linearize | Linearize and optimize a PDF for streaming download
 [**EditPdfRasterize**](EditPdfApi.md#EditPdfRasterize) | **Post** /convert/edit/pdf/rasterize | Rasterize a PDF to an image-based PDF
+[**EditPdfRasterizeBatchJob**](EditPdfApi.md#EditPdfRasterizeBatchJob) | **Post** /convert/edit/pdf/rasterize/batch-job | Rasterize a PDF to an image-based PDF as Batch Job
 [**EditPdfReduceFileSize**](EditPdfApi.md#EditPdfReduceFileSize) | **Post** /convert/edit/pdf/optimize/reduce-file-size | Reduce the file size and optimize a PDF
 [**EditPdfRemoveAllAnnotations**](EditPdfApi.md#EditPdfRemoveAllAnnotations) | **Post** /convert/edit/pdf/annotations/remove-all | Remove all PDF annotations, including comments in the document
 [**EditPdfRemoveAnnotationItem**](EditPdfApi.md#EditPdfRemoveAnnotationItem) | **Post** /convert/edit/pdf/annotations/remove-item | Remove a specific PDF annotation, comment in the document
@@ -152,6 +156,36 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **EditPdfDeletePagesBatchJob**
+> EditPdfBatchJobCreateResult EditPdfDeletePagesBatchJob(ctx, inputFile, pageStart, pageEnd)
+Remove, delete pages from a PDF document as Batch Job
+
+Remove one or more pages from a PDF document.  Runs as a batch job async and returns a batch job ID that you can check the status of to get the result.  Requires Cloudmersive Private Cloud or Managed Instance.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+  **pageStart** | **int32**| Page number (1 based) to start deleting pages from (inclusive). | 
+  **pageEnd** | **int32**| Page number (1 based) to stop deleting pages from (inclusive). | 
+
+### Return type
+
+[**EditPdfBatchJobCreateResult**](EditPdfBatchJobCreateResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **EditPdfEncrypt**
 > string EditPdfEncrypt(ctx, inputFile, optional)
 Encrypt and password-protect a PDF
@@ -216,6 +250,34 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: multipart/form-data
  - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditPdfGetAsyncJobStatus**
+> EditPdfJobStatusResult EditPdfGetAsyncJobStatus(ctx, asyncJobID)
+Get the status and result of a PDF Batch Job
+
+Returns the result of the Async Job - possible states can be STARTED or COMPLETED.  This API is only available for Cloudmersive Managed Instance and Private Cloud deployments.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **asyncJobID** | **string**|  | 
+
+### Return type
+
+[**EditPdfJobStatusResult**](EditPdfJobStatusResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -344,6 +406,38 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **EditPdfInsertPagesBatchJob**
+> EditPdfBatchJobCreateResult EditPdfInsertPagesBatchJob(ctx, sourceFile, destinationFile, pageStartSource, pageEndSource, pageInsertBeforeDesitnation)
+Insert, copy pages from one PDF document into another as a batch job
+
+Copy one or more pages from one PDF document (source document) and insert them into a second PDF document (destination document).  Runs as a batch job async and returns a batch job ID that you can check the status of to get the result.  Requires Cloudmersive Private Cloud or Managed Instance.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **sourceFile** | ***os.File**| Source PDF file to copy pages from. | 
+  **destinationFile** | ***os.File**| Destination PDF file to copy pages into. | 
+  **pageStartSource** | **int32**| Page number (1 based) to start copying pages from (inclusive) in the Source file. | 
+  **pageEndSource** | **int32**| Page number (1 based) to stop copying pages pages from (inclusive) in the Source file. | 
+  **pageInsertBeforeDesitnation** | **int32**| Page number (1 based) to insert the pages before in the Destination file. | 
+
+### Return type
+
+[**EditPdfBatchJobCreateResult**](EditPdfBatchJobCreateResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **EditPdfLinearize**
 > string EditPdfLinearize(ctx, inputFile)
 Linearize and optimize a PDF for streaming download
@@ -373,8 +467,45 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **EditPdfRasterize**
-> string EditPdfRasterize(ctx, inputFile)
+> string EditPdfRasterize(ctx, inputFile, optional)
 Rasterize a PDF to an image-based PDF
+
+Rasterize a PDF into an image-based PDF.  The output is a PDF where each page is comprised of a high-resolution image, with all text, figures and other components removed.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***EditPdfRasterizeOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditPdfRasterizeOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **dpi** | **optional.Int32**| Optional; configures the pixel density in Dots per Inch (DPI) (default is 300).  This parameter can only be used with Cloudmersive Managed Instance and Private Cloud. | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/octet-stream
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditPdfRasterizeBatchJob**
+> EditPdfBatchJobCreateResult EditPdfRasterizeBatchJob(ctx, inputFile)
+Rasterize a PDF to an image-based PDF as Batch Job
 
 Rasterize a PDF into an image-based PDF.  The output is a PDF where each page is comprised of a high-resolution image, with all text, figures and other components removed.
 
@@ -387,7 +518,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**string**
+[**EditPdfBatchJobCreateResult**](EditPdfBatchJobCreateResult.md)
 
 ### Authorization
 

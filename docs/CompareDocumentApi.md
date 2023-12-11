@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **CompareDocumentDocx**
-> string CompareDocumentDocx(ctx, inputFile1, inputFile2)
+> string CompareDocumentDocx(ctx, inputFile1, inputFile2, optional)
 Compare Two Word DOCX
 
 Compare two Office Word Documents (docx) files and highlight the differences
@@ -20,6 +20,16 @@ Name | Type | Description  | Notes
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **inputFile1** | ***os.File**| First input file to perform the operation on. | 
   **inputFile2** | ***os.File**| Second input file to perform the operation on (more than 2 can be supplied). | 
+ **optional** | ***CompareDocumentDocxOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a CompareDocumentDocxOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **autorepair** | **optional.Bool**| Optional; automatically repair input documents that have errors (default is true) | 
 
 ### Return type
 

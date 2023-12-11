@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"strings"
 	"os"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -138,10 +139,17 @@ EditDocumentApiService Accept all tracked changes, revisions in a Word DOCX docu
 Accepts all tracked changes and revisions in a Word DOCX document.  This will accept all pending changes in the document when tracked changes is turned on.  Track changes will remain on (if it is on) after this oepration is completed.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param inputFile Input file to perform the operation on.
+ * @param optional nil or *EditDocumentDocxAcceptAllTrackChangesOpts - Optional Parameters:
+     * @param "Autorepair" (optional.Bool) -  Optional; automatically repair input documents that have errors (default is true)
 
 @return string
 */
-func (a *EditDocumentApiService) EditDocumentDocxAcceptAllTrackChanges(ctx context.Context, inputFile *os.File) (string, *http.Response, error) {
+
+type EditDocumentDocxAcceptAllTrackChangesOpts struct { 
+	Autorepair optional.Bool
+}
+
+func (a *EditDocumentApiService) EditDocumentDocxAcceptAllTrackChanges(ctx context.Context, inputFile *os.File, localVarOptionals *EditDocumentDocxAcceptAllTrackChangesOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -173,6 +181,9 @@ func (a *EditDocumentApiService) EditDocumentDocxAcceptAllTrackChanges(ctx conte
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.Autorepair.IsSet() {
+		localVarHeaderParams["autorepair"] = parameterToString(localVarOptionals.Autorepair.Value(), "")
 	}
 	var localVarFile *os.File
 	if localVarFile != nil {
@@ -4706,6 +4717,134 @@ func (a *EditDocumentApiService) EditDocumentPptxDeleteSlides(ctx context.Contex
 }
 
 /* 
+EditDocumentApiService Set the size and/or orientation of a PowerPoint PPTX presentation document
+Edits the input PowerPoint PPTX presentation document to be a different orientation and/or size
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param inputFile Input file to perform the operation on.
+ * @param optional nil or *EditDocumentPptxEditSizeAndOrientationOpts - Optional Parameters:
+     * @param "Orientation" (optional.String) -  Optional: The desired slide orientation; can be landscape or portrait.
+     * @param "Width" (optional.Int32) -  Optional: The desired slide width in Emu, where 1 inch equals 914400 emu.
+     * @param "Height" (optional.Int32) -  Optional: The desired slide height in Emu, where 1 inch equals 914400 emu
+
+@return string
+*/
+
+type EditDocumentPptxEditSizeAndOrientationOpts struct { 
+	Orientation optional.String
+	Width optional.Int32
+	Height optional.Int32
+}
+
+func (a *EditDocumentApiService) EditDocumentPptxEditSizeAndOrientation(ctx context.Context, inputFile *os.File, localVarOptionals *EditDocumentPptxEditSizeAndOrientationOpts) (string, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue string
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/convert/edit/pptx/set-size-and-orientation"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"multipart/form-data"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.Orientation.IsSet() {
+		localVarHeaderParams["orientation"] = parameterToString(localVarOptionals.Orientation.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.Width.IsSet() {
+		localVarHeaderParams["width"] = parameterToString(localVarOptionals.Width.Value(), "")
+	}
+	if localVarOptionals != nil && localVarOptionals.Height.IsSet() {
+		localVarHeaderParams["height"] = parameterToString(localVarOptionals.Height.Value(), "")
+	}
+	var localVarFile *os.File
+	if localVarFile != nil {
+		fbs, _ := ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Apikey"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		if localVarHttpResponse.StatusCode == 200 {
+			var v string
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/* 
 EditDocumentApiService Get macro information from a PowerPoint PPTX/PPTM presentation document
 Returns information about the Macros (e.g. VBA) defined in the PowerPoint Document
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4798,6 +4937,114 @@ func (a *EditDocumentApiService) EditDocumentPptxGetMacroInformation(ctx context
 		
 		if localVarHttpResponse.StatusCode == 200 {
 			var v GetMacrosResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+				if err != nil {
+					newErr.error = err.Error()
+					return localVarReturnValue, localVarHttpResponse, newErr
+				}
+				newErr.model = v
+				return localVarReturnValue, localVarHttpResponse, newErr
+		}
+		
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
+}
+
+/* 
+EditDocumentApiService Get the page layout information, including size and orientation of a PowerPoint PPTX presentation document
+Gets size and orientation of an input PowerPoint PPTX presentation
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param inputFile Input file to perform the operation on.
+
+@return PptxPageLayoutInformation
+*/
+func (a *EditDocumentApiService) EditDocumentPptxGetSizeAndOrientation(ctx context.Context, inputFile *os.File) (PptxPageLayoutInformation, *http.Response, error) {
+	var (
+		localVarHttpMethod = strings.ToUpper("Post")
+		localVarPostBody   interface{}
+		localVarFileName   string
+		localVarFileBytes  []byte
+		localVarReturnValue PptxPageLayoutInformation
+	)
+
+	// create path and map variables
+	localVarPath := a.client.cfg.BasePath + "/convert/edit/pptx/get-size-and-orientation"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHttpContentTypes := []string{"multipart/form-data"}
+
+	// set Content-Type header
+	localVarHttpContentType := selectHeaderContentType(localVarHttpContentTypes)
+	if localVarHttpContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHttpContentType
+	}
+
+	// to determine the Accept header
+	localVarHttpHeaderAccepts := []string{"application/json", "text/json", "application/xml", "text/xml"}
+
+	// set Accept header
+	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
+	if localVarHttpHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	var localVarFile *os.File
+	if localVarFile != nil {
+		fbs, _ := ioutil.ReadAll(localVarFile)
+		localVarFileBytes = fbs
+		localVarFileName = localVarFile.Name()
+		localVarFile.Close()
+	}
+	if ctx != nil {
+		// API Key Authentication
+		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
+			var key string
+			if auth.Prefix != "" {
+				key = auth.Prefix + " " + auth.Key
+			} else {
+				key = auth.Key
+			}
+			localVarHeaderParams["Apikey"] = key
+			
+		}
+	}
+	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHttpResponse, err := a.client.callAPI(r)
+	if err != nil || localVarHttpResponse == nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
+	localVarHttpResponse.Body.Close()
+	if err != nil {
+		return localVarReturnValue, localVarHttpResponse, err
+	}
+
+	if localVarHttpResponse.StatusCode < 300 {
+		// If we succeed, return the data, otherwise pass on to decode error.
+		err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
+		if err == nil { 
+			return localVarReturnValue, localVarHttpResponse, err
+		}
+	}
+
+	if localVarHttpResponse.StatusCode >= 300 {
+		newErr := GenericSwaggerError{
+			body: localVarBody,
+			error: localVarHttpResponse.Status,
+		}
+		
+		if localVarHttpResponse.StatusCode == 200 {
+			var v PptxPageLayoutInformation
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"));
 				if err != nil {
 					newErr.error = err.Error()

@@ -4,13 +4,53 @@ All URIs are relative to *https://api.cloudmersive.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**SplitDocumentBatchJobCreate**](SplitDocumentApi.md#SplitDocumentBatchJobCreate) | **Post** /convert/split/batch-job/create | Split a single Document into Separate Documents by Page as a Batch Job
 [**SplitDocumentDocx**](SplitDocumentApi.md#SplitDocumentDocx) | **Post** /convert/split/docx | Split a single Word Document DOCX into Separate Documents by Page
+[**SplitDocumentGetAsyncJobStatus**](SplitDocumentApi.md#SplitDocumentGetAsyncJobStatus) | **Get** /convert/split/batch-job/status | Get the status and result of a Split Document Batch Job
 [**SplitDocumentPdfByPage**](SplitDocumentApi.md#SplitDocumentPdfByPage) | **Post** /convert/split/pdf | Split a PDF file into separate PDF files, one per page
 [**SplitDocumentPptx**](SplitDocumentApi.md#SplitDocumentPptx) | **Post** /convert/split/pptx | Split a single PowerPoint Presentation PPTX into Separate Slides
+[**SplitDocumentPptxAdvanced**](SplitDocumentApi.md#SplitDocumentPptxAdvanced) | **Post** /convert/split/pptx/advanced | Split a single PowerPoint Presentation PPTX into Separate Presentations
 [**SplitDocumentTxtByLine**](SplitDocumentApi.md#SplitDocumentTxtByLine) | **Post** /convert/split/txt/by-line | Split a single Text file (txt) into lines
 [**SplitDocumentTxtByString**](SplitDocumentApi.md#SplitDocumentTxtByString) | **Post** /convert/split/txt/by-string | Split a single Text file (txt) by a string delimiter
 [**SplitDocumentXlsx**](SplitDocumentApi.md#SplitDocumentXlsx) | **Post** /convert/split/xlsx | Split a single Excel XLSX into Separate Worksheets
 
+
+# **SplitDocumentBatchJobCreate**
+> SplitBatchJobCreateResult SplitDocumentBatchJobCreate(ctx, inputFile, optional)
+Split a single Document into Separate Documents by Page as a Batch Job
+
+Split a Document (PPTX supported), comprised of multiple pages into separate files, with each containing exactly one page.  This API is designed for large jobs that could take a long time to create and so runs as a batch job that returns a Job ID that you can use with the GetAsyncJobStatus API to check on the status of the Job and ultimately get the output result.  This API automatically detects the document type and then performs the split by using the document type-specific API needed to perform the split.  This API is only available for Cloudmersive Managed Instance and Private Cloud deployments.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***SplitDocumentBatchJobCreateOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a SplitDocumentBatchJobCreateOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **returnDocumentContents** | **optional.Bool**| Set to true to return the contents of each presentation directly, set to false to only return URLs to each resulting presentation.  Default is true. | 
+
+### Return type
+
+[**SplitBatchJobCreateResult**](SplitBatchJobCreateResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **SplitDocumentDocx**
 > SplitDocxDocumentResult SplitDocumentDocx(ctx, inputFile, optional)
@@ -45,6 +85,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **SplitDocumentGetAsyncJobStatus**
+> JobStatusResult SplitDocumentGetAsyncJobStatus(ctx, asyncJobID)
+Get the status and result of a Split Document Batch Job
+
+Returns the result of the Async Job - possible states can be STARTED or COMPLETED.  This API is only available for Cloudmersive Managed Instance and Private Cloud deployments.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **asyncJobID** | **string**|  | 
+
+### Return type
+
+[**JobStatusResult**](JobStatusResult.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -119,6 +187,34 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **SplitDocumentPptxAdvanced**
+> PptxSplitAdvancedResponse SplitDocumentPptxAdvanced(ctx, request)
+Split a single PowerPoint Presentation PPTX into Separate Presentations
+
+Split a PowerPoint PPTX Presentation, comprised of multiple slides into separate PowerPoint PPTX presentations of customizeable size.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **request** | [**PptxSplitAdvancedRequest**](PptxSplitAdvancedRequest.md)|  | 
+
+### Return type
+
+[**PptxSplitAdvancedResponse**](PptxSplitAdvancedResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, text/json, application/xml, text/xml, application/x-www-form-urlencoded
  - **Accept**: application/json, text/json, application/xml, text/xml
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

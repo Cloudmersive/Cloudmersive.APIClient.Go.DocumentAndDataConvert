@@ -17,6 +17,8 @@ import (
 type PdfMetadata struct {
 	// True if the operation was successful, false otherwise
 	Successful bool `json:"Successful,omitempty"`
+	// Details of any errors if the operation was unsucessful
+	ErrorDetails string `json:"ErrorDetails,omitempty"`
 	// Title of the document
 	Title string `json:"Title,omitempty"`
 	// Keywords of the document
@@ -33,4 +35,6 @@ type PdfMetadata struct {
 	DateCreated time.Time `json:"DateCreated,omitempty"`
 	// The number of pages in the document
 	PageCount int32 `json:"PageCount,omitempty"`
+	// True if the PDF document is encrypted, false otherwise
+	Encrypted bool `json:"Encrypted,omitempty"`
 }

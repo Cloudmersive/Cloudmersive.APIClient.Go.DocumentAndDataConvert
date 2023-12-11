@@ -49,7 +49,9 @@ Method | HTTP request | Description
 [**EditDocumentDocxUpdateTableRow**](EditDocumentApi.md#EditDocumentDocxUpdateTableRow) | **Post** /convert/edit/docx/update-table-row | Update, set contents of a table row in an existing table in a Word DOCX document
 [**EditDocumentFinishEditing**](EditDocumentApi.md#EditDocumentFinishEditing) | **Post** /convert/edit/finish-editing | Finish editing document, and download result from document editing
 [**EditDocumentPptxDeleteSlides**](EditDocumentApi.md#EditDocumentPptxDeleteSlides) | **Post** /convert/edit/pptx/delete-slides | Delete, remove slides from a PowerPoint PPTX presentation document
+[**EditDocumentPptxEditSizeAndOrientation**](EditDocumentApi.md#EditDocumentPptxEditSizeAndOrientation) | **Post** /convert/edit/pptx/set-size-and-orientation | Set the size and/or orientation of a PowerPoint PPTX presentation document
 [**EditDocumentPptxGetMacroInformation**](EditDocumentApi.md#EditDocumentPptxGetMacroInformation) | **Post** /convert/edit/pptx/get-macros | Get macro information from a PowerPoint PPTX/PPTM presentation document
+[**EditDocumentPptxGetSizeAndOrientation**](EditDocumentApi.md#EditDocumentPptxGetSizeAndOrientation) | **Post** /convert/edit/pptx/get-size-and-orientation | Get the page layout information, including size and orientation of a PowerPoint PPTX presentation document
 [**EditDocumentPptxReplace**](EditDocumentApi.md#EditDocumentPptxReplace) | **Post** /convert/edit/pptx/replace-all | Replace string in PowerPoint PPTX presentation
 [**EditDocumentXlsxAppendRow**](EditDocumentApi.md#EditDocumentXlsxAppendRow) | **Post** /convert/edit/xlsx/append-row | Append row to a Excel XLSX spreadsheet, worksheet
 [**EditDocumentXlsxClearCellByIndex**](EditDocumentApi.md#EditDocumentXlsxClearCellByIndex) | **Post** /convert/edit/xlsx/clear-cell/by-index | Clear cell contents in an Excel XLSX spreadsheet, worksheet by index
@@ -103,7 +105,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **EditDocumentDocxAcceptAllTrackChanges**
-> string EditDocumentDocxAcceptAllTrackChanges(ctx, inputFile)
+> string EditDocumentDocxAcceptAllTrackChanges(ctx, inputFile, optional)
 Accept all tracked changes, revisions in a Word DOCX document
 
 Accepts all tracked changes and revisions in a Word DOCX document.  This will accept all pending changes in the document when tracked changes is turned on.  Track changes will remain on (if it is on) after this oepration is completed.
@@ -114,6 +116,15 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
   **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***EditDocumentDocxAcceptAllTrackChangesOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditDocumentDocxAcceptAllTrackChangesOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **autorepair** | **optional.Bool**| Optional; automatically repair input documents that have errors (default is true) | 
 
 ### Return type
 
@@ -1334,6 +1345,45 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **EditDocumentPptxEditSizeAndOrientation**
+> string EditDocumentPptxEditSizeAndOrientation(ctx, inputFile, optional)
+Set the size and/or orientation of a PowerPoint PPTX presentation document
+
+Edits the input PowerPoint PPTX presentation document to be a different orientation and/or size
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+ **optional** | ***EditDocumentPptxEditSizeAndOrientationOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a EditDocumentPptxEditSizeAndOrientationOpts struct
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **orientation** | **optional.String**| Optional: The desired slide orientation; can be landscape or portrait. | 
+ **width** | **optional.Int32**| Optional: The desired slide width in Emu, where 1 inch equals 914400 emu. | 
+ **height** | **optional.Int32**| Optional: The desired slide height in Emu, where 1 inch equals 914400 emu | 
+
+### Return type
+
+**string**
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **EditDocumentPptxGetMacroInformation**
 > GetMacrosResponse EditDocumentPptxGetMacroInformation(ctx, inputFile)
 Get macro information from a PowerPoint PPTX/PPTM presentation document
@@ -1350,6 +1400,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetMacrosResponse**](GetMacrosResponse.md)
+
+### Authorization
+
+[Apikey](../README.md#Apikey)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json, text/json, application/xml, text/xml
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **EditDocumentPptxGetSizeAndOrientation**
+> PptxPageLayoutInformation EditDocumentPptxGetSizeAndOrientation(ctx, inputFile)
+Get the page layout information, including size and orientation of a PowerPoint PPTX presentation document
+
+Gets size and orientation of an input PowerPoint PPTX presentation
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **inputFile** | ***os.File**| Input file to perform the operation on. | 
+
+### Return type
+
+[**PptxPageLayoutInformation**](PptxPageLayoutInformation.md)
 
 ### Authorization
 

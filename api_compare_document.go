@@ -16,6 +16,7 @@ import (
 	"net/url"
 	"strings"
 	"os"
+	"github.com/antihax/optional"
 )
 
 // Linger please
@@ -31,10 +32,17 @@ Compare two Office Word Documents (docx) files and highlight the differences
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param inputFile1 First input file to perform the operation on.
  * @param inputFile2 Second input file to perform the operation on (more than 2 can be supplied).
+ * @param optional nil or *CompareDocumentDocxOpts - Optional Parameters:
+     * @param "Autorepair" (optional.Bool) -  Optional; automatically repair input documents that have errors (default is true)
 
 @return string
 */
-func (a *CompareDocumentApiService) CompareDocumentDocx(ctx context.Context, inputFile1 *os.File, inputFile2 *os.File) (string, *http.Response, error) {
+
+type CompareDocumentDocxOpts struct { 
+	Autorepair optional.Bool
+}
+
+func (a *CompareDocumentApiService) CompareDocumentDocx(ctx context.Context, inputFile1 *os.File, inputFile2 *os.File, localVarOptionals *CompareDocumentDocxOpts) (string, *http.Response, error) {
 	var (
 		localVarHttpMethod = strings.ToUpper("Post")
 		localVarPostBody   interface{}
@@ -66,6 +74,9 @@ func (a *CompareDocumentApiService) CompareDocumentDocx(ctx context.Context, inp
 	localVarHttpHeaderAccept := selectHeaderAccept(localVarHttpHeaderAccepts)
 	if localVarHttpHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
+	}
+	if localVarOptionals != nil && localVarOptionals.Autorepair.IsSet() {
+		localVarHeaderParams["autorepair"] = parameterToString(localVarOptionals.Autorepair.Value(), "")
 	}
 	var localVarFile *os.File
 	if localVarFile != nil {
